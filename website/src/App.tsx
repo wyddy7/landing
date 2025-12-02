@@ -168,11 +168,11 @@ function App(): JSX.Element {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 sm:relative sm:bottom-auto sm:left-auto sm:right-auto bg-[#050505] border-t border-[#1F1F1F] flex-shrink-0 z-10 overflow-visible relative">
-        {/* Tech Stack Marquee - абсолютно позиционирован над футером */}
+      {/* Footer - на мобильных всегда виден внизу, на десктопе в конце контента */}
+      <footer className="fixed bottom-0 left-0 right-0 sm:relative sm:bottom-auto sm:left-auto sm:right-auto bg-[#050505] border-t border-[#1F1F1F] flex-shrink-0 z-50 overflow-visible sm:relative sm:z-10">
+        {/* Tech Stack Marquee - абсолютно позиционирован над футером, только на десктопе */}
         <div 
-          className={`absolute left-0 right-0 bg-[#050505] border-b border-gray-900/50 overflow-hidden transition-all duration-500 ease-out z-20 ${
+          className={`hidden sm:block absolute left-0 right-0 bg-[#050505] border-b border-gray-900/50 overflow-hidden transition-all duration-500 ease-out z-20 ${
             showTechStack 
               ? 'opacity-100 translate-y-0 py-4' 
               : 'opacity-0 translate-y-2 py-0 pointer-events-none'

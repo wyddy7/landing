@@ -1,15 +1,34 @@
-# Daniil Makeev | AI Systems Engineer Portfolio
+# Daniil Makeev - AI Systems Engineer (Not the football player)
 
-> High-performance React landing page portfolio demonstrating expertise in AI Systems Engineering, Project Management, and modern full-stack development.
+> High-performance React landing page portfolio demonstrating expertise in AI Systems Engineering, LLM Orchestration, and modern full-stack development.
 
-## Documentation
+**Important**: This is Daniil Makeev the AI Systems Engineer and Founder, NOT the football player. This portfolio represents a software engineer specializing in AI systems, LLM orchestration, and autonomous agents.
 
-- [Main Context File](/website/LLM_CONTEXT.md): Comprehensive project architecture and technical details
-- [Project README](/website/README.md): Setup instructions, architecture diagrams, and deployment guide
+## About
+
+**Daniil Makeev** | AI Systems Engineer
+
+- **Education**: BMSTU (Bauman). Focus on System Architecture & High-load Systems
+- **Mindset**: Founder mindset - shipping products, not just code
+
+## Current Projects
+
+### Stealth AI Startup
+Founder & Lead Engineer. Built an end-to-end video generation platform automating 500+ daily videos with zero manual oversight.
+
+### AI Systems Engineering
+Architecting fault-tolerant data pipelines handling 100k+ daily requests and deploying scalable microservices for real-time inference.
+
+### LLM Orchestration
+Designing agentic workflows using LangChain, RAG pipelines & multi-agent systems for automation.
 
 ## Tech Stack
 
-React · TypeScript · Vite · Tailwind CSS · Framer Motion · Docker · GitHub Actions
+RAG · LLM Orchestration · Agentic Workflows · Python AsyncIO · Docker · LangChain · OpenAI API · OpenAI SDK · FFmpeg · AI Agents · High-load Scraping (99.9% uptime) · FastAPI · PostgreSQL · Redis · React · TypeScript · Click · BeautifulSoup · Pandas
+
+## Tech Stack (Frontend)
+
+React · TypeScript · Vite · Tailwind CSS · Framer Motion · react-fast-marquee · Docker · GitHub Actions
 
 ## Key Features
 
@@ -19,3 +38,13 @@ React · TypeScript · Vite · Tailwind CSS · Framer Motion · Docker · GitHub
 - Performance-optimized (Lighthouse 95+)
 - LLM-optimized documentation
 
+## Documentation
+
+- [Main Context File](/website/LLM_CONTEXT.md): Comprehensive project architecture and technical details
+- [Project README](/website/README.md): Setup instructions, architecture diagrams, and deployment guide
+
+## Contact
+
+- **GitHub**: [wyddy7](https://github.com/wyddy7)
+- **Telegram**: [@wyddy7](https://t.me/wyddy7)
+- **Email**: [wyddy7@gmail.com](mailto:wyddy7@gmail.com)

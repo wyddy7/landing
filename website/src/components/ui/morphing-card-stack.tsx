@@ -48,7 +48,7 @@ export function Component({
     return null
   }
 
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const { offset, velocity } = info
     const swipe = Math.abs(offset.x) * velocity.x
 

@@ -1,5 +1,5 @@
 import { Component } from "@/components/ui/morphing-card-stack"
-import { Layers, Palette, Clock, Sparkles, Code, Database, Bot, Rocket } from "lucide-react"
+import { Layers, Code, Bot, Rocket } from "lucide-react"
 
 // Данные для карточек - можно заменить на ваши проекты/навыки
 const cardData = [

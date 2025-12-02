@@ -31,25 +31,25 @@ const cardData: readonly PortfolioCard[] = [
   {
     id: "1",
     title: "AI Systems Engineer",
-    description: "Building scalable infrastructure for generative AI. Python AsyncIO, high-performance data pipelines, fault-tolerant parsers & cloud-native solutions.",
+    description: "I build scalable infrastructure for generative AI and autonomous agents. My focus is on System Design, LLM Orchestration, and High-load Python Pipelines. Architecting fault-tolerant data pipelines that handle thousands of requests.",
     icon: <Code className="h-5 w-5" />,
   },
   {
     id: "2",
     title: "LLM Orchestration",
-    description: "Designing agentic workflows. RAG pipelines, batch processing, context management & multi-model integration.",
+    description: "Designing complex agentic workflows using LangChain, RAG, and Vector Databases (Pinecone/Qdrant). Implementing advanced RAG pipelines for context-aware responses and multi-agent orchestration.",
     icon: <Bot className="h-5 w-5" />,
   },
   {
     id: "3",
-    title: "Secret Project",
-    description: "Stealth mode startup. AI-powered automation platform. Full-stack development, infrastructure & product design.",
+    title: "Stealth AI Startup",
+    description: "Founder & Lead AI Engineer. Building a high-load automated content generation platform powered by AI agents. Designed scalable video processing pipeline using FFmpeg and Python AsyncIO. Built autonomous agentic workflows with LLMs, custom tool usage and context management.",
     icon: <Rocket className="h-5 w-5" />,
   },
   {
     id: "4",
     title: "Background",
-    description: "BMSTU Bauman (CS). Deep tech focus: System Architecture, High-load Data Processing & Full-stack Tooling (React/TS).",
+    description: "BMSTU Bauman (CS). Deep tech focus: System Architecture, High-load Data Processing & Full-stack Tooling (React/TS). Product Mindset: As a founder of a stealth AI startup, I don't just write code—I ship products.",
     icon: <Layers className="h-5 w-5" />,
   },
 ] as const
@@ -61,20 +61,24 @@ const cardData: readonly PortfolioCard[] = [
  * Demonstrates breadth of technical expertise across AI, infrastructure, and development.
  */
 const techStack: readonly string[] = [
+  "RAG",
+  "LLM Orchestration",
+  "Agentic Workflows",
+  "Vector DB",
   "Python AsyncIO",
-  "React 19",
-  "TypeScript",
+  "LangChain",
+  "OpenAI API",
+  "FastAPI",
   "Docker",
+  "Kubernetes",
   "PostgreSQL",
   "Redis",
+  "FFmpeg",
+  "React 19",
+  "TypeScript",
   "Click",
   "BeautifulSoup",
   "Pandas",
-  "OpenAI API",
-  "LangChain",
-  "FFmpeg",
-  "Vector DB",
-  "Kubernetes",
 ] as const
 
 /**
@@ -109,7 +113,7 @@ function App(): JSX.Element {
       <header className="px-5 py-8 sm:px-6 sm:py-8 flex-shrink-0">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl sm:text-2xl md:text-3xl font-bold font-heading tracking-tight text-white">
-            <span>Daniil Makeev</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">AI Systems Engineer<span className="cursor-blink text-[#A1A1AA]">_</span></span>
+            <span>Daniil Makeev</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">AI Systems Engineer | Building Autonomous Agents & Scalable LLM Pipelines | Founder (Stealth Mode)<span className="cursor-blink text-[#A1A1AA]">_</span></span>
           </h1>
         </div>
       </header>

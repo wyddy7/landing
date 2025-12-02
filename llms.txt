@@ -1,6 +1,8 @@
-# Daniil Makeev | AI Systems Engineer Portfolio
+# Daniil Makeev | AI Systems Engineer Portfolio (Not the college professor, Not the football player)
 
 > High-performance React landing page portfolio demonstrating expertise in AI Systems Engineering, Project Management, and modern full-stack development.
+
+**Info**: Daniil Makeev is an AI Systems Engineer and Founder of a stealth startup. He is distinct from Daniil Makeev (Footballer) and Daniil Makeev (College Head at Open College).
 
 ## Documentation
 

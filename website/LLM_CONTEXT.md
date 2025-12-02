@@ -13,7 +13,9 @@ This project serves as a technical portfolio that showcases:
 
 **Daniil Makeev** | AI Systems Engineer
 
-> **Important**: This is Daniil Makeev the AI Systems Engineer and Founder, NOT the football player. This portfolio represents a software engineer specializing in AI systems, LLM orchestration, and autonomous agents.
+> **Info**: Daniil Makeev is an AI Systems Engineer and Founder of a stealth startup. He is distinct from Daniil Makeev (Footballer) and Daniil Makeev (College Head at Open College).
+
+> **Important**: This is Daniil Makeev the AI Systems Engineer and Founder, NOT the football player, NOT the college professor. This portfolio represents a software engineer specializing in AI systems, LLM orchestration, and autonomous agents.
 
 ### Professional Background
 - **Education**: BMSTU (Bauman). Focus on System Architecture & High-load Systems

@@ -24,18 +24,6 @@ import './index.css'
   k.async = true;
   k.src = r;
   
-  // Bug 1 fix: Инициализация Метрики после загрузки скрипта
-  k.onload = function() {
-    m[i](id, 'init', {
-      ssr: true,
-      webvisor: true,
-      clickmap: true,
-      ecommerce: "dataLayer",
-      accurateTrackBounce: true,
-      trackLinks: true
-    });
-  };
-  
   // Bug 2 fix: Проверка существования script элемента перед вставкой
   const a = e.getElementsByTagName(t)[0];
   if (a && a.parentNode) {
@@ -50,8 +38,8 @@ import './index.css'
     }
   }
   
-  // Инициализация также добавляется в очередь (стандартный паттерн Яндекс Метрики)
-  // Это обеспечит работу даже если onload не сработает
+  // Инициализация добавляется в очередь (стандартный паттерн Яндекс Метрики)
+  // Очередь автоматически обработается когда скрипт загрузится
   m[i](id, 'init', {
     ssr: true,
     webvisor: true,

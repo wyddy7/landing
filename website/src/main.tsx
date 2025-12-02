@@ -13,7 +13,7 @@ import './index.css'
   const id = 105618061;
   
   m[i] = m[i] || function(){(m[i].a = m[i].a || []).push(arguments)};
-  m[i].l = 1 * new Date();
+  m[i].l = Date.now();
   
   // Проверка на дубликаты
   for (let j = 0; j < e.scripts.length; j++) {
@@ -22,7 +22,7 @@ import './index.css'
   
   const k = e.createElement(t);
   const a = e.getElementsByTagName(t)[0];
-  k.async = 1;
+  k.async = true;
   k.src = r;
   a.parentNode?.insertBefore(k, a);
   

@@ -55,3 +55,19 @@ a:focus {
   @apply underline outline-none;
 }
 
+/* Мигающий курсор для терминала */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.cursor-blink {
+  display: inline-block;
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+

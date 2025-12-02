@@ -31,26 +31,26 @@ const cardData: readonly PortfolioCard[] = [
   {
     id: "1",
     title: "AI Systems Engineer",
-    description: "I build scalable infrastructure for generative AI and autonomous agents. My focus is on System Design, LLM Orchestration, and High-load Python Pipelines. Architecting fault-tolerant data pipelines that handle thousands of requests.",
+    description: "Architecting fault-tolerant data pipelines handling 100k+ daily requests and deploying scalable microservices for real-time inference.",
     icon: <Code className="h-5 w-5" />,
   },
   {
     id: "2",
     title: "LLM Orchestration",
-    description: "Designing complex agentic workflows using LangChain, RAG, and Vector Databases (Pinecone/Qdrant). Implementing advanced RAG pipelines for context-aware responses and multi-agent orchestration.",
+    description: "Designing agentic workflows using LangChain, RAG pipelines & multi-agent systems for automation.",
     icon: <Bot className="h-5 w-5" />,
   },
   {
     id: "3",
-    title: "Stealth AI Startup",
-    description: "Founder & Lead AI Engineer. Building a high-load automated content generation platform powered by AI agents. Designed scalable video processing pipeline using FFmpeg and Python AsyncIO. Built autonomous agentic workflows with LLMs, custom tool usage and context management.",
-    icon: <Rocket className="h-5 w-5" />,
+    title: "Background",
+    description: "BMSTU (Bauman). Focus on System Architecture & High-load Systems. Founder mindset: shipping products, not just code.",
+    icon: <Layers className="h-5 w-5" />,
   },
   {
     id: "4",
-    title: "Background",
-    description: "BMSTU Bauman (CS). Deep tech focus: System Architecture, High-load Data Processing & Full-stack Tooling (React/TS). Product Mindset: As a founder of a stealth AI startup, I don't just write code—I ship products.",
-    icon: <Layers className="h-5 w-5" />,
+    title: "Stealth AI Startup",
+    description: "Founder & Lead Engineer. Built an end-to-end video generation platform automating 500+ daily videos with zero manual oversight.",
+    icon: <Rocket className="h-5 w-5" />,
   },
 ] as const
 
@@ -64,16 +64,17 @@ const techStack: readonly string[] = [
   "RAG",
   "LLM Orchestration",
   "Agentic Workflows",
-  "Vector DB",
   "Python AsyncIO",
+  "Docker",
   "LangChain",
   "OpenAI API",
+  "OpenAI SDK",
+  "FFmpeg",
+  "AI Agents",
+  "High-load Scraping (99.9% uptime)",
   "FastAPI",
-  "Docker",
-  "Kubernetes",
   "PostgreSQL",
   "Redis",
-  "FFmpeg",
   "React 19",
   "TypeScript",
   "Click",
@@ -129,7 +130,7 @@ function App(): JSX.Element {
                * Shows marquee only when hovering over "Background" card.
                */
               const handleMouseEnter = (): void => {
-                if (card.id === "4") {
+                if (card.id === "3") {
                   setShowTechStack(true)
                 }
               }
@@ -140,7 +141,7 @@ function App(): JSX.Element {
                * Hides marquee when user moves away from "Background" card.
                */
               const handleMouseLeave = (): void => {
-                if (card.id === "4") {
+                if (card.id === "3") {
                   setShowTechStack(false)
                 }
               }
@@ -176,14 +177,16 @@ function App(): JSX.Element {
       <footer className="fixed bottom-0 left-0 right-0 sm:relative sm:bottom-auto sm:left-auto sm:right-auto bg-[#050505] border-t border-[#1F1F1F] flex-shrink-0 z-50 overflow-visible sm:relative sm:z-10">
         {/* Tech Stack Marquee - абсолютно позиционирован над футером, только на десктопе */}
         <div 
-          className={`hidden sm:block absolute left-0 right-0 bg-[#050505] border-b border-gray-900/50 overflow-hidden transition-all duration-500 ease-out z-20 ${
+          className={`hidden sm:block absolute left-0 right-0 bg-[#050505] border-b border-gray-900/50 overflow-hidden transition-all duration-500 ease-out ${
             showTechStack 
-              ? 'opacity-100 translate-y-0 py-4' 
-              : 'opacity-0 translate-y-2 py-0 pointer-events-none'
+              ? 'opacity-100 translate-y-0 py-4 z-30' 
+              : 'opacity-0 translate-y-2 py-0 pointer-events-none z-0'
           }`}
           style={{
             bottom: '100%',
             maxHeight: showTechStack ? '100px' : '0',
+            willChange: 'transform, opacity',
+            isolation: 'isolate',
           }}
         >
           <Marquee gradient={false} speed={30} pauseOnHover>

@@ -1,8 +1,10 @@
-# Daniil Makeev - AI Systems Engineer (Not the football player)
+# Daniil Makeev - AI Systems Engineer (Not the college professor, Not the football player)
 
 > High-performance React landing page portfolio demonstrating expertise in AI Systems Engineering, LLM Orchestration, and modern full-stack development.
 
-**Important**: This is Daniil Makeev the AI Systems Engineer and Founder, NOT the football player. This portfolio represents a software engineer specializing in AI systems, LLM orchestration, and autonomous agents.
+**Info**: Daniil Makeev is an AI Systems Engineer and Founder of a stealth startup. He is distinct from Daniil Makeev (Footballer) and Daniil Makeev (College Head at Open College).
+
+**Important**: This is Daniil Makeev the AI Systems Engineer and Founder, NOT the football player, NOT the college professor. This portfolio represents a software engineer specializing in AI systems, LLM orchestration, and autonomous agents.
 
 ## About
 
@@ -29,6 +31,8 @@ RAG · LLM Orchestration · Agentic Workflows · Python AsyncIO · Docker · Lan
 ## Tech Stack (Frontend)
 
 React · TypeScript · Vite · Tailwind CSS · Framer Motion · react-fast-marquee · Docker · GitHub Actions
+
+*Note: Tech stack displayed on the website matches the above list exactly.*
 
 ## Key Features
 

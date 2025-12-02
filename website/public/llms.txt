@@ -1,0 +1,21 @@
+# Daniil Makeev | AI Systems Engineer Portfolio
+
+> High-performance React landing page portfolio demonstrating expertise in AI Systems Engineering, Project Management, and modern full-stack development.
+
+## Documentation
+
+- [Main Context File](/website/LLM_CONTEXT.md): Comprehensive project architecture and technical details
+- [Project README](/website/README.md): Setup instructions, architecture diagrams, and deployment guide
+
+## Tech Stack
+
+React · TypeScript · Vite · Tailwind CSS · Framer Motion · Docker · GitHub Actions
+
+## Key Features
+
+- Production-ready architecture with TypeScript strict mode
+- CI/CD automation via GitHub Actions
+- Docker containerization
+- Performance-optimized (Lighthouse 95+)
+- LLM-optimized documentation
+

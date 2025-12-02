@@ -21,12 +21,37 @@ import './index.css'
   }
   
   const k = e.createElement(t);
-  const a = e.getElementsByTagName(t)[0];
   k.async = true;
   k.src = r;
-  a.parentNode?.insertBefore(k, a);
   
-  // Инициализация Метрики
+  // Bug 1 fix: Инициализация Метрики после загрузки скрипта
+  k.onload = function() {
+    m[i](id, 'init', {
+      ssr: true,
+      webvisor: true,
+      clickmap: true,
+      ecommerce: "dataLayer",
+      accurateTrackBounce: true,
+      trackLinks: true
+    });
+  };
+  
+  // Bug 2 fix: Проверка существования script элемента перед вставкой
+  const a = e.getElementsByTagName(t)[0];
+  if (a && a.parentNode) {
+    a.parentNode.insertBefore(k, a);
+  } else {
+    // Если нет script элементов, вставляем в head или body
+    const head = e.head || e.getElementsByTagName('head')[0];
+    if (head) {
+      head.appendChild(k);
+    } else {
+      e.body.appendChild(k);
+    }
+  }
+  
+  // Инициализация также добавляется в очередь (стандартный паттерн Яндекс Метрики)
+  // Это обеспечит работу даже если onload не сработает
   m[i](id, 'init', {
     ssr: true,
     webvisor: true,

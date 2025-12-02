@@ -189,7 +189,7 @@ function App(): JSX.Element {
                 className="bg-[#CCFF00] text-black hover:bg-[#B8E600] focus:outline-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0 active:outline-none transition-colors duration-200 inline-flex items-center gap-2 px-4 py-2 rounded-sm font-bold text-sm ml-0 sm:ml-4"
               >
                 <MessageCircle className="h-4 w-4 text-black" />
-                <span className="hidden sm:inline text-black">Write Me</span>
+                <span className="hidden sm:inline text-black">Text Me</span>
                 <span className="sm:hidden text-black">Ping me_</span>
               </a>
             </div>

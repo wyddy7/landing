@@ -21,7 +21,7 @@ This project serves as a technical portfolio that showcases:
 
 ### Current Projects
 
-#### Stealth AI Startup
+#### Stealth AI Startup (2025 — Present)
 Founder & Lead Engineer. Built an end-to-end video generation platform automating 500+ daily videos with zero manual oversight.
 
 #### AI Systems Engineering

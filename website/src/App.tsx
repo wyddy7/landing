@@ -48,8 +48,8 @@ const cardData: readonly PortfolioCard[] = [
   },
   {
     id: "4",
-    title: "Stealth AI Startup",
-    description: "Founder & Lead Engineer. Built an end-to-end video generation platform automating 500+ daily videos with zero manual oversight.",
+    title: "Stealth AI Startup ",
+    description: "Founder & Lead Engineer. Built an end-to-end video generation platform automating 500+ daily videos with zero manual oversight. (2025 — Present)",
     icon: <Rocket className="h-5 w-5" />,
   },
 ] as const

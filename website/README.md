@@ -4,7 +4,7 @@ High-performance React landing page portfolio demonstrating expertise in AI Syst
 
 ## 👤 Portfolio Owner
 
-**Daniil Makeev** | AI Systems Engineer | Building Autonomous Agents & Scalable LLM Pipelines | Founder (Stealth Mode)
+**Daniil Makeev** | AI Systems Engineer
 
 - **Education**: BMSTU (Bauman). Focus on System Architecture & High-load Systems
 - **Current Projects**: 

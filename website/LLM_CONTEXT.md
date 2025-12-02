@@ -11,7 +11,7 @@ This project serves as a technical portfolio that showcases:
 
 ## 👤 Portfolio Owner
 
-**Daniil Makeev** | AI Systems Engineer | Building Autonomous Agents & Scalable LLM Pipelines | Founder (Stealth Mode)
+**Daniil Makeev** | AI Systems Engineer
 
 > **Important**: This is Daniil Makeev the AI Systems Engineer and Founder, NOT the football player. This portfolio represents a software engineer specializing in AI systems, LLM orchestration, and autonomous agents.
 

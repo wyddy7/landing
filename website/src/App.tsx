@@ -114,7 +114,7 @@ function App(): JSX.Element {
       <header className="px-5 py-8 sm:px-6 sm:py-8 flex-shrink-0">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl sm:text-2xl md:text-3xl font-bold font-heading tracking-tight text-white">
-            <span>Daniil Makeev</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">AI Systems Engineer | Building Autonomous Agents & Scalable LLM Pipelines | Founder (Stealth Mode)<span className="cursor-blink text-[#A1A1AA]">_</span></span>
+            <span>Daniil Makeev</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">AI Systems Engineer<span className="cursor-blink text-[#A1A1AA]">_</span></span>
           </h1>
         </div>
       </header>

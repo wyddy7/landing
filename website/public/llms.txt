@@ -32,6 +32,8 @@ RAG · LLM Orchestration · Agentic Workflows · Python AsyncIO · Docker · Lan
 
 React · TypeScript · Vite · Tailwind CSS · Framer Motion · react-fast-marquee · Docker · GitHub Actions
 
+*Note: Tech stack displayed on the website matches the above list exactly.*
+
 ## Key Features
 
 - Production-ready architecture with TypeScript strict mode

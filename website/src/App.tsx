@@ -1,6 +1,7 @@
 import { Code, Bot, Rocket, Layers, Github, Mail, MessageCircle } from "lucide-react"
 import { useState, type ReactNode } from "react"
 import { Button } from "@/components/ui/neon-button"
+import Marquee from "react-fast-marquee"
 
 /**
  * Portfolio card data structure.
@@ -54,12 +55,27 @@ const cardData: readonly PortfolioCard[] = [
 ] as const
 
 /**
- * Technology stack string displayed on hover.
+ * Technology stack array for infinite marquee.
  * 
- * Shows comprehensive tech stack when user hovers over "Background" card.
- * Demonstrates breadth of technical expertise.
+ * Comprehensive list of technologies displayed in a continuous scrolling marquee.
+ * Demonstrates breadth of technical expertise across AI, infrastructure, and development.
  */
-const techStack: string = "React · TypeScript · Docker · PostgreSQL · Redis · Click · BeautifulSoup · Pandas · OpenAI API · LangChain"
+const techStack: readonly string[] = [
+  "Python AsyncIO",
+  "React 19",
+  "TypeScript",
+  "Docker",
+  "PostgreSQL",
+  "Redis",
+  "Click",
+  "BeautifulSoup",
+  "Pandas",
+  "OpenAI API",
+  "LangChain",
+  "FFmpeg",
+  "Vector DB",
+  "Kubernetes",
+] as const
 
 /**
  * Main application component.
@@ -80,11 +96,10 @@ const techStack: string = "React · TypeScript · Docker · PostgreSQL · Redis 
  */
 function App(): JSX.Element {
   /**
-   * Controls visibility of tech stack tooltip.
+   * Controls visibility of tech stack marquee.
    * 
-   * Implements progressive disclosure pattern: tech stack appears
-   * only on hover over "Background" card to reduce visual clutter
-   * while maintaining discoverability.
+   * Implements progressive disclosure pattern: tech stack marquee appears
+   * only on hover over "Background" card with smooth animation.
    */
   const [showTechStack, setShowTechStack] = useState<boolean>(false)
 
@@ -105,10 +120,9 @@ function App(): JSX.Element {
           <ul className="space-y-6 sm:space-y-6" role="list">
             {cardData.map((card: PortfolioCard) => {
               /**
-               * Handles mouse enter event for tech stack tooltip.
+               * Handles mouse enter event for tech stack marquee.
                * 
-               * Implements conditional rendering based on card ID to show
-               * tech stack only for "Background" card, reducing cognitive load.
+               * Shows marquee only when hovering over "Background" card.
                */
               const handleMouseEnter = (): void => {
                 if (card.id === "4") {
@@ -117,10 +131,9 @@ function App(): JSX.Element {
               }
 
               /**
-               * Handles mouse leave event for tech stack tooltip.
+               * Handles mouse leave event for tech stack marquee.
                * 
-               * Hides tooltip when user moves away from "Background" card,
-               * maintaining clean UI state.
+               * Hides marquee when user moves away from "Background" card.
                */
               const handleMouseLeave = (): void => {
                 if (card.id === "4") {
@@ -155,16 +168,30 @@ function App(): JSX.Element {
         </div>
       </main>
 
-      {/* Tech Stack Tooltip (appears on hover Background) */}
-      {showTechStack && (
-        <div className="fixed bottom-20 sm:bottom-24 right-3 sm:right-6 font-mono text-[10px] sm:text-xs text-[#A1A1AA] opacity-30 pointer-events-none max-w-[calc(100vw-1.5rem)] sm:max-w-none">
-          <div className="hidden sm:block">{techStack}</div>
-          <div className="block sm:hidden text-[9px] leading-tight">{techStack}</div>
-        </div>
-      )}
-
       {/* Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 sm:relative sm:bottom-auto sm:left-auto sm:right-auto bg-[#050505] border-t border-[#1F1F1F] px-5 py-4 sm:px-6 sm:py-6 flex-shrink-0 z-10 overflow-x-hidden">
+      <footer className="fixed bottom-0 left-0 right-0 sm:relative sm:bottom-auto sm:left-auto sm:right-auto bg-[#050505] border-t border-[#1F1F1F] flex-shrink-0 z-10 overflow-visible relative">
+        {/* Tech Stack Marquee - абсолютно позиционирован над футером */}
+        <div 
+          className={`absolute left-0 right-0 bg-[#050505] border-b border-gray-900/50 overflow-hidden transition-all duration-500 ease-out z-20 ${
+            showTechStack 
+              ? 'opacity-100 translate-y-0 py-4' 
+              : 'opacity-0 translate-y-2 py-0 pointer-events-none'
+          }`}
+          style={{
+            bottom: '100%',
+            maxHeight: showTechStack ? '100px' : '0',
+          }}
+        >
+          <Marquee gradient={false} speed={30} pauseOnHover>
+            {techStack.map((tech, i) => (
+              <span key={i} className="mx-8 text-sm font-mono text-gray-500">
+                {tech}
+              </span>
+            ))}
+          </Marquee>
+        </div>
+        
+        <div className="px-5 py-4 sm:px-6 sm:py-6">
         <div className="max-w-4xl mx-auto">
           <div className="font-mono text-base sm:text-base text-[#A1A1AA] flex items-center w-full min-w-0 gap-3 sm:gap-0">
             <div className="flex items-center gap-3 sm:gap-0 flex-shrink-0 min-w-0">
@@ -198,6 +225,7 @@ function App(): JSX.Element {
             </Button>
           </div>
         </div>
+      </div>
       </footer>
     </div>
   )

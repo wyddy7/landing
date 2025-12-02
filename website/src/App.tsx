@@ -23,7 +23,7 @@ const cardData = [
   {
     id: "4",
     title: "Background",
-    description: "MSTU Bauman (CS). Deep tech focus: System Architecture, High-load Data Processing & Full-stack Tooling (React/TS).",
+    description: "BMSTU Bauman (CS). Deep tech focus: System Architecture, High-load Data Processing & Full-stack Tooling (React/TS).",
     icon: <Layers className="h-5 w-5" />,
   },
 ]
@@ -39,7 +39,7 @@ function App() {
       <header className="px-6 py-8 flex-shrink-0">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold font-heading tracking-tight text-white">
-            <span>Daniil Makeev</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal">AI Systems Engineer<span className="cursor-blink text-[#22C55E]">_</span></span>
+            <span>Daniil Makeev</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal">AI Systems Engineer<span className="cursor-blink text-[#A1A1AA]">_</span></span>
           </h1>
         </div>
       </header>

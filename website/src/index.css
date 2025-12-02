@@ -62,11 +62,11 @@ a {
 }
 
 a:hover {
-  @apply text-[#22C55E];
+  @apply text-[#CCFF00];
 }
 
 a:focus {
-  @apply outline-none ring-2 ring-[#22C55E] ring-offset-2 ring-offset-[#050505];
+  @apply outline-none ring-2 ring-[#CCFF00] ring-offset-2 ring-offset-[#050505];
 }
 
 /* Мигающий курсор для терминала */

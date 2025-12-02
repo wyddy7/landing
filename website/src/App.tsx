@@ -1,60 +1,68 @@
 import { Code, Bot, Rocket, Layers, Github, Mail, MessageCircle } from "lucide-react"
+import { useState } from "react"
 
 const cardData = [
   {
     id: "1",
     title: "AI Systems Engineer",
-    description: "Building scalable infrastructure for generative AI. Python, Docker, AsyncIO & Cloud-native solutions.",
+    description: "Building scalable infrastructure for generative AI. Python AsyncIO, high-performance data pipelines, fault-tolerant parsers & cloud-native solutions.",
     icon: <Code className="h-5 w-5" />,
   },
   {
     id: "2",
     title: "LLM Orchestration",
-    description: "Designing agentic workflows. RAG pipelines, context management & multi-model integration.",
+    description: "Designing agentic workflows. RAG pipelines, batch processing, context management & multi-model integration.",
     icon: <Bot className="h-5 w-5" />,
   },
   {
     id: "3",
-    title: "Founder @ ReelsGen",
-    description: "Automated video generation platform. FFmpeg + LLM pipelines powering content automation at scale.",
+    title: "Secret Project",
+    description: "Stealth mode startup. AI-powered automation platform. Full-stack development, infrastructure & product design.",
     icon: <Rocket className="h-5 w-5" />,
   },
   {
     id: "4",
     title: "Background",
-    description: "MSTU Bauman (CS). Deep tech focus: System Architecture, High-load Data Processing & Algorithms.",
+    description: "MSTU Bauman (CS). Deep tech focus: System Architecture, High-load Data Processing & Full-stack Tooling (React/TS).",
     icon: <Layers className="h-5 w-5" />,
   },
 ]
 
+const techStack = "React · TypeScript · Docker · PostgreSQL · Redis · Click · BeautifulSoup · Pandas · OpenAI API · LangChain"
+
 function App() {
+  const [showTechStack, setShowTechStack] = useState(false)
+
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="h-screen bg-[#050505] text-white flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="border-b border-border px-6 py-8">
+      <header className="px-6 py-8 flex-shrink-0">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-2xl font-mono">
-            Daniil Makeev | AI Systems Engineer
-            <span className="cursor-blink">_</span>
+          <h1 className="text-3xl font-bold font-heading tracking-tight text-white">
+            <span>Daniil Makeev</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal">AI Systems Engineer<span className="cursor-blink text-[#22C55E]">_</span></span>
           </h1>
         </div>
       </header>
 
       {/* Main Content - List */}
-      <main className="flex-1 flex items-center justify-center px-6 py-12">
+      <main className="flex-1 flex items-center justify-center px-6 py-8">
         <div className="w-full max-w-4xl">
-          <ul className="space-y-1">
+          <ul className="space-y-6">
             {cardData.map((card) => (
               <li
                 key={card.id}
-                className="group flex items-start gap-4 p-4 rounded-lg border border-transparent hover:border-primary/30 hover:bg-secondary/5 transition-all duration-200"
+                className="group flex items-start gap-5 transition-all duration-200 hover:translate-x-1"
+                onMouseEnter={() => card.id === "4" && setShowTechStack(true)}
+                onMouseLeave={() => card.id === "4" && setShowTechStack(false)}
               >
-                <div className="flex-shrink-0 mt-0.5 text-muted-foreground group-hover:text-foreground transition-colors">
+                <div className="flex-shrink-0 mt-0.5 text-[#A1A1AA] group-hover:text-white transition-colors duration-200">
                   {card.icon}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h2 className="font-semibold text-lg mb-1">{card.title}</h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <h2 className="font-semibold text-xl mb-1.5 text-white group-hover:text-white transition-colors duration-200 tracking-tight">
+                    {card.title}
+                  </h2>
+                  <p className="text-sm text-[#A1A1AA] leading-relaxed font-body">
                     {card.description}
                   </p>
                 </div>
@@ -64,35 +72,39 @@ function App() {
         </div>
       </main>
 
+      {/* Tech Stack Tooltip (appears on hover Background) */}
+      {showTechStack && (
+        <div className="fixed bottom-24 right-6 font-mono text-xs text-[#A1A1AA] opacity-30 pointer-events-none">
+          {techStack}
+        </div>
+      )}
+
       {/* Footer */}
-      <footer className="border-t border-border px-6 py-8">
+      <footer className="px-6 py-6 flex-shrink-0 border-t border-[#1F1F1F]">
         <div className="max-w-4xl mx-auto">
-          <div className="font-mono text-sm">
-            <span className="text-muted-foreground">&gt; Connect:</span>{" "}
+          <div className="font-mono text-sm text-[#A1A1AA]">
+            <span>&gt; Connect:</span>{" "}
             <a
               href="https://github.com/wyddy7"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:text-primary transition-colors inline-flex items-center gap-1.5 ml-2"
+              className="text-white hover:text-[#22C55E] transition-colors duration-200 inline-flex items-center ml-2"
             >
               <Github className="h-4 w-4" />
-              <span>[GitHub]</span>
             </a>
             <a
               href="https://t.me/wyddy7"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:text-primary transition-colors inline-flex items-center gap-1.5 ml-4"
+              className="text-white hover:text-[#22C55E] transition-colors duration-200 inline-flex items-center ml-4"
             >
               <MessageCircle className="h-4 w-4" />
-              <span>[Telegram]</span>
             </a>
             <a
               href="mailto:your-email@example.com"
-              className="text-foreground hover:text-primary transition-colors inline-flex items-center gap-1.5 ml-4"
+              className="text-white hover:text-[#22C55E] transition-colors duration-200 inline-flex items-center ml-4"
             >
               <Mail className="h-4 w-4" />
-              <span>[Email]</span>
             </a>
           </div>
         </div>

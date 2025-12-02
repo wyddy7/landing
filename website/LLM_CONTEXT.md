@@ -166,4 +166,4 @@ This portfolio demonstrates readiness for:
 
 - **GitHub**: [wyddy7](https://github.com/wyddy7)
 - **Telegram**: [@wyddy7](https://t.me/wyddy7)
-- **Email**: Available on request
+- **Email**: [wyddy7@gmail.com](mailto:wyddy7@gmail.com)

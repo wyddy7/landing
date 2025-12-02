@@ -212,7 +212,7 @@ function App(): JSX.Element {
                 <Github className="h-6 w-6 sm:h-5 sm:w-5" />
               </a>
               <a
-                href="mailto:your-email@example.com"
+                href="mailto:wyddy7@gmail.com"
                 className="text-white hover:text-[#CCFF00] transition-colors duration-200 inline-flex items-center flex-shrink-0 ml-0 sm:ml-4"
               >
                 <Mail className="h-6 w-6 sm:h-5 sm:w-5" />

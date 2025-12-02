@@ -9,6 +9,30 @@ This project serves as a technical portfolio that showcases:
 - **Project Management**: CI/CD implementation, comprehensive documentation, structured development workflow
 - **Full-stack Development**: Modern React patterns, TypeScript best practices, production deployment strategies
 
+## 👤 Portfolio Owner
+
+**Daniil Makeev** | AI Systems Engineer | Building Autonomous Agents & Scalable LLM Pipelines | Founder (Stealth Mode)
+
+> **Important**: This is Daniil Makeev the AI Systems Engineer and Founder, NOT the football player. This portfolio represents a software engineer specializing in AI systems, LLM orchestration, and autonomous agents.
+
+### Professional Background
+- **Education**: BMSTU (Bauman). Focus on System Architecture & High-load Systems
+- **Mindset**: Founder mindset - shipping products, not just code
+
+### Current Projects
+
+#### Stealth AI Startup
+Founder & Lead Engineer. Built an end-to-end video generation platform automating 500+ daily videos with zero manual oversight.
+
+#### AI Systems Engineering
+Architecting fault-tolerant data pipelines handling 100k+ daily requests and deploying scalable microservices for real-time inference.
+
+#### LLM Orchestration
+Designing agentic workflows using LangChain, RAG pipelines & multi-agent systems for automation.
+
+### Professional Tech Stack
+RAG, LLM Orchestration, Agentic Workflows, Python AsyncIO, Docker, LangChain, OpenAI API, OpenAI SDK, FFmpeg, AI Agents, High-load Scraping (99.9% uptime), FastAPI, PostgreSQL, Redis, React, TypeScript, Click, BeautifulSoup, Pandas
+
 ## 🏗 Architecture Decisions
 
 ### 1. **Component-Based Architecture with TypeScript Strict Mode**
@@ -40,7 +64,7 @@ This project serves as a technical portfolio that showcases:
 - Static asset optimization
 - Environment-based configuration support
 
-## 🛠 Tech Stack
+## 🛠 Tech Stack (Project)
 
 - **Runtime**: Node.js 18+ (LTS)
 - **Framework**: React 18.3+ (Concurrent Features, Suspense)
@@ -60,6 +84,7 @@ This project serves as a technical portfolio that showcases:
 - `src/index.css`: Global styles with Tailwind directives
 
 ### UI Components
+- `src/components/ui/neon-button.tsx`: Custom button component with neon effects and variants
 - `src/components/ui/morphing-card-stack.tsx`: Advanced card component with:
   - Multiple layout modes (stack, grid, list)
   - Gesture-based navigation (swipe/drag)
@@ -137,3 +162,8 @@ This portfolio demonstrates readiness for:
 - **Project Manager**: Documentation, CI/CD, structured workflow
 - **Full-stack Developer**: Modern React, TypeScript, deployment
 
+## 📧 Contact
+
+- **GitHub**: [wyddy7](https://github.com/wyddy7)
+- **Telegram**: [@wyddy7](https://t.me/wyddy7)
+- **Email**: Available on request

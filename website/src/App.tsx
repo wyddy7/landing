@@ -75,7 +75,7 @@ const techStack: readonly string[] = [
   "FastAPI",
   "PostgreSQL",
   "Redis",
-  "React 19",
+  "React",
   "TypeScript",
   "Click",
   "BeautifulSoup",

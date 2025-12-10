@@ -1,40 +1,51 @@
-name: Deploy to GitHub Pages
+name: Deploy website to Pages
 
 on:
   push:
-    branches:
-      - master
+    branches: [ "master" ]
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
-    runs-on: ubuntu-22.04
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.1.1
-        with:
-          fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4.0.2
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          node-version: '18.20.4'
-          cache: npm
+          node-version: 20
+          cache: 'npm'
           cache-dependency-path: website/package-lock.json
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: cd website && npm ci
 
-      - name: Build website
-        run: cd website && npm run build
+      - name: Build Website
+        # Vite соберет сайт в папку website/dist
+        run: cd website && npm run build 
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3.9.3
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./website/dist
-          publish_branch: gh-pages
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
-          exclude_assets: .github
+          # Самое важное: указываем путь к собранному сайту
+          path: website/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

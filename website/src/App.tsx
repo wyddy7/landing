@@ -1,4 +1,4 @@
-import { Code, Bot, Rocket, Layers, Github, Mail, MessageCircle } from "lucide-react"
+import { Code, Bot, Rocket, Layers, Brain, Github, Mail, MessageCircle } from "lucide-react"
 import { useState, type ReactNode } from "react"
 import { Button } from "@/components/ui/neon-button"
 import Marquee from "react-fast-marquee"
@@ -51,6 +51,12 @@ const cardData: readonly PortfolioCard[] = [
     title: "Stealth AI Startup ",
     description: "Founder & Lead Engineer. Built an end-to-end video generation platform automating 500+ daily videos with zero manual oversight. (2025 — Present)",
     icon: <Rocket className="h-5 w-5" />,
+  },
+  {
+    id: "5",
+    title: "Network AI Agent",
+    description: "Solo-shipped a monetized personal CRM bot in 48h using LLM & RAG for context recall, featuring native Telegram payments and autonomous user onboarding.",
+    icon: <Brain className="h-5 w-5" />,
   },
 ] as const
 

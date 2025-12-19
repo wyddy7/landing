@@ -30,33 +30,33 @@ interface PortfolioCard {
 const cardData: readonly PortfolioCard[] = [
   {
     id: "1",
-    title: "AI Systems Engineer",
-    description: "Architecting fault-tolerant data pipelines handling 100k+ daily requests and deploying scalable microservices for real-time inference.",
+    title: "Core Focus",
+    description: "Engineering autonomous AI agents and scalable content pipelines. Focused on shipping production-ready systems that solve business problems fast.",
     icon: <Code className="h-5 w-5" />,
   },
   {
     id: "2",
-    title: "LLM Orchestration",
-    description: "Designing agentic workflows using LangChain, RAG pipelines & multi-agent systems for automation.",
-    icon: <Bot className="h-5 w-5" />,
-  },
-  {
-    id: "3",
     title: "Background",
-    description: "BMSTU (Bauman). Focus on System Architecture & High-load Systems. Founder mindset: shipping products, not just code.",
+    description: "BMSTU (Bauman). Founder mindset: deliver impact, not overhead.",
     icon: <Layers className="h-5 w-5" />,
   },
   {
-    id: "4",
-    title: "Stealth AI Startup ",
-    description: "Founder & Lead Engineer. Built an end-to-end video generation platform automating 500+ daily videos with zero manual oversight. (2025 — Present)",
+    id: "3",
+    title: "AI Video Automation Platform (Founder & Lead)",
+    description: "Architected and deployed a fully autonomous video generation system processing 500+ videos daily. Stack: Python, FFmpeg, OpenAI API, Supabase. Impact: Zero manual oversight required. 100% automated workflow.",
     icon: <Rocket className="h-5 w-5" />,
   },
   {
-    id: "5",
+    id: "4",
     title: "Network AI Agent",
-    description: "Solo-shipped a monetized personal CRM bot in 48h using LLM & RAG for context recall, featuring native Telegram payments and autonomous user onboarding.",
+    description: "Designed and shipped a monetized personal CRM bot in 48h. Tech: RAG (Vector Search), AsyncIO, Telegram Payments. Impact: Autonomous user onboarding and real-time context recall.",
     icon: <Brain className="h-5 w-5" />,
+  },
+  {
+    id: "5",
+    title: "Technical Arsenal",
+    description: "AI Engineering: Agentic Workflows, RAG Pipelines, LLM Integration (OpenAI/Claude). Backend Engineering: Python (AsyncIO), FastAPI, Docker, Supabase (PostgreSQL). Data Systems: Resilient Scraping Infrastructure (99.9% uptime), Video Processing (FFmpeg).",
+    icon: <Bot className="h-5 w-5" />,
   },
 ] as const
 
@@ -67,25 +67,18 @@ const cardData: readonly PortfolioCard[] = [
  * Demonstrates breadth of technical expertise across AI, infrastructure, and development.
  */
 const techStack: readonly string[] = [
-  "RAG",
-  "LLM Orchestration",
   "Agentic Workflows",
-  "Python AsyncIO",
-  "Docker",
-  "LangChain",
-  "OpenAI API",
-  "OpenAI SDK",
-  "FFmpeg",
-  "AI Agents",
-  "High-load Scraping (99.9% uptime)",
+  "RAG Pipelines",
+  "LLM Integration (OpenAI/Claude)",
+  "Python (AsyncIO)",
   "FastAPI",
+  "Docker",
+  "Supabase",
   "PostgreSQL",
-  "Redis",
-  "React",
-  "TypeScript",
-  "Click",
-  "BeautifulSoup",
-  "Pandas",
+  "Resilient Scraping Infrastructure (99.9% uptime)",
+  "Video Processing (FFmpeg)",
+  "Vector Search",
+  "Telegram Payments",
 ] as const
 
 /**
@@ -120,7 +113,7 @@ function App(): JSX.Element {
       <header className="px-5 py-8 sm:px-6 sm:py-8 flex-shrink-0">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-2xl sm:text-2xl md:text-3xl font-bold font-heading tracking-tight text-white">
-            <span>Daniil Makeev</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">AI Systems Engineer<span className="cursor-blink text-[#A1A1AA]">_</span></span>
+            <span>Daniil Makeev</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">AI Engineer & Systems Builder<span className="cursor-blink text-[#A1A1AA]">_</span></span>
           </h1>
         </div>
       </header>
@@ -136,7 +129,7 @@ function App(): JSX.Element {
                * Shows marquee only when hovering over "Background" card.
                */
               const handleMouseEnter = (): void => {
-                if (card.id === "3") {
+                if (card.id === "2") {
                   setShowTechStack(true)
                 }
               }
@@ -147,7 +140,7 @@ function App(): JSX.Element {
                * Hides marquee when user moves away from "Background" card.
                */
               const handleMouseLeave = (): void => {
-                if (card.id === "3") {
+                if (card.id === "2") {
                   setShowTechStack(false)
                 }
               }

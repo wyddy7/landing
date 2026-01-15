@@ -6,16 +6,6 @@ import { useI18n } from "@/hooks/use-i18n"
 import { LanguageSelector } from "@/components/ui/language-selector-dropdown"
 
 /**
- * Portfolio card data structure.
- */
-interface PortfolioCard {
-  id: string
-  title: string
-  description: string
-  icon: ReactNode
-}
-
-/**
  * Main application component.
  */
 function App(): JSX.Element {

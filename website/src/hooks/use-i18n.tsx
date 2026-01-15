@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode } from "react";
 import { translations, Language } from "@/lib/i18n";
 
 const STORAGE_KEY = "preferred_language";
@@ -22,8 +22,6 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     return browserLang === 'ru' ? 'ru' : 'en';
   });
 
-  const [isLoaded, setIsLoaded] = useState(true);
-
   const changeLanguage = (newLang: Language) => {
     setLang(newLang);
     localStorage.setItem(STORAGE_KEY, newLang);
@@ -32,7 +30,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const t = translations[lang];
 
   return (
-    <I18nContext.Provider value={{ lang, t, changeLanguage, isLoaded }}>
+    <I18nContext.Provider value={{ lang, t, changeLanguage, isLoaded: true }}>
       {children}
     </I18nContext.Provider>
   );

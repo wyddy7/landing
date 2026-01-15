@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
+import { I18nProvider } from '@/hooks/use-i18n'
 
 // Динамическая загрузка Яндекс Метрики (скрыта от просмотра исходного кода)
 (function() {
@@ -52,7 +53,9 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <I18nProvider>
+      <App />
+    </I18nProvider>
   </React.StrictMode>,
 )
 

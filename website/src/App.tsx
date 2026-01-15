@@ -2,119 +2,46 @@ import { Code, Bot, Rocket, Layers, Brain, Github, Mail, MessageCircle } from "l
 import { useState, type ReactNode } from "react"
 import { Button } from "@/components/ui/neon-button"
 import Marquee from "react-fast-marquee"
+import { useI18n } from "@/hooks/use-i18n"
+import { LanguageSelector } from "@/components/ui/language-selector-dropdown"
 
 /**
  * Portfolio card data structure.
- * 
- * Represents a portfolio item with icon, title, and description.
- * Used to showcase key skills and projects in a structured format.
  */
 interface PortfolioCard {
-  /** Unique identifier for the card */
   id: string
-  /** Card title/heading */
   title: string
-  /** Detailed description of the skill/project */
   description: string
-  /** React icon component for visual representation */
   icon: ReactNode
 }
 
 /**
- * Portfolio card data configuration.
- * 
- * Defines the main portfolio items displayed on the landing page.
- * Structured to highlight AI Systems Engineering, LLM Orchestration,
- * and Project Management expertise.
- */
-const cardData: readonly PortfolioCard[] = [
-  {
-    id: "1",
-    title: "Core Focus",
-    description: "Engineering autonomous AI agents and scalable content pipelines. Focused on shipping production-ready systems that solve business problems fast.",
-    icon: <Code className="h-5 w-5" />,
-  },
-  {
-    id: "2",
-    title: "Background",
-    description: "BMSTU (Bauman). Founder mindset: deliver impact, not overhead.",
-    icon: <Layers className="h-5 w-5" />,
-  },
-  {
-    id: "3",
-    title: "AI Video Automation Platform (Founder & Lead)",
-    description: "Architected and deployed a fully autonomous video generation system processing 500+ videos daily. Stack: Python, FFmpeg, OpenAI API, Supabase. Impact: Zero manual oversight required. 100% automated workflow.",
-    icon: <Rocket className="h-5 w-5" />,
-  },
-  {
-    id: "4",
-    title: "Network AI Agent",
-    description: "Designed and shipped a monetized personal CRM bot in 48h. Tech: RAG (Vector Search), AsyncIO, Telegram Payments. Impact: Autonomous user onboarding and real-time context recall.",
-    icon: <Brain className="h-5 w-5" />,
-  },
-  {
-    id: "5",
-    title: "Technical Arsenal",
-    description: "AI Engineering: Agentic Workflows, RAG Pipelines, LLM Integration (OpenAI/Claude). Backend Engineering: Python (AsyncIO), FastAPI, Docker, Supabase (PostgreSQL). Data Systems: Resilient Scraping Infrastructure (99.9% uptime), Video Processing (FFmpeg).",
-    icon: <Bot className="h-5 w-5" />,
-  },
-] as const
-
-/**
- * Technology stack array for infinite marquee.
- * 
- * Comprehensive list of technologies displayed in a continuous scrolling marquee.
- * Demonstrates breadth of technical expertise across AI, infrastructure, and development.
- */
-const techStack: readonly string[] = [
-  "Agentic Workflows",
-  "RAG Pipelines",
-  "LLM Integration (OpenAI/Claude)",
-  "Python (AsyncIO)",
-  "FastAPI",
-  "Docker",
-  "Supabase",
-  "PostgreSQL",
-  "Resilient Scraping Infrastructure (99.9% uptime)",
-  "Video Processing (FFmpeg)",
-  "Vector Search",
-  "Telegram Payments",
-] as const
-
-/**
  * Main application component.
- * 
- * Implements a minimalist portfolio landing page with:
- * - Semantic HTML structure for accessibility and SEO
- * - Interactive hover states for enhanced UX
- * - Responsive design with mobile-first approach
- * - Performance-optimized rendering with React 18
- * 
- * Architecture decisions:
- * - Single-page application for fast load times
- * - Component-based structure for maintainability
- * - Type-safe props and state management
- * - CSS-in-JS via Tailwind for optimal bundle size
- * 
- * @returns {JSX.Element} The main application component
  */
 function App(): JSX.Element {
-  /**
-   * Controls visibility of tech stack marquee.
-   * 
-   * Implements progressive disclosure pattern: tech stack marquee appears
-   * only on hover over "Background" card with smooth animation.
-   */
+  const { t } = useI18n()
   const [showTechStack, setShowTechStack] = useState<boolean>(false)
+
+  // Map icons to card data from translations
+  const icons: Record<string, ReactNode> = {
+    "1": <Code className="h-5 w-5" />,
+    "2": <Layers className="h-5 w-5" />,
+    "3": <Rocket className="h-5 w-5" />,
+    "4": <Brain className="h-5 w-5" />,
+    "5": <Bot className="h-5 w-5" />,
+  }
 
   return (
     <div className="min-h-screen bg-[#050505] text-white flex flex-col">
       {/* Header */}
       <header className="px-5 py-8 sm:px-6 sm:py-8 flex-shrink-0">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
           <h1 className="text-2xl sm:text-2xl md:text-3xl font-bold font-heading tracking-tight text-white">
-            <span>Daniil Makeev</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">AI Engineer & Systems Builder<span className="cursor-blink text-[#A1A1AA]">_</span></span>
+            <span>{t.name}</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">{t.tagline}<span className="cursor-blink text-[#A1A1AA]">_</span></span>
           </h1>
+          <div className="flex-shrink-0">
+            <LanguageSelector />
+          </div>
         </div>
       </header>
 
@@ -122,23 +49,13 @@ function App(): JSX.Element {
       <main className="flex-1 flex items-center justify-center px-5 py-8 pb-24 sm:pb-8 sm:px-6 sm:py-8">
         <div className="w-full max-w-4xl">
           <ul className="space-y-6 sm:space-y-6" role="list">
-            {cardData.map((card: PortfolioCard) => {
-              /**
-               * Handles mouse enter event for tech stack marquee.
-               * 
-               * Shows marquee only when hovering over "Background" card.
-               */
+            {t.cards.map((card) => {
               const handleMouseEnter = (): void => {
                 if (card.id === "2") {
                   setShowTechStack(true)
                 }
               }
 
-              /**
-               * Handles mouse leave event for tech stack marquee.
-               * 
-               * Hides marquee when user moves away from "Background" card.
-               */
               const handleMouseLeave = (): void => {
                 if (card.id === "2") {
                   setShowTechStack(false)
@@ -154,7 +71,7 @@ function App(): JSX.Element {
                 >
                 <div className="flex-shrink-0 mt-1 text-[#A1A1AA] group-hover:text-white transition-colors duration-200">
                   <div className="h-6 w-6 sm:h-5 sm:w-5">
-                    {card.icon}
+                    {icons[card.id]}
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -189,7 +106,7 @@ function App(): JSX.Element {
           }}
         >
           <Marquee gradient={false} speed={30} pauseOnHover>
-            {techStack.map((tech, i) => (
+            {t.techStack.map((tech, i) => (
               <span key={i} className="mx-8 text-sm font-mono text-gray-500">
                 {tech}
               </span>
@@ -201,7 +118,7 @@ function App(): JSX.Element {
         <div className="max-w-4xl mx-auto">
           <div className="font-mono text-base sm:text-base text-[#A1A1AA] flex items-center w-full min-w-0 gap-3 sm:gap-0">
             <div className="flex items-center gap-3 sm:gap-0 flex-shrink-0 min-w-0">
-              <span className="whitespace-nowrap hidden sm:inline">&gt; Connect:</span>
+              <span className="whitespace-nowrap hidden sm:inline">&gt; {t.connect}</span>
               <a
                 href="https://github.com/wyddy7"
                 target="_blank"
@@ -226,8 +143,8 @@ function App(): JSX.Element {
               className="flex-shrink-0 inline-flex items-center gap-2 font-bold text-base ml-auto"
             >
               <MessageCircle className="h-5 w-5" />
-              <span className="hidden sm:inline">Text Me</span>
-              <span className="sm:hidden">Ping me_</span>
+              <span className="hidden sm:inline">{t.textMe}</span>
+              <span className="sm:hidden">{t.pingMe}</span>
             </Button>
           </div>
         </div>

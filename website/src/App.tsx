@@ -32,9 +32,9 @@ function App(): JSX.Element {
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white flex flex-col">
+    <div className="min-h-screen bg-[#050505] text-white flex flex-col overflow-hidden">
       {/* Header */}
-      <header className="px-5 py-8 sm:px-6 sm:py-8 flex-shrink-0">
+      <header className="px-5 py-4 sm:px-6 sm:py-6 flex-shrink-0">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <h1 className="text-2xl sm:text-2xl md:text-3xl font-bold font-heading tracking-tight text-white">
             <span>{t.name}</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">{t.tagline}<span className="cursor-blink text-[#A1A1AA]">_</span></span>
@@ -46,9 +46,9 @@ function App(): JSX.Element {
       </header>
 
       {/* Main Content - List */}
-      <main className="flex-1 flex items-center justify-center px-5 py-8 pb-24 sm:pb-8 sm:px-6 sm:py-8">
+      <main className="flex-1 flex items-center justify-center px-5 py-2 sm:px-6 sm:py-4">
         <div className="w-full max-w-4xl">
-          <ul className="space-y-6 sm:space-y-6" role="list">
+          <ul className="space-y-4 sm:space-y-5" role="list">
             {t.cards.map((card) => {
               const handleMouseEnter = (): void => {
                 if (card.id === "2") {
@@ -114,7 +114,7 @@ function App(): JSX.Element {
           </Marquee>
         </div>
         
-        <div className="px-5 py-4 sm:px-6 sm:py-6">
+        <div className="px-5 py-3 sm:px-6 sm:py-4">
         <div className="max-w-4xl mx-auto">
           <div className="font-mono text-base sm:text-base text-[#A1A1AA] flex items-center w-full min-w-0 gap-3 sm:gap-0">
             <div className="flex items-center gap-3 sm:gap-0 flex-shrink-0 min-w-0">

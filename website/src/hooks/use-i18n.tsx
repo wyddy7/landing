@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { translations, Language } from "@/lib/i18n";
 
 const STORAGE_KEY = "preferred_language";
-const SNG_COUNTRIES = ["RU", "BY", "KZ", "AM", "AZ", "KG", "MD", "TJ", "UZ"];
 
 interface I18nContextType {
   lang: Language;
@@ -17,39 +16,13 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Language>(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved === "en" || saved === "ru") return saved as Language;
-    return "en";
+    
+    // Детекция по языку браузера
+    const browserLang = navigator.language.split('-')[0].toLowerCase();
+    return browserLang === 'ru' ? 'ru' : 'en';
   });
 
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    async function detectLanguage() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        setIsLoaded(true);
-        return;
-      }
-
-      try {
-        const response = await fetch("https://api.country.is");
-        const data = await response.json();
-        const country = data.country;
-
-        if (SNG_COUNTRIES.includes(country)) {
-          setLang("ru");
-        } else {
-          setLang("en");
-        }
-      } catch (error) {
-        console.error("Failed to detect country:", error);
-        setLang("en");
-      } finally {
-        setIsLoaded(true);
-      }
-    }
-
-    detectLanguage();
-  }, []);
+  const [isLoaded, setIsLoaded] = useState(true);
 
   const changeLanguage = (newLang: Language) => {
     setLang(newLang);

@@ -1,5 +1,7 @@
 # AI Systems Engineer | LLM Orchestration | Project Management
 
+> **⚠️ ВНИМАНИЕ**: Это старый лендинг для фаундерской деятельности, не для бигтеха. Актуальный лендинг для бигтеха находится в ветке `master`.
+
 High-performance React landing page portfolio demonstrating expertise in AI Systems Engineering, Project Management, and modern full-stack development. Built with production-ready architecture, comprehensive CI/CD, and LLM-optimized documentation.
 
 ## 👤 Portfolio Owner

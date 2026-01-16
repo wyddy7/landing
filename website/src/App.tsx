@@ -1,9 +1,18 @@
-import { Code, Bot, Rocket, Layers, Brain, Github, Mail, MessageCircle } from "lucide-react"
+import { Code, Bot, Rocket, Layers, Github, Mail, MessageCircle, ExternalLink } from "lucide-react"
 import { useState, type ReactNode } from "react"
 import { Button } from "@/components/ui/neon-button"
 import Marquee from "react-fast-marquee"
 import { useI18n } from "@/hooks/use-i18n"
 import { LanguageSelector } from "@/components/ui/language-selector-dropdown"
+
+const NetWhoIcon = ({ className }: { className?: string }) => (
+  <img 
+    src="/netwho.svg" 
+    alt="NetWho Logo" 
+    className={className}
+    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+  />
+)
 
 /**
  * Main application component.
@@ -14,11 +23,49 @@ function App(): JSX.Element {
 
   // Map icons to card data from translations
   const icons: Record<string, ReactNode> = {
-    "1": <Code className="h-5 w-5" />,
-    "2": <Layers className="h-5 w-5" />,
-    "3": <Rocket className="h-5 w-5" />,
-    "4": <Brain className="h-5 w-5" />,
-    "5": <Bot className="h-5 w-5" />,
+    "1": <Code className="h-full w-full" />,
+    "2": <Layers className="h-full w-full" />,
+    "3": <Rocket className="h-full w-full" />,
+    "4": <NetWhoIcon className="h-full w-full" />,
+    "5": <Bot className="h-full w-full" />,
+  }
+
+  const renderDescription = (text: string) => {
+    return text.split('\n').map((line, i) => (
+      <span key={i}>
+        {line.split(/(\[[^\]]+\]\([^)]+\)|@\w+|t\.me\/\w+)/g).map((part, j) => {
+          if (!part) return null;
+
+          // Markdown-style links [text](url)
+          const markdownMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+          if (markdownMatch) {
+            const [, linkText, linkUrl] = markdownMatch;
+            const href = linkUrl.startsWith('http') ? linkUrl : 
+                        linkUrl.startsWith('@') ? `https://t.me/${linkUrl.slice(1)}` :
+                        linkUrl.startsWith('t.me/') ? `https://${linkUrl}` :
+                        linkUrl;
+            return (
+              <a key={j} href={href} target="_blank" rel="noopener noreferrer" className="text-[#CCFF00] hover:underline">
+                {linkText}
+              </a>
+            );
+          }
+
+          // Regular @username links
+          if (part.startsWith('@')) {
+            return <a key={j} href={`https://t.me/${part.slice(1)}`} target="_blank" rel="noopener noreferrer" className="text-[#CCFF00] hover:underline">{part}</a>
+          }
+
+          // Regular t.me/username links
+          if (part.startsWith('t.me/')) {
+            return <a key={j} href={`https://${part}`} target="_blank" rel="noopener noreferrer" className="text-[#CCFF00] hover:underline">{part}</a>
+          }
+
+          return part
+        })}
+        {i < text.split('\n').length - 1 && <br />}
+      </span>
+    ))
   }
 
   return (
@@ -59,17 +106,27 @@ function App(): JSX.Element {
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
-                <div className="flex-shrink-0 mt-1 text-[#A1A1AA] group-hover:text-white transition-colors duration-200">
-                  <div className="h-6 w-6 sm:h-5 sm:w-5">
+                <div className="flex-shrink-0 w-9 sm:w-[30px] flex justify-start items-start text-[#A1A1AA] group-hover:text-white transition-colors duration-200">
+                  <div className={card.id === "4" ? "h-9 w-9 sm:h-[30px] sm:w-[30px]" : "h-6 w-6 sm:h-5 sm:w-5 mt-1.5 sm:mt-1"}>
                     {icons[card.id]}
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
                   <h2 className="font-semibold text-lg sm:text-lg md:text-xl mb-2 sm:mb-1.5 text-white group-hover:text-white transition-colors duration-200 tracking-tight">
-                    {card.title}
+                    {card.id === "4" ? (
+                      <a 
+                        href="https://github.com/wyddy7/netwho" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="hover:text-[#CCFF00] transition-colors duration-200 inline-flex items-center gap-2"
+                      >
+                        {card.title}
+                        <ExternalLink className="h-4 w-4 text-[#A1A1AA] group-hover:text-[#CCFF00] transition-colors duration-200" />
+                      </a>
+                    ) : card.title}
                   </h2>
                   <p className="text-sm sm:text-sm text-[#A1A1AA] leading-relaxed font-body">
-                    {card.description}
+                    {renderDescription(card.description)}
                   </p>
                 </div>
               </li>

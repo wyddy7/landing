@@ -7,6 +7,11 @@ export const translations = {
     pingMe: "Ping me_",
     cards: [
       {
+        id: "4",
+        title: "NetWho (AI CRM Network Assistant)",
+        description: "Bot built on aiogram 3.x with RAG architecture. Implemented semantic contact search (Vector Search) and news parsing via Jina AI. Data validation with Pydantic v2.\n\n[Live Demo](@netwho_bot) — [Community](t.me/netwho)",
+      },
+      {
         id: "1",
         title: "Core Focus",
         description: "Python backend development and AI integration. Building scalable data pipelines and business process automation.",
@@ -20,11 +25,6 @@ export const translations = {
         id: "3",
         title: "Video Generation Pipeline",
         description: "Python-based system using FFmpeg and OpenAI. AsyncIO for queueing, Supabase for metadata. Processing ~100 videos daily.",
-      },
-      {
-        id: "4",
-        title: "NetWho (AI CRM Network Assistant)",
-        description: "Bot built on aiogram 3.x with RAG architecture. Implemented semantic contact search (Vector Search) and news parsing via Jina AI. Data validation with Pydantic v2.",
       },
       {
         id: "5",
@@ -53,6 +53,11 @@ export const translations = {
     pingMe: "Пинг_",
     cards: [
       {
+        id: "4",
+        title: "NetWho (AI CRM Network Assistant)",
+        description: "Бот на aiogram 3.x с RAG-архитектурой. Реализовал семантический поиск по контактам (Vector Search) и парсинг новостей через Jina AI. Валидация данных на Pydantic v2. \n\n[Live Demo в Telegram](@netwho_bot) — [Сообщество в Telegram](t.me/netwho)",
+      },
+      {
         id: "1",
         title: "Основной фокус",
         description: "Python Backend разработка и интеграция AI-решений. Создание масштабируемых пайплайнов данных и автоматизация процессов.",
@@ -66,11 +71,6 @@ export const translations = {
         id: "3",
         title: "Video Generation Pipeline",
         description: "Система на Python с FFmpeg и OpenAI. Асинхронная очередь (AsyncIO) на Supabase. Обработка ~100 видео в день. Фокус: FFmpeg CLI.",
-      },
-      {
-        id: "4",
-        title: "NetWho (AI CRM Network Assistant)",
-        description: "Бот на aiogram 3.x с RAG-архитектурой. Реализовал семантический поиск по контактам (Vector Search) и парсинг новостей через Jina AI. Валидация данных на Pydantic v2.",
       },
       {
         id: "5",

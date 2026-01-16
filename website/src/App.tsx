@@ -23,11 +23,11 @@ function App(): JSX.Element {
 
   // Map icons to card data from translations
   const icons: Record<string, ReactNode> = {
-    "1": <Code className="h-full w-full" />,
-    "2": <Layers className="h-full w-full" />,
-    "3": <Rocket className="h-full w-full" />,
-    "4": <NetWhoIcon className="h-full w-full" />,
-    "5": <Bot className="h-full w-full" />,
+    "1": <Code className="h-5 w-5" />,
+    "2": <Layers className="h-5 w-5" />,
+    "3": <Rocket className="h-5 w-5" />,
+    "4": <NetWhoIcon className="h-5 w-5" />,
+    "5": <Bot className="h-5 w-5" />,
   }
 
   const renderDescription = (text: string) => {
@@ -106,8 +106,8 @@ function App(): JSX.Element {
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
-                <div className="flex-shrink-0 w-9 sm:w-[30px] flex justify-center items-start text-[#A1A1AA] group-hover:text-white transition-colors duration-200">
-                  <div className={card.id === "4" ? "h-9 w-9 sm:h-[30px] sm:w-[30px]" : "h-6 w-6 sm:h-5 sm:w-5 mt-1.5 sm:mt-1"}>
+                <div className="flex-shrink-0 mt-1 text-[#A1A1AA] group-hover:text-white transition-colors duration-200">
+                  <div className="h-6 w-6 sm:h-5 sm:w-5">
                     {icons[card.id]}
                   </div>
                 </div>

@@ -23,8 +23,8 @@ export const translations = {
       },
       {
         id: "4",
-        title: "Telegram CRM Bot",
-        description: "RAG pipeline with vector embeddings. Async bot (AsyncIO) with Telegram Payments and LLM state management.",
+        title: "NetWho (AI CRM Network Assistant)",
+        description: "Bot built on aiogram 3.x with RAG architecture. Implemented semantic contact search (Vector Search) and news parsing via Jina AI. Data validation with Pydantic v2.",
       },
       {
         id: "5",
@@ -69,8 +69,8 @@ export const translations = {
       },
       {
         id: "4",
-        title: "Telegram CRM Bot",
-        description: "RAG-пайплайн с векторными эмбеддингами. Асинхронный бот (AsyncIO) с Telegram Payments и управлением контекстом LLM.",
+        title: "NetWho (AI CRM Network Assistant)",
+        description: "Бот на aiogram 3.x с RAG-архитектурой. Реализовал семантический поиск по контактам (Vector Search) и парсинг новостей через Jina AI. Валидация данных на Pydantic v2.",
       },
       {
         id: "5",

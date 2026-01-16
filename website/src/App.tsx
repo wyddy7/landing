@@ -1,4 +1,4 @@
-import { Code, Bot, Rocket, Layers, Github, Mail, MessageCircle, ExternalLink } from "lucide-react"
+import { Code, Bot, Rocket, Layers, Github, Mail, MessageCircle } from "lucide-react"
 import { useState, type ReactNode } from "react"
 import { Button } from "@/components/ui/neon-button"
 import Marquee from "react-fast-marquee"
@@ -121,7 +121,7 @@ function App(): JSX.Element {
                         className="hover:text-[#CCFF00] transition-colors duration-200 inline-flex items-center gap-2"
                       >
                         {card.title}
-                        <ExternalLink className="h-4 w-4 text-[#A1A1AA] group-hover:text-[#CCFF00] transition-colors duration-200" />
+                        <Github className="h-4 w-4 text-[#A1A1AA] group-hover:text-[#CCFF00] transition-colors duration-200" />
                       </a>
                     ) : card.title}
                   </h2>

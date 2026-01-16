@@ -106,7 +106,7 @@ function App(): JSX.Element {
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
-                <div className="flex-shrink-0 w-9 sm:w-[30px] flex justify-start items-start text-[#A1A1AA] group-hover:text-white transition-colors duration-200">
+                <div className="flex-shrink-0 w-9 sm:w-[30px] flex justify-center items-start text-[#A1A1AA] group-hover:text-white transition-colors duration-200">
                   <div className={card.id === "4" ? "h-9 w-9 sm:h-[30px] sm:w-[30px]" : "h-6 w-6 sm:h-5 sm:w-5 mt-1.5 sm:mt-1"}>
                     {icons[card.id]}
                   </div>

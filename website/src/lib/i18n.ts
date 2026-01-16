@@ -19,7 +19,7 @@ export const translations = {
       {
         id: "3",
         title: "Video Generation Pipeline",
-        description: "Python-based system using FFmpeg and OpenAI. AsyncIO for queueing, Supabase for metadata. Processing ~500 videos daily.",
+        description: "Python-based system using FFmpeg and OpenAI. AsyncIO for queueing, Supabase for metadata. Processing ~100 videos daily.",
       },
       {
         id: "4",
@@ -65,7 +65,7 @@ export const translations = {
       {
         id: "3",
         title: "Video Generation Pipeline",
-        description: "Система на Python с FFmpeg и OpenAI. Асинхронная очередь (AsyncIO) на Supabase. Обработка ~500 видео в день. Фокус: FFmpeg CLI.",
+        description: "Система на Python с FFmpeg и OpenAI. Асинхронная очередь (AsyncIO) на Supabase. Обработка ~100 видео в день. Фокус: FFmpeg CLI.",
       },
       {
         id: "4",

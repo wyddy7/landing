@@ -84,7 +84,7 @@
 
 ### 13. Текст на странице
 - **Нужен ли заголовок/описание над карточками?**
-  - Например: "AI Systems Engineer | LLM Orchestration"
+  - Например: "Python Backend Developer | AI/ML Integration"
   - Или только карточки?
 
 ### 14. FAQ секция

@@ -1,22 +1,22 @@
-# AI Systems Engineer | LLM Orchestration | Project Management
+# Python Backend Developer | AI/ML Integration | Project Management
 
-High-performance React landing page portfolio demonstrating expertise in AI Systems Engineering, Project Management, and modern full-stack development. Built with production-ready architecture, comprehensive CI/CD, and LLM-optimized documentation.
+High-performance React landing page portfolio demonstrating expertise in Python Backend Development, AI/ML Integration, and modern full-stack development. Built with production-ready architecture, comprehensive CI/CD, and LLM-optimized documentation.
 
 ## 👤 Portfolio Owner
 
-**Daniil Makeev** | AI Systems Engineer
+**Daniil Makeev** | Python Backend Developer | AI/ML Integration
 
-- **Education**: BMSTU (Bauman). Focus on System Architecture & High-load Systems
-- **Current Projects**: 
-  - Stealth AI Startup (2025 — Present): Founder & Lead Engineer, end-to-end video generation platform (500+ daily videos automated)
-  - AI Systems Engineering: Fault-tolerant data pipelines (100k+ daily requests), scalable microservices for real-time inference
-  - LLM Orchestration: Agentic workflows, LangChain, RAG pipelines, multi-agent systems
+- **Education**: BMSTU (Bauman Moscow State Technical University). 4th year, Faculty of Informatics and Computer Engineering.
+- **Projects**: 
+  - Video Generation Pipeline (Pet Project, 2024-2025): Python-based automated video generation using FFmpeg and OpenAI API.
+  - Telegram CRM Bot (Pet Project, 2024): RAG-powered Telegram bot with vector embeddings for information retrieval.
+  - AI/ML Integration: RAG pipelines, LLM integration, and automation workflows.
 
 ## 🎯 Project Overview
 
 Portfolio landing page showcasing:
-- **AI Systems Engineering**: Scalable architecture, performance optimization, production deployment
-- **Project Management**: CI/CD automation, comprehensive documentation, structured workflows
+- **Python Backend Development**: Scalable architecture, performance optimization, production deployment
+- **AI/ML Integration**: RAG systems, LLM orchestration, and business process automation
 - **Full-stack Development**: Modern React patterns, TypeScript strict mode, containerization
 
 ## 🏗️ Architecture

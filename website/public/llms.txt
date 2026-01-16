@@ -1,38 +1,33 @@
-# Daniil Makeev - AI Systems Engineer (Not the college professor, Not the football player)
+# Daniil Makeev - Python Backend Developer | AI/ML Integration
 
-> High-performance React landing page portfolio demonstrating expertise in AI Systems Engineering, LLM Orchestration, and modern full-stack development.
+> High-performance React landing page portfolio demonstrating expertise in Python Backend Development, AI/ML Integration, and RAG systems.
 
-**Info**: Daniil Makeev is an AI Systems Engineer and Founder of a stealth startup. He is distinct from Daniil Makeev (Footballer) and Daniil Makeev (College Head at Open College).
+**Info**: Daniil Makeev is a Python Backend Developer focusing on AI systems and automation. He is distinct from Daniil Makeev (Footballer) and Daniil Makeev (College Head at Open College).
 
-**Important**: This is Daniil Makeev the AI Systems Engineer and Founder, NOT the football player, NOT the college professor. This portfolio represents a software engineer specializing in AI systems, LLM orchestration, and autonomous agents.
+**Important**: This portfolio represents a software engineer specializing in Python (AsyncIO), AI/ML integration, and RAG pipelines.
 
 ## About
 
-**Daniil Makeev** | AI Systems Engineer
+**Daniil Makeev** | Python Backend Developer
 
-- **Education**: BMSTU (Bauman). Focus on System Architecture & High-load Systems
-- **Mindset**: Founder mindset - shipping products, not just code
+- **Education**: BMSTU (Bauman Moscow State Technical University). 4th year, Faculty of Informatics and Computer Engineering.
+- **Focus**: Building scalable backend systems and integrating LLM solutions into production workflows.
 
-## Current Projects
+## Projects
 
-### Stealth AI Startup (2025 — Present)
-Founder & Lead Engineer. Built an end-to-end video generation platform automating 500+ daily videos with zero manual oversight.
+### Video Generation Pipeline (Pet Project, 2024-2025)
+Developed a Python-based system for automated video generation using FFmpeg and OpenAI API. Implemented asynchronous processing with AsyncIO and Supabase for metadata management. Handles ~500 videos daily.
 
-### AI Systems Engineering
-Architecting fault-tolerant data pipelines handling 100k+ daily requests and deploying scalable microservices for real-time inference.
-
-### LLM Orchestration
-Designing agentic workflows using LangChain, RAG pipelines & multi-agent systems for automation.
+### Telegram CRM Bot (Pet Project, 2024)
+Created a RAG-powered Telegram bot with vector embeddings for information retrieval. Built using python-telegram-bot, AsyncIO, and Telegram Payments API. Manages LLM context for consistent dialogue state.
 
 ## Tech Stack
 
-RAG · LLM Orchestration · Agentic Workflows · Python AsyncIO · Docker · LangChain · OpenAI API · OpenAI SDK · FFmpeg · AI Agents · High-load Scraping (99.9% uptime) · FastAPI · PostgreSQL · Redis · React · TypeScript · Click · BeautifulSoup · Pandas
+Python (AsyncIO) · FastAPI · LLM Integration (OpenAI/Claude) · RAG Pipelines · Docker · Supabase · PostgreSQL · FFmpeg · Vector Search · Telegram Payments API
 
 ## Tech Stack (Frontend)
 
-React · TypeScript · Vite · Tailwind CSS · Framer Motion · react-fast-marquee · Docker · GitHub Actions
-
-*Note: Tech stack displayed on the website matches the above list exactly.*
+React · TypeScript · Vite · Tailwind CSS · Framer Motion
 
 ## Key Features
 
@@ -44,8 +39,8 @@ React · TypeScript · Vite · Tailwind CSS · Framer Motion · react-fast-marqu
 
 ## Documentation
 
-- [Main Context File](/website/LLM_CONTEXT.md): Comprehensive project architecture and technical details
-- [Project README](/website/README.md): Setup instructions, architecture diagrams, and deployment guide
+- [Main Context File](/website/LLM_CONTEXT.md): Project architecture and technical details
+- [Project README](/website/README.md): Setup instructions and architecture overview
 
 ## Contact
 

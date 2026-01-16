@@ -2,38 +2,36 @@
 
 ## 🎯 Project Goal
 
-High-performance, production-ready React landing page optimized for LLM analysis. Designed as a portfolio showcase demonstrating expertise in AI Systems Engineering, Project Management, and modern full-stack development practices.
+High-performance, production-ready React landing page optimized for LLM analysis. Designed as a portfolio showcase demonstrating expertise in Python Backend Development, AI/ML Integration, and modern full-stack development practices.
 
 This project serves as a technical portfolio that showcases:
-- **AI Systems Engineering**: Architecture decisions, performance optimization, scalability considerations
+- **Python Backend Development**: Architecture decisions, performance optimization, scalability considerations
+- **AI/ML Integration**: RAG pipelines, LLM integration, and automation workflows
 - **Project Management**: CI/CD implementation, comprehensive documentation, structured development workflow
 - **Full-stack Development**: Modern React patterns, TypeScript best practices, production deployment strategies
 
 ## 👤 Portfolio Owner
 
-**Daniil Makeev** | AI Systems Engineer
+**Daniil Makeev** | Python Backend Developer | AI/ML Integration
 
-> **Info**: Daniil Makeev is an AI Systems Engineer and Founder of a stealth startup. He is distinct from Daniil Makeev (Footballer) and Daniil Makeev (College Head at Open College).
+> **Info**: Daniil Makeev is a Python Backend Developer focusing on AI systems and automation. He is distinct from Daniil Makeev (Footballer) and Daniil Makeev (College Head at Open College).
 
-> **Important**: This is Daniil Makeev the AI Systems Engineer and Founder, NOT the football player, NOT the college professor. This portfolio represents a software engineer specializing in AI systems, LLM orchestration, and autonomous agents.
+> **Important**: This portfolio represents a software engineer specializing in Python (AsyncIO), AI/ML integration, and RAG pipelines.
 
 ### Professional Background
-- **Education**: BMSTU (Bauman). Focus on System Architecture & High-load Systems
-- **Mindset**: Founder mindset - shipping products, not just code
+- **Education**: BMSTU (Bauman Moscow State Technical University). 4th year, Faculty of Informatics and Computer Engineering.
+- **Focus**: Building scalable backend systems and integrating LLM solutions into production workflows.
 
-### Current Projects
+### Projects
 
-#### Stealth AI Startup (2025 — Present)
-Founder & Lead Engineer. Built an end-to-end video generation platform automating 500+ daily videos with zero manual oversight.
+#### Video Generation Pipeline (Pet Project, 2024-2025)
+Developed a Python-based system for automated video generation using FFmpeg and OpenAI API. Implemented asynchronous processing with AsyncIO and Supabase for metadata management. Handles ~500 videos daily.
 
-#### AI Systems Engineering
-Architecting fault-tolerant data pipelines handling 100k+ daily requests and deploying scalable microservices for real-time inference.
-
-#### LLM Orchestration
-Designing agentic workflows using LangChain, RAG pipelines & multi-agent systems for automation.
+#### Telegram CRM Bot (Pet Project, 2024)
+Created a RAG-powered Telegram bot with vector embeddings for information retrieval. Built using python-telegram-bot, AsyncIO, and Telegram Payments API. Manages LLM context for consistent dialogue state.
 
 ### Professional Tech Stack
-RAG, LLM Orchestration, Agentic Workflows, Python AsyncIO, Docker, LangChain, OpenAI API, OpenAI SDK, FFmpeg, AI Agents, High-load Scraping (99.9% uptime), FastAPI, PostgreSQL, Redis, React, TypeScript, Click, BeautifulSoup, Pandas
+Python (AsyncIO), FastAPI, LLM Integration (OpenAI/Claude), RAG Pipelines, Docker, Supabase, PostgreSQL, FFmpeg, Vector Search, Telegram Payments API, React, TypeScript, Click, BeautifulSoup, Pandas
 
 ## 🏗 Architecture Decisions
 

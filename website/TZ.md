@@ -30,9 +30,9 @@
 ### 3. SEO и LLM-оптимизация
 
 #### Мета-теги
-- Title: "AI Systems Engineer | LLM Orchestration | wyddy7"
+- Title: "Python Backend Developer | AI/ML Integration | wyddy7"
 - Description: 150 символов с ключевыми словами
-- Keywords: AI backend, Python, LLM orchestration, etc.
+- Keywords: Python, Backend, AI integration, RAG pipelines, FastAPI, etc.
 
 #### Структура контента
 - Семантические заголовки (H1-H3)

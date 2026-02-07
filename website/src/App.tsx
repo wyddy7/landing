@@ -115,7 +115,7 @@ function App(): JSX.Element {
                   <h2 className="font-semibold text-lg sm:text-lg md:text-xl mb-2 sm:mb-1.5 text-white group-hover:text-white transition-colors duration-200 tracking-tight">
                     {card.id === "4" ? (
                       <a 
-                        href="https://github.com/wyddy7/netwho" 
+                        href="https://github.com/wyddy7/netwho/tree/org" 
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="hover:text-[#CCFF00] transition-colors duration-200 inline-flex items-center gap-2"

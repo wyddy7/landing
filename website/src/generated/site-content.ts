@@ -18,12 +18,16 @@ export const siteContent = {
       "ru": "AI Engineer"
     },
     "tagline": {
-      "en": "AI Engineer | Generative Systems | RAG",
-      "ru": "AI Engineer | Generative Systems | RAG"
+      "en": "AI Engineer | RAG | GenAI Pipelines",
+      "ru": "AI Engineer | RAG | GenAI Pipelines"
+    },
+    "hook": {
+      "en": "I build production RAG systems and content generation pipelines with a focus on answer quality, processing speed, and generation cost.",
+      "ru": "Строю production RAG-системы и пайплайны генерации контента с фокусом на качество ответа, скорость обработки и стоимость генерации."
     },
     "summary": {
-      "en": "AI Engineer focused on generative pipelines, RAG systems, and production-grade automation. I build AI products that reduce manual work, improve answer quality, and turn LLM prototypes into reliable systems.",
-      "ru": "AI Engineer, который делает generative pipelines, RAG-системы и production-grade automation. Собираю AI-продукты, которые снижают ручной труд, повышают качество ответов и превращают LLM-прототипы в надёжные системы."
+      "en": "AI Engineer focused on production RAG systems and content generation pipelines. I build AI tools that reduce manual work, improve answer quality, and keep generation cost under control.",
+      "ru": "AI Engineer, который делает production RAG-системы и пайплайны генерации контента. Собираю AI-инструменты, которые снижают ручной труд, повышают качество ответов и держат под контролем стоимость генерации."
     }
   },
   "contacts": {
@@ -156,14 +160,15 @@ export const siteContent = {
     "core": [
       "Python",
       "FastAPI",
-      "GenAI",
+      "AsyncIO",
       "RAG",
       "pgvector",
       "PydanticAI",
+      "OpenAI API",
       "deepagents",
       "Docker",
       "PostgreSQL",
-      "OpenAI API"
+      "GenAI"
     ],
     "languages": [
       "Russian (native)",
@@ -174,108 +179,112 @@ export const siteContent = {
   "translations": {
     "en": {
       "name": "Daniil Makeev",
-      "tagline": "AI Engineer | Generative Systems | RAG",
+      "tagline": "AI Engineer | RAG | GenAI Pipelines",
+      "hook": "I build production RAG systems and content generation pipelines with a focus on answer quality, processing speed, and generation cost.",
       "connect": "Connect:",
       "textMe": "Text Me",
       "pingMe": "Ping me_",
       "cards": [
         {
-          "id": "hao",
-          "icon": "layers",
-          "title": "Hao | AI Engineer",
-          "description": "Current role: AI Engineer / Lead AI Generation Engineer. Building generative video pipelines and RAG systems with measurable product impact."
-        },
-        {
           "id": "focus",
           "icon": "code",
-          "title": "Core Focus",
-          "description": "Generative systems, RAG assistants, and automation workflows. I care about production reliability, cost control, and shipping useful AI products."
+          "title": "What I Build",
+          "description": "Production RAG systems and content generation pipelines. Focus: answer quality, processing speed, and generation cost."
         },
         {
-          "id": "education",
-          "icon": "bot",
-          "title": "Technical Arsenal",
-          "description": "Python, FastAPI, Docker, PostgreSQL, pgvector, PydanticAI, deepagents, OpenAI API.",
-          "showTechStackOnHover": true
+          "id": "production-experience",
+          "icon": "layers",
+          "title": "Production AI Experience",
+          "description": "Currently AI Engineer / Lead AI Generation Engineer at Hao. Automated script generation, sped up content processing by 3x, and cut LLM generation costs by about 48%."
+        },
+        {
+          "id": "video-generation",
+          "icon": "rocket",
+          "title": "Video Generation Pipeline",
+          "description": "Production pipeline for video generation: automated script workflows, parallelized processing, and added LLM deduplication. Result: roughly 2x less manual work, 3x faster processing, and about 48% lower generation spend."
         },
         {
           "id": "project-netwho",
           "icon": "netwho",
           "title": "NetWho (AI CRM Network Assistant)",
           "link": "https://github.com/wyddy7/netwho/tree/org",
-          "description": "Bot built on aiogram 3.x with RAG architecture. Implemented semantic contact search with vector search and news parsing via Jina AI. Data validation with Pydantic v2.\n\n[Live Demo](@netwho_bot) — [Community](t.me/netwho)"
+          "description": "AI CRM assistant with semantic contact search, news parsing, and structured dialogue context. Built with aiogram 3.x, RAG, vector search, and Pydantic v2.\n\n[Live Demo](@netwho_bot) — [Community](t.me/netwho)"
         },
         {
-          "id": "education-status",
-          "icon": "rocket",
-          "title": "Education",
-          "description": "BMSTU, Computer Science and Engineering. Incomplete higher education, graduation expected in 2026."
+          "id": "stack",
+          "icon": "bot",
+          "title": "Technical Arsenal",
+          "description": "Python, FastAPI, AsyncIO, PostgreSQL, pgvector, PydanticAI, OpenAI API, deepagents, Docker.",
+          "showTechStackOnHover": true
         }
       ],
       "techStack": [
         "Python",
         "FastAPI",
-        "GenAI",
+        "AsyncIO",
         "RAG",
         "pgvector",
         "PydanticAI",
+        "OpenAI API",
         "deepagents",
         "Docker",
         "PostgreSQL",
-        "OpenAI API"
+        "GenAI"
       ]
     },
     "ru": {
       "name": "Даниил Макеев",
-      "tagline": "AI Engineer | Generative Systems | RAG",
+      "tagline": "AI Engineer | RAG | GenAI Pipelines",
+      "hook": "Строю production RAG-системы и пайплайны генерации контента с фокусом на качество ответа, скорость обработки и стоимость генерации.",
       "connect": "Связь:",
       "textMe": "Написать мне",
       "pingMe": "Пинг_",
       "cards": [
         {
-          "id": "hao",
-          "icon": "layers",
-          "title": "Hao | AI Engineer",
-          "description": "Текущая роль: AI Engineer / Lead AI Generation Engineer. Делаю generative video pipelines и RAG-системы с измеримым продуктовым эффектом."
-        },
-        {
           "id": "focus",
           "icon": "code",
-          "title": "Основной фокус",
-          "description": "Generative systems, RAG-ассистенты и automation workflows. Мне важны production reliability, контроль стоимости и полезный AI-продукт."
+          "title": "Что я строю",
+          "description": "Production RAG-системы и пайплайны генерации контента. Фокус: качество ответа, скорость обработки и стоимость генерации."
         },
         {
-          "id": "education",
-          "icon": "bot",
-          "title": "Технический арсенал",
-          "description": "Python, FastAPI, Docker, PostgreSQL, pgvector, PydanticAI, deepagents, OpenAI API.",
-          "showTechStackOnHover": true
+          "id": "production-experience",
+          "icon": "layers",
+          "title": "Продовый AI-опыт",
+          "description": "Сейчас AI Engineer / Lead AI Generation Engineer в Hao. Автоматизировал генерацию сценариев, ускорил обработку контента в 3 раза и снизил расходы на LLM примерно на 48%."
+        },
+        {
+          "id": "video-generation",
+          "icon": "rocket",
+          "title": "Video Generation Pipeline",
+          "description": "Пайплайн генерации видео в проде: автоматизация сценариев, параллельная обработка и дедупликация запросов к LLM. Результат: примерно в 2 раза меньше ручной работы, в 3 раза быстрее обработка и примерно на 48% ниже затраты на генерацию."
         },
         {
           "id": "project-netwho",
           "icon": "netwho",
           "title": "NetWho (AI CRM Network Assistant)",
           "link": "https://github.com/wyddy7/netwho/tree/org",
-          "description": "Бот на aiogram 3.x с RAG-архитектурой. Реализовал семантический поиск по контактам через vector search и парсинг новостей через Jina AI. Валидация данных на Pydantic v2.\n\n[Live Demo в Telegram](@netwho_bot) — [Сообщество в Telegram](t.me/netwho)"
+          "description": "AI CRM-ассистент с семантическим поиском по контактам, парсингом новостей и управлением диалоговым контекстом. Стек: aiogram 3.x, RAG, vector search, Pydantic v2.\n\n[Live Demo в Telegram](@netwho_bot) — [Сообщество в Telegram](t.me/netwho)"
         },
         {
-          "id": "education-status",
-          "icon": "rocket",
-          "title": "Образование",
-          "description": "МГТУ им. Н.Э. Баумана, ИВТ. Неоконченное высшее, выпуск ожидается в 2026."
+          "id": "stack",
+          "icon": "bot",
+          "title": "Инструменты",
+          "description": "Python, FastAPI, AsyncIO, PostgreSQL, pgvector, PydanticAI, OpenAI API, deepagents, Docker.",
+          "showTechStackOnHover": true
         }
       ],
       "techStack": [
         "Python",
         "FastAPI",
-        "GenAI",
+        "AsyncIO",
         "RAG",
         "pgvector",
         "PydanticAI",
+        "OpenAI API",
         "deepagents",
         "Docker",
         "PostgreSQL",
-        "OpenAI API"
+        "GenAI"
       ]
     }
   }

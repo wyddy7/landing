@@ -1,6 +1,6 @@
-# Daniil Makeev - AI Engineer | Generative Systems | RAG
+# Daniil Makeev - AI Engineer | RAG | GenAI Pipelines
 
-> AI Engineer focused on generative pipelines, RAG systems, and production-grade automation. I build AI products that reduce manual work, improve answer quality, and turn LLM prototypes into reliable systems.
+> AI Engineer focused on production RAG systems and content generation pipelines. I build AI tools that reduce manual work, improve answer quality, and keep generation cost under control.
 
 **Canonical URL**: https://wyddy.tech/
 
@@ -9,7 +9,7 @@
 **Daniil Makeev** | AI Engineer
 
 - **Location**: Moscow, Russia
-- **Focus**: Generative systems, RAG assistants, and production AI automation
+- **Focus**: I build production RAG systems and content generation pipelines with a focus on answer quality, processing speed, and generation cost.
 - **Education**: Bauman Moscow State Technical University, Computer Science and Engineering
 - **Status**: Incomplete higher education, graduation expected in 2026
 
@@ -51,7 +51,7 @@ Built automated generation pipelines for video content. Focus areas: orchestrati
 
 ## Core Skills
 
-Python · FastAPI · GenAI · RAG · pgvector · PydanticAI · deepagents · Docker · PostgreSQL · OpenAI API
+Python · FastAPI · AsyncIO · RAG · pgvector · PydanticAI · OpenAI API · deepagents · Docker · PostgreSQL · GenAI
 
 ## Languages
 

@@ -40,6 +40,7 @@ function buildTranslations(profile) {
     en: {
       name: profile.branding.name.en,
       tagline: profile.branding.tagline.en,
+      hook: profile.branding.hook.en,
       connect: labels.en.connect,
       textMe: labels.en.textMe,
       pingMe: labels.en.pingMe,
@@ -49,6 +50,7 @@ function buildTranslations(profile) {
     ru: {
       name: profile.branding.name.ru,
       tagline: profile.branding.tagline.ru,
+      hook: profile.branding.hook.ru,
       connect: labels.ru.connect,
       textMe: labels.ru.textMe,
       pingMe: labels.ru.pingMe,
@@ -109,7 +111,7 @@ function buildLlms(profile, canonicalUrl) {
 **${profile.branding.name.en}** | ${profile.branding.title.en}
 
 - **Location**: Moscow, Russia
-- **Focus**: Generative systems, RAG assistants, and production AI automation
+- **Focus**: ${profile.branding.hook.en}
 - **Education**: ${profile.education.institution.en}, ${profile.education.program.en}
 - **Status**: ${profile.education.status.en}
 
@@ -143,6 +145,8 @@ function validateProfile(profile) {
   assert(profile.branding?.name?.ru, "branding.name.ru is required");
   assert(profile.branding?.tagline?.en, "branding.tagline.en is required");
   assert(profile.branding?.tagline?.ru, "branding.tagline.ru is required");
+  assert(profile.branding?.hook?.en, "branding.hook.en is required");
+  assert(profile.branding?.hook?.ru, "branding.hook.ru is required");
   assert(profile.seo?.title, "seo.title is required");
   assert(profile.seo?.description, "seo.description is required");
   assert(Array.isArray(profile.seo?.keywords), "seo.keywords must be an array");

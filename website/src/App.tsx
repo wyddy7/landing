@@ -73,10 +73,15 @@ function App(): JSX.Element {
     <div className="min-h-screen bg-[#050505] text-white flex flex-col overflow-hidden">
       {/* Header */}
       <header className="px-5 py-4 sm:px-6 sm:py-6 flex-shrink-0">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <h1 className="text-2xl sm:text-2xl md:text-3xl font-bold font-heading tracking-tight text-white">
-            <span>{t.name}</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">{t.tagline}<span className="cursor-blink text-[#A1A1AA]">_</span></span>
-          </h1>
+        <div className="max-w-4xl mx-auto flex items-start justify-between gap-4">
+          <div className="min-w-0">
+            <h1 className="text-2xl sm:text-2xl md:text-3xl font-bold font-heading tracking-tight text-white">
+              <span>{t.name}</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">{t.tagline}<span className="cursor-blink text-[#A1A1AA]">_</span></span>
+            </h1>
+            <p className="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-[#A1A1AA]">
+              {t.hook}
+            </p>
+          </div>
           <div className="flex-shrink-0">
             <LanguageSelector />
           </div>

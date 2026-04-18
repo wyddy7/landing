@@ -6,7 +6,7 @@ export const siteContent = {
     "url": "https://wyddy.tech",
     "author": "Daniil Makeev",
     "locale": "ru",
-    "defaultLanguage": "ru"
+    "defaultLanguage": "en"
   },
   "branding": {
     "name": {
@@ -33,6 +33,7 @@ export const siteContent = {
   "contacts": {
     "email": "wyddy7@gmail.com",
     "github": "https://github.com/wyddy7",
+    "linkedin": "https://www.linkedin.com/in/wyddy",
     "telegram": "https://t.me/wyddy7",
     "telegramHandle": "@wyddy7"
   },
@@ -138,8 +139,8 @@ export const siteContent = {
       },
       "link": "https://github.com/wyddy7/netwho/tree/org",
       "description": {
-        "en": "Bot built on aiogram 3.x with RAG architecture. Implemented semantic contact search with vector search and news parsing via Jina AI. Data validation with Pydantic v2.\n\n[Live Demo](@netwho_bot) — [Community](t.me/netwho)",
-        "ru": "Бот на aiogram 3.x с RAG-архитектурой. Реализовал семантический поиск по контактам через vector search и парсинг новостей через Jina AI. Валидация данных на Pydantic v2.\n\n[Live Demo в Telegram](@netwho_bot) — [Сообщество в Telegram](t.me/netwho)"
+        "en": "Bot built on aiogram 3.x with RAG architecture. Implemented semantic contact search with vector search and news parsing via Jina AI. Data validation with Pydantic v2.\n\n[Live Demo](@netwho_bot)",
+        "ru": "Бот на aiogram 3.x с RAG-архитектурой. Реализовал семантический поиск по контактам через vector search и парсинг новостей через Jina AI. Валидация данных на Pydantic v2.\n\n[Live Demo в Telegram](@netwho_bot)"
       }
     },
     {
@@ -186,16 +187,10 @@ export const siteContent = {
       "pingMe": "Ping me_",
       "cards": [
         {
-          "id": "focus",
-          "icon": "code",
-          "title": "What I Build",
-          "description": "Production RAG systems and content generation pipelines. Focus: answer quality, processing speed, and generation cost."
-        },
-        {
           "id": "production-experience",
           "icon": "layers",
-          "title": "Production AI Experience",
-          "description": "Currently AI Engineer / Lead AI Generation Engineer at Hao. Automated script generation, sped up content processing by 3x, and cut LLM generation costs by about 48%."
+          "title": "AI Engineer at Hao",
+          "description": "Building production AI pipelines since January 2025. Focus areas: RAG systems, content generation automation, LLM cost optimization, and vector search."
         },
         {
           "id": "video-generation",
@@ -208,7 +203,7 @@ export const siteContent = {
           "icon": "netwho",
           "title": "NetWho (AI CRM Network Assistant)",
           "link": "https://github.com/wyddy7/netwho/tree/org",
-          "description": "AI CRM assistant with semantic contact search, news parsing, and structured dialogue context. Built with aiogram 3.x, RAG, vector search, and Pydantic v2.\n\n[Live Demo](@netwho_bot) — [Community](t.me/netwho)"
+          "description": "AI CRM assistant with semantic contact search, news parsing, and structured dialogue context. Built with aiogram 3.x, RAG, vector search, and Pydantic v2.\n\n[Live Demo](@netwho_bot)"
         },
         {
           "id": "stack",
@@ -241,16 +236,10 @@ export const siteContent = {
       "pingMe": "Пинг_",
       "cards": [
         {
-          "id": "focus",
-          "icon": "code",
-          "title": "Что я строю",
-          "description": "Production RAG-системы и пайплайны генерации контента. Фокус: качество ответа, скорость обработки и стоимость генерации."
-        },
-        {
           "id": "production-experience",
           "icon": "layers",
-          "title": "Продовый AI-опыт",
-          "description": "Сейчас AI Engineer / Lead AI Generation Engineer в Hao. Автоматизировал генерацию сценариев, ускорил обработку контента в 3 раза и снизил расходы на LLM примерно на 48%."
+          "title": "AI Engineer в Hao",
+          "description": "Строю production AI-пайплайны с января 2025. Направления: RAG-системы, автоматизация генерации контента, оптимизация стоимости LLM, vector search."
         },
         {
           "id": "video-generation",
@@ -263,7 +252,7 @@ export const siteContent = {
           "icon": "netwho",
           "title": "NetWho (AI CRM Network Assistant)",
           "link": "https://github.com/wyddy7/netwho/tree/org",
-          "description": "AI CRM-ассистент с семантическим поиском по контактам, парсингом новостей и управлением диалоговым контекстом. Стек: aiogram 3.x, RAG, vector search, Pydantic v2.\n\n[Live Demo в Telegram](@netwho_bot) — [Сообщество в Telegram](t.me/netwho)"
+          "description": "AI CRM-ассистент с семантическим поиском по контактам, парсингом новостей и управлением диалоговым контекстом. Стек: aiogram 3.x, RAG, vector search, Pydantic v2.\n\n[Live Demo в Telegram](@netwho_bot)"
         },
         {
           "id": "stack",

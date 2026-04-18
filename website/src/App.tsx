@@ -1,4 +1,4 @@
-import { Code, Bot, Rocket, Layers, Github, Mail, MessageCircle } from "lucide-react"
+import { Code, Bot, Rocket, Layers, Github, Mail, MessageCircle, Linkedin } from "lucide-react"
 import { useState, type ReactNode } from "react"
 import { Button } from "@/components/ui/neon-button"
 import Marquee from "react-fast-marquee"
@@ -71,26 +71,27 @@ function App(): JSX.Element {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white flex flex-col overflow-hidden">
-      {/* Header */}
-      <header className="px-5 py-4 sm:px-6 sm:py-6 flex-shrink-0">
-        <div className="max-w-4xl mx-auto flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <h1 className="text-2xl sm:text-2xl md:text-3xl font-bold font-heading tracking-tight text-white">
-              <span>{t.name}</span> <span className="font-mono text-[#A1A1AA] font-normal">|</span> <span className="font-mono text-[#A1A1AA] font-normal text-base sm:text-base md:text-lg">{t.tagline}<span className="cursor-blink text-[#A1A1AA]">_</span></span>
-            </h1>
-            <p className="mt-3 max-w-2xl text-sm sm:text-base leading-relaxed text-[#A1A1AA]">
-              {t.hook}
-            </p>
+      {/* Centered content block: identity + cards together */}
+      <main className="flex-1 flex flex-col justify-center px-5 sm:px-6 pb-16 sm:pb-0">
+        <div className="w-full max-w-4xl mx-auto">
+          {/* Identity */}
+          <div className="flex items-start justify-between gap-4 mb-8 sm:mb-10">
+            <div className="min-w-0">
+              <h1 className="text-2xl sm:text-3xl font-bold font-heading tracking-tight text-white">
+                {t.name}
+              </h1>
+              <p className="mt-1 font-mono text-sm sm:text-base text-[#A1A1AA] font-normal tracking-tight">
+                {t.tagline}<span className="cursor-blink">_</span>
+              </p>
+              <p className="mt-4 max-w-2xl text-sm sm:text-base leading-relaxed text-[#A1A1AA]">
+                {t.hook}
+              </p>
+            </div>
+            <div className="flex-shrink-0">
+              <LanguageSelector />
+            </div>
           </div>
-          <div className="flex-shrink-0">
-            <LanguageSelector />
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content - List */}
-      <main className="flex-1 flex items-center justify-center px-5 py-2 sm:px-6 sm:py-4">
-        <div className="w-full max-w-4xl">
+          {/* Cards */}
           <ul className="space-y-4 sm:space-y-5" role="list">
             {t.cards.map((card) => {
               const handleMouseEnter = (): void => {
@@ -179,6 +180,14 @@ function App(): JSX.Element {
                 className="text-white hover:text-[#CCFF00] transition-colors duration-200 inline-flex items-center flex-shrink-0 ml-0 sm:ml-2"
               >
                 <Github className="h-6 w-6 sm:h-5 sm:w-5" />
+              </a>
+              <a
+                href={siteContent.contacts.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-[#CCFF00] transition-colors duration-200 inline-flex items-center flex-shrink-0 ml-0 sm:ml-4"
+              >
+                <Linkedin className="h-6 w-6 sm:h-5 sm:w-5" />
               </a>
               <a
                 href={`mailto:${siteContent.contacts.email}`}

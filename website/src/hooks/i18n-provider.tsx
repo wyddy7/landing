@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from "react";
-import { translations, type Language } from "@/lib/i18n";
+import { translations, siteContent, type Language } from "@/lib/i18n";
 import { I18nContext, STORAGE_KEY } from "@/hooks/i18n-context";
 
 export function I18nProvider({ children }: { children: ReactNode }) {
@@ -10,8 +10,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       return saved as Language;
     }
 
-    const browserLang = navigator.language.split("-")[0].toLowerCase();
-    return browserLang === "ru" ? "ru" : "en";
+    const defaultLang = siteContent.site.defaultLanguage;
+    return (defaultLang === "en" || defaultLang === "ru") ? defaultLang as Language : "en";
   });
 
   const changeLanguage = (newLang: Language) => {

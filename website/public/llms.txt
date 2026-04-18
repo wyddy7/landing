@@ -44,7 +44,7 @@ Owned internal Python services focused on ETL and data quality.
 ### NetWho (AI CRM Network Assistant)
 Bot built on aiogram 3.x with RAG architecture. Implemented semantic contact search with vector search and news parsing via Jina AI. Data validation with Pydantic v2.
 
-[Live Demo](@netwho_bot) — [Community](t.me/netwho)
+[Live Demo](@netwho_bot)
 
 ### Video Generation Pipelines
 Built automated generation pipelines for video content. Focus areas: orchestration, prompt workflows, queueing, deduplication, and flexible scene assembly.

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/neon-button"
 import Marquee from "react-fast-marquee"
 import { useI18n } from "@/hooks/use-i18n"
 import { LanguageSelector } from "@/components/ui/language-selector-dropdown"
+import { siteContent } from "@/lib/i18n"
 
 const NetWhoIcon = ({ className }: { className?: string }) => (
   <img 
@@ -23,11 +24,11 @@ function App(): JSX.Element {
 
   // Map icons to card data from translations
   const icons: Record<string, ReactNode> = {
-    "1": <Code className="h-5 w-5" />,
-    "2": <Layers className="h-5 w-5" />,
-    "3": <Rocket className="h-5 w-5" />,
-    "4": <NetWhoIcon className="h-5 w-5" />,
-    "5": <Bot className="h-5 w-5" />,
+    code: <Code className="h-5 w-5" />,
+    layers: <Layers className="h-5 w-5" />,
+    rocket: <Rocket className="h-5 w-5" />,
+    netwho: <NetWhoIcon className="h-5 w-5" />,
+    bot: <Bot className="h-5 w-5" />,
   }
 
   const renderDescription = (text: string) => {
@@ -88,13 +89,13 @@ function App(): JSX.Element {
           <ul className="space-y-4 sm:space-y-5" role="list">
             {t.cards.map((card) => {
               const handleMouseEnter = (): void => {
-                if (card.id === "2") {
+                if ("showTechStackOnHover" in card && card.showTechStackOnHover) {
                   setShowTechStack(true)
                 }
               }
 
               const handleMouseLeave = (): void => {
-                if (card.id === "2") {
+                if ("showTechStackOnHover" in card && card.showTechStackOnHover) {
                   setShowTechStack(false)
                 }
               }
@@ -108,14 +109,14 @@ function App(): JSX.Element {
                 >
                 <div className="flex-shrink-0 mt-1 text-[#A1A1AA] group-hover:text-white transition-colors duration-200">
                   <div className="h-6 w-6 sm:h-5 sm:w-5">
-                    {icons[card.id]}
+                    {icons[card.icon]}
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
                   <h2 className="font-semibold text-lg sm:text-lg md:text-xl mb-2 sm:mb-1.5 text-white group-hover:text-white transition-colors duration-200 tracking-tight">
-                    {card.id === "4" ? (
+                    {"link" in card && card.link ? (
                       <a 
-                        href="https://github.com/wyddy7/netwho/tree/org" 
+                        href={card.link}
                         target="_blank" 
                         rel="noopener noreferrer" 
                         className="hover:text-[#CCFF00] transition-colors duration-200 inline-flex items-center gap-2"
@@ -167,7 +168,7 @@ function App(): JSX.Element {
             <div className="flex items-center gap-3 sm:gap-0 flex-shrink-0 min-w-0">
               <span className="whitespace-nowrap hidden sm:inline">&gt; {t.connect}</span>
               <a
-                href="https://github.com/wyddy7"
+                href={siteContent.contacts.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-[#CCFF00] transition-colors duration-200 inline-flex items-center flex-shrink-0 ml-0 sm:ml-2"
@@ -175,7 +176,7 @@ function App(): JSX.Element {
                 <Github className="h-6 w-6 sm:h-5 sm:w-5" />
               </a>
               <a
-                href="mailto:wyddy7@gmail.com"
+                href={`mailto:${siteContent.contacts.email}`}
                 className="text-white hover:text-[#CCFF00] transition-colors duration-200 inline-flex items-center flex-shrink-0 ml-0 sm:ml-4"
               >
                 <Mail className="h-6 w-6 sm:h-5 sm:w-5" />
@@ -183,7 +184,7 @@ function App(): JSX.Element {
             </div>
             <div className="flex-1 min-w-0"></div>
             <Button
-              href="https://t.me/wyddy7"
+              href={siteContent.contacts.telegram}
               target="_blank"
               rel="noopener noreferrer"
               variant="solid"

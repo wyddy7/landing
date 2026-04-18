@@ -1,49 +1,64 @@
-# Daniil Makeev - Python Backend Developer | AI/ML Integration
+# Daniil Makeev - AI Engineer | Generative Systems | RAG
 
-> High-performance React landing page portfolio demonstrating expertise in Python Backend Development, AI/ML Integration, and RAG systems.
+> AI Engineer focused on generative pipelines, RAG systems, and production-grade automation. I build AI products that reduce manual work, improve answer quality, and turn LLM prototypes into reliable systems.
 
-**Info**: Daniil Makeev is a Python Backend Developer focusing on AI systems and automation. He is distinct from Daniil Makeev (Footballer) and Daniil Makeev (College Head at Open College).
-
-**Important**: This portfolio represents a software engineer specializing in Python (AsyncIO), AI/ML integration, and RAG pipelines.
+**Canonical URL**: https://wyddy.tech/
 
 ## About
 
-**Daniil Makeev** | Python Backend Developer
+**Daniil Makeev** | AI Engineer
 
-- **Education**: BMSTU (Bauman Moscow State Technical University). 4th year, Faculty of Informatics and Computer Engineering.
-- **Focus**: Building scalable backend systems and integrating LLM solutions into production workflows.
+- **Location**: Moscow, Russia
+- **Focus**: Generative systems, RAG assistants, and production AI automation
+- **Education**: Bauman Moscow State Technical University, Computer Science and Engineering
+- **Status**: Incomplete higher education, graduation expected in 2026
 
-## Projects
+## Experience
 
-### Video Generation Pipeline (Pet Project, 2024-2025)
-Developed a Python-based system for automated video generation using FFmpeg and OpenAI API. Implemented asynchronous processing with AsyncIO and Supabase for metadata management. Handles ~500 videos daily.
+### Hao (https://hao.vc)
+**AI Engineer / Lead AI Generation Engineer** | January 2025 - Present
 
-### Telegram CRM Bot (Pet Project, 2024)
-Created a RAG-powered Telegram bot with vector embeddings for information retrieval. Built using python-telegram-bot, AsyncIO, and Telegram Payments API. Manages LLM context for consistent dialogue state.
+Built video generation pipelines and a contact-centric RAG assistant for production AI workflows.
 
-## Tech Stack
+- Automated script generation workflows and cut manual work roughly in half.
+- Parallelized generation flows and sped up per-unit content processing by 3x.
+- Implemented LLM request deduplication and reduced generation costs by about 48%.
+- Added reranking to contact search reasoning, improving answer relevance by about 60%.
+- Introduced profile personalization and increased LTV by about 34%.
+- Isolated user data with RLS to eliminate cross-user data exposure risks.
 
-Python (AsyncIO) · FastAPI · LLM Integration (OpenAI/Claude) · RAG Pipelines · Docker · Supabase · PostgreSQL · FFmpeg · Vector Search · Telegram Payments API
+**Stack**: RAG · pgvector · PydanticAI · GenAI · ElevenLabs · deepagents
 
-## Tech Stack (Frontend)
+### Zenit-Elektro Metrology Company
+**Python Developer** | June 2023 - January 2025
 
-React · TypeScript · Vite · Tailwind CSS · Framer Motion
+Owned internal Python services focused on ETL and data quality.
 
-## Key Features
+- Built an ETL pipeline that automated manual operations and cut site moderation time by 3x.
+- Integrated data validation that reduced import errors by about 60%.
 
-- Production-ready architecture with TypeScript strict mode
-- CI/CD automation via GitHub Actions
-- Docker containerization
-- Performance-optimized (Lighthouse 95+)
-- LLM-optimized documentation
+**Stack**: Python · FastAPI · asyncio · HTTP · ETL · PostgreSQL
 
-## Documentation
+## Selected Projects
 
-- [Main Context File](/website/LLM_CONTEXT.md): Project architecture and technical details
-- [Project README](/website/README.md): Setup instructions and architecture overview
+### NetWho (AI CRM Network Assistant)
+Bot built on aiogram 3.x with RAG architecture. Implemented semantic contact search with vector search and news parsing via Jina AI. Data validation with Pydantic v2.
+
+[Live Demo](@netwho_bot) — [Community](t.me/netwho)
+
+### Video Generation Pipelines
+Built automated generation pipelines for video content. Focus areas: orchestration, prompt workflows, queueing, deduplication, and flexible scene assembly.
+
+## Core Skills
+
+Python · FastAPI · GenAI · RAG · pgvector · PydanticAI · deepagents · Docker · PostgreSQL · OpenAI API
+
+## Languages
+
+Russian (native) · English (B2) · Chinese (B1)
 
 ## Contact
 
-- **GitHub**: [wyddy7](https://github.com/wyddy7)
-- **Telegram**: [@wyddy7](https://t.me/wyddy7)
-- **Email**: [wyddy7@gmail.com](mailto:wyddy7@gmail.com)
+- **GitHub**: https://github.com/wyddy7
+- **Telegram**: https://t.me/wyddy7
+- **Email**: wyddy7@gmail.com

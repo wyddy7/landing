@@ -2,19 +2,38 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import { I18nProvider } from '@/hooks/use-i18n'
+import { I18nProvider } from '@/hooks/i18n-provider'
+
+type YmInitOptions = {
+  ssr: boolean
+  webvisor: boolean
+  clickmap: boolean
+  ecommerce: string
+  accurateTrackBounce: boolean
+  trackLinks: boolean
+}
+
+type YmArguments = [number, "init", YmInitOptions]
+type YmFunction = ((...args: YmArguments) => void) & {
+  a?: YmArguments[]
+  l?: number
+}
 
 // Динамическая загрузка Яндекс Метрики (скрыта от просмотра исходного кода)
 (function() {
-  const m = window as any;
+  const m = window as Window & { ym?: YmFunction };
   const e = document;
   const t = 'script';
   const r = 'https://mc.yandex.ru/metrika/tag.js?id=105618061';
-  const i = 'ym';
   const id = 105618061;
-  
-  m[i] = m[i] || function(){(m[i].a = m[i].a || []).push(arguments)};
-  m[i].l = Date.now();
+
+  const ym: YmFunction = m.ym ?? ((...args: YmArguments) => {
+    ym.a = ym.a || [];
+    ym.a.push(args);
+  });
+
+  m.ym = ym;
+  ym.l = Date.now();
   
   // Проверка на дубликаты
   for (let j = 0; j < e.scripts.length; j++) {
@@ -41,7 +60,7 @@ import { I18nProvider } from '@/hooks/use-i18n'
   
   // Инициализация добавляется в очередь (стандартный паттерн Яндекс Метрики)
   // Очередь автоматически обработается когда скрипт загрузится
-  m[i](id, 'init', {
+  ym(id, 'init', {
     ssr: true,
     webvisor: true,
     clickmap: true,
@@ -58,4 +77,3 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     </I18nProvider>
   </React.StrictMode>,
 )
-

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDown, Check } from "lucide-react";
 import { useI18n } from "@/hooks/use-i18n";
-import { Language } from "@/lib/i18n";
+import type { Language } from "@/lib/i18n";
 
 const languages: { code: Language; label: string; flag: string }[] = [
   { code: "en", label: "English", flag: "🇺🇸" },

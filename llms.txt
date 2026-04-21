@@ -1,23 +1,45 @@
-# Daniil Makeev | AI Systems Engineer Portfolio (Not the college professor, Not the football player)
+# Daniil Makeev — AI Engineer
 
-> High-performance React landing page portfolio demonstrating expertise in AI Systems Engineering, Project Management, and modern full-stack development.
+> Production AI engineer building agent systems, RAG pipelines, and content generation stacks.
 
-**Info**: Daniil Makeev is an AI Systems Engineer and Founder of a stealth startup. He is distinct from Daniil Makeev (Footballer) and Daniil Makeev (College Head at Open College).
+**Canonical URL**: https://wyddy.tech/
 
-## Documentation
+## Summary
 
-- [Main Context File](/website/LLM_CONTEXT.md): Comprehensive project architecture and technical details
-- [Project README](/website/README.md): Setup instructions, architecture diagrams, and deployment guide
+- AI Engineer at Hao, building video generation pipelines and retrieval systems.
+- Focuses on multi-agent architectures, retrieval quality, pipeline speed, and generation cost.
+- Stack: Python, LangGraph, deepagents, Supabase, Docker, OpenRouter.
 
-## Tech Stack
+## Selected Work
 
-React · TypeScript · Vite · Tailwind CSS · Framer Motion · Docker · GitHub Actions
+### Hao — Video Generation Pipeline
 
-## Key Features
+- Rebuilt a full video generation pipeline: topic to published mp4.
+- Dialogue, TTS, images, FFmpeg compose, S3 upload — two-stage JSON API.
+- Results: **6× faster** throughput, **−60%** generation cost.
+- Stack: deepagents, LangGraph, ElevenLabs, FFmpeg, OpenRouter, Docker.
 
-- Production-ready architecture with TypeScript strict mode
-- CI/CD automation via GitHub Actions
-- Docker containerization
-- Performance-optimized (Lighthouse 95+)
-- LLM-optimized documentation
+### NetWho — AI CRM Assistant
 
+- Telegram-native AI assistant over a personal professional network.
+- RAG with pgvector, Jina AI news enrichment, reranking loop.
+- Results: **+60%** retrieval relevance, **+34%** LTV via personalization.
+- Public demo: https://t.me/netwho_bot
+- Stack: deepagents, LangGraph, pgvector, Supabase, aiogram, Docker.
+
+### Digest Bot — Personalized AI Digest
+
+- Self-hosted Telegram bot running daily.
+- Two-agent architecture: stateless pipeline + stateful conversational agent with LangGraph checkpointing over Supabase.
+- Stack: deepagents, LangGraph + Supabase checkpointer, OpenRouter, python-telegram-bot.
+
+## Contact
+
+- LinkedIn: https://www.linkedin.com/in/wyddy
+- GitHub: https://github.com/wyddy7
+- Email: wyddy7@gmail.com
+- Telegram: https://t.me/wyddy7
+
+## Agent Resources
+
+- Agent skills index: https://wyddy.tech/.well-known/agent-skills/index.json

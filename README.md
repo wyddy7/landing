@@ -1,27 +1,20 @@
-# Landing
+# wyddy.tech
 
-Репозиторий для лендинг-портфолио.
+Personal portfolio landing — static HTML, deployed to GitHub Pages via GitHub Actions.
 
-## 📁 Структура
+## Structure
 
-Проект находится в папке [`website/`](./website/).
-
-## 🚀 Быстрый старт
-
-```bash
-cd website
-npm install
-npm run dev
+```
+index.html               — main portfolio page
+case-netwho.html         — NetWho case study
+case-video-pipeline.html — Video pipeline case study
+favicon.svg / favicon-light.svg
+og-image.png / og-image.svg
+*.mp4 / *.MOV            — demo media
+robots.txt / llms.txt / sitemap.xml
+.well-known/             — agent skills index
 ```
 
-## 📖 Документация
+## Deploy
 
-Подробная документация и инструкции находятся в [`website/README.md`](./website/README.md).
-
-## 🔧 Разработка
-
-Все файлы проекта находятся в папке `website/`. Для работы с проектом перейдите в эту папку.
-
-## 📦 Деплой
-
-Автоматический деплой на GitHub Pages настроен через GitHub Actions. При пуше в ветку `main` проект автоматически собирается и деплоится.
+Push to `master` → GitHub Actions deploys to GitHub Pages → wyddy.tech.

@@ -1,0 +1,1209 @@
+<!DOCTYPE html><html lang="en" style="--accent: oklch(83% 0.22 95);"><head>
+
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0c0c0b">
+<title>Daniil Makeev — AI Engineer</title>
+<meta name="description" content="AI Engineer. Builds agent systems, RAG pipelines and content generation stacks — currently at Hao.">
+<link rel="canonical" href="https://wyddy.tech/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wyddy.tech/">
+<meta property="og:title" content="Daniil Makeev — AI Engineer">
+<meta property="og:description" content="AI Engineer. Builds agent systems, RAG pipelines and content generation stacks.">
+<meta property="og:image" content="https://wyddy.tech/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Daniil Makeev — AI Engineer">
+<meta name="twitter:description" content="AI Engineer. Builds agent systems, RAG pipelines and content generation stacks.">
+<meta name="twitter:image" content="https://wyddy.tech/og-image.png">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg" id="favicon">
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,400i" rel="stylesheet">
+
+<template id="__bundler_thumbnail">
+<svg viewBox="0 0 80 56" xmlns="http://www.w3.org/2000/svg">
+  <rect width="80" height="56" fill="#0c0c0b"></rect>
+  <text x="40" y="33" font-size="18" fill="#f2f0eb" text-anchor="middle" font-family="serif" font-style="italic">DM</text>
+</svg>
+</template>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0c0c0b;
+  --text: #f2f0eb;
+  --muted: #6a6860;
+  --rule: #1e1e1c;
+  --accent: oklch(83% 0.22 95);
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+
+  --step--1: clamp(16px, 0.78rem + 0.72vw, 19px);
+  --step-0:  clamp(20px, 1.2rem + 1.08vw, 26px);
+  --step-1:  clamp(26px, 1.68rem + 2.16vw, 38px);
+  --step-2:  clamp(43px, 3rem + 2.4vw, 67px);
+  --step-3:  clamp(77px, 6rem + 4.8vw, 139px);
+
+  --sp-xs: clamp(10px, 1.2vw, 17px);
+  --sp-s:  clamp(17px, 2.4vw, 26px);
+  --sp-m:  clamp(26px, 4.2vw, 53px);
+  --sp-l:  clamp(43px, 6.6vw, 86px);
+  --sp-xl: clamp(62px, 8.4vw, 132px);
+
+  --pad-x: clamp(24px, 6vw, 86px);
+  --body-max: min(816px, 92vw);
+
+  --axis: #b0ada6;
+  --illus-bg: #111110;
+  --pill-bg: #161614;
+  --pill-text: #b0ada6;
+}
+
+/* ─── LIGHT THEME (editorial cream, same type system) ── */
+html[data-theme="light"] {
+  --bg: #f5f3ec;
+  --text: #1a1917;
+  --muted: #78746b;
+  --rule: #dcd7cb;
+  --accent: oklch(58% 0.17 75);
+  --axis: #78746b;
+  --illus-bg: #eee9db;
+  --pill-bg: #ebe6d6;
+  --pill-text: #3a3834;
+}
+html[data-theme="light"] { color-scheme: light; }
+html[data-theme="light"] body { background: var(--bg); color: var(--text); }
+html[data-theme="light"] .btn-primary,
+html[data-theme="light"] .cta-btn { background: #1a1917; color: #f5f3ec; }
+html[data-theme="light"] .hero-line { color: #4a4740; }
+html[data-theme="light"] .hero-line strong { color: var(--text); }
+html[data-theme="light"] .company-summary,
+html[data-theme="light"] .work-desc,
+html[data-theme="light"] .step-body { color: #4a4740; }
+html[data-theme="light"] .work-result { color: #2a2824; }
+html[data-theme="light"] .metric-label { color: var(--muted); }
+html[data-theme="light"] .topbar { background: rgba(245, 243, 236, 0.82); }
+html[data-theme="light"] .testimonial { background: color-mix(in oklch, var(--accent) 7%, transparent); }
+html[data-theme="light"] .testimonial-quote { color: #1a1917; }
+html[data-theme="light"] .illus .node-bg { fill: var(--illus-bg); stroke: var(--rule); }
+html[data-theme="light"] .illus .node-label { fill: #3a3834; }
+html[data-theme="light"] .illus .link { stroke: #a8a498; }
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 19px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+body { min-height: 100vh; min-height: 100dvh; }
+
+/* ─── HERO ── */
+.hero {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--sp-l) var(--pad-x);
+  padding-bottom: calc(var(--sp-m) + env(safe-area-inset-bottom, 0px));
+}
+
+.hero-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--step-3);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: var(--sp-m);
+}
+
+/* identity line — compact, label-first */
+.hero-identity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin-bottom: var(--sp-m);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero-identity span {
+  padding: 0 12px;
+  border-right: 1px solid var(--rule);
+}
+.hero-identity span:first-child { padding-left: 0; }
+.hero-identity span:last-child { border-right: none; }
+
+/* one-line positioning — hard signal, not summary */
+.hero-line {
+  font-size: var(--step-1);
+  font-weight: 300;
+  color: #9a9790;
+  line-height: 1.45;
+  max-width: 22em;
+  text-wrap: pretty;
+  border-left: 2px solid var(--accent);
+  padding-left: var(--sp-s);
+  margin-bottom: var(--sp-m);
+}
+.hero-line strong { color: var(--text); font-weight: 500; }
+
+/* hero CTA row */
+.hero-cta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-s);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #0c0c0b;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 26px;
+  border-radius: 3px;
+  text-decoration: none;
+  min-height: 52px;
+  transition: opacity .15s, transform .1s;
+  white-space: nowrap;
+}
+.btn-primary:hover { opacity: .86; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 15px;
+  color: var(--muted);
+  text-decoration: none;
+  min-height: 52px;
+  transition: color .15s;
+}
+.btn-secondary:hover { color: var(--text); }
+.btn-secondary svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #5a9e5a;
+  margin-top: var(--sp-s);
+  line-height: 1.4;
+}
+.avail-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #5a9e5a;
+  flex-shrink: 0;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+/* ─── METRICS ── */
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--rule);
+  padding-top: var(--sp-s);
+  margin-top: var(--sp-m);
+}
+.metric {
+  padding-right: var(--sp-s);
+  border-right: 1px solid var(--rule);
+  padding-left: var(--sp-s);
+}
+.metric:first-child { padding-left: 0; }
+.metric:last-child { border-right: none; padding-right: 0; }
+
+.metric-num {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--step-2);
+  line-height: 1;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  margin-bottom: 5px;
+}
+.metric-label {
+  font-size: var(--step--1);
+  color: var(--muted);
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+/* ─── BODY ── */
+.body {
+  max-width: var(--body-max);
+  margin: 0 auto;
+  padding: var(--sp-xl) var(--pad-x);
+}
+
+/* ─── SECTIONS ── */
+.sec {
+  padding: var(--sp-l) 0;
+  border-bottom: 1px solid var(--rule);
+}
+.sec:last-child { border-bottom: none; }
+
+.sec > h2 {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--sp-m);
+}
+
+/* ─── WORK ── */
+.work-list { display: flex; flex-direction: column; gap: var(--sp-l); }
+
+/* Company block — groups all work at one employer */
+.company { padding-bottom: var(--sp-l); border-bottom: 1px solid var(--rule); margin-bottom: var(--sp-l); }
+.company:last-of-type { padding-bottom: 0; border-bottom: none; margin-bottom: 0; }
+
+.company-header { margin-bottom: var(--sp-m); }
+.company-name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: var(--step-1);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.company-name a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s, color .15s;
+}
+.company-name a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.company-name .ext {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 0.55em;
+  color: var(--muted);
+  vertical-align: middle;
+  font-style: normal;
+  font-family: var(--sans);
+  transform: translateY(-2px);
+}
+.company-role {
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.company-summary {
+  font-size: var(--step--1);
+  color: #8a8780;
+  line-height: 1.75;
+  text-wrap: pretty;
+  max-width: 42em;
+}
+
+.projects {
+  margin-top: var(--sp-m);
+  padding-left: var(--sp-m);
+  border-left: 2px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-m);
+}
+.project-title {
+  font-size: var(--step-0);
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 10px;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.project-title::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.work-item {}
+.work-title {
+  font-size: var(--step-0);
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+.work-meta {
+  font-size: var(--step--1);
+  color: var(--muted);
+  margin-bottom: 9px;
+}
+.work-desc {
+  font-size: var(--step--1);
+  color: #8a8780;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+.work-result {
+  margin-top: 7px;
+  font-size: var(--step--1);
+  color: #b0ada6;
+  line-height: 1.5;
+}
+.work-result strong { color: var(--text); font-weight: 500; }
+.work-stack {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  line-height: 1.6;
+}
+.work-links { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 22px; }
+.work-link {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in oklch, var(--accent) 55%, transparent);
+  padding: 2px 0;
+  transition: border-color .15s;
+}
+.work-link:hover { border-color: var(--accent); }
+
+/* ─── SKILLS ── */
+.skills { display: flex; flex-direction: column; gap: 22px; }
+.skill-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 22px;
+  align-items: start;
+}
+.skill-cat {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 10px;
+  line-height: 1.25;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: none;
+}
+.pills { display: flex; flex-wrap: wrap; gap: 9px; }
+.pill {
+  font-size: 17px;
+  color: var(--pill-text);
+  background: var(--pill-bg);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 8px 14px;
+  line-height: 1.4;
+}
+
+/* ─── CONTACT ── */
+.contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-m);
+}
+.contact-links { display: flex; gap: var(--sp-m); flex-wrap: wrap; align-items: center; }
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: var(--step--1);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .15s;
+  min-height: 52px;
+}
+.contact-link:hover { color: var(--text); }
+.contact-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #0c0c0b;
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 30px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: opacity .15s, transform .1s;
+  white-space: nowrap;
+  min-height: 56px;
+}
+.cta-btn:hover { opacity: .86; transform: translateY(-1px); }
+.cta-btn:active { transform: translateY(0); }
+
+/* ─── RESPONSIVE ── */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero { min-height: auto; padding-top: var(--sp-m); padding-bottom: var(--sp-m); }
+  .name { font-size: clamp(32px, 7vw, 52px); margin-bottom: var(--sp-s); }
+  .hero-line { font-size: clamp(14px, 2vw, 18px); margin-bottom: var(--sp-s); }
+}
+
+@media (max-width: 400px) {
+  .hero-metrics { grid-template-columns: 1fr; }
+  .metric { border-right: none !important; padding-left: 0 !important; padding-right: 0 !important; border-bottom: 1px solid var(--rule); padding-bottom: var(--sp-s); margin-bottom: var(--sp-s); }
+  .metric:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+  .skill-row { grid-template-columns: 1fr; gap: 5px; }
+  .contact-row { flex-direction: column; align-items: flex-start; }
+  .cta-btn { width: 100%; justify-content: center; }
+  .hero-identity span { padding: 0 8px; }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  :root { --body-max: min(640px, 88vw); }
+}
+
+@media (min-width: 1920px) {
+  :root { --step-3: clamp(96px, 6vw, 140px); --body-max: 760px; }
+  .hero { max-width: 1400px; margin: 0 auto; }
+}
+
+/* ─── HERO NAME (typographic drama) ── */
+.name .first, .name .last { display: block; }
+.name .last { padding-left: 0.4em; }
+.name .dot {
+  display: inline-block;
+  width: 0.18em;
+  height: 0.18em;
+  background: var(--accent);
+  border-radius: 50%;
+  vertical-align: 0.2em;
+  margin-left: 0.1em;
+  transform: translateY(-0.05em);
+}
+
+/* ─── STICKY MICRO-TOPBAR ── */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 18px var(--pad-x);
+  background: rgba(12, 12, 11, 0.78);
+  -webkit-backdrop-filter: saturate(140%) blur(18px);
+  backdrop-filter: saturate(140%) blur(18px);
+  border-bottom: 1px solid var(--rule);
+  z-index: 50;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-m);
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity .3s ease, transform .3s ease;
+  pointer-events: none;
+}
+.topbar.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.topbar-name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(22px, 1.3rem + 0.3vw, 28px);
+  line-height: 1;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.topbar-name .topbar-dot {
+  display: inline-block;
+  width: 0.18em;
+  height: 0.18em;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-left: 0.12em;
+  transform: translateY(-0.05em);
+  vertical-align: 0.15em;
+}
+.topbar-nav {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(22px, 2.4vw, 34px);
+  font-size: 20px;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+.topbar-nav a {
+  color: inherit;
+  text-decoration: none;
+  transition: color .15s;
+  padding: 4px 0;
+}
+.topbar-nav a:hover { color: var(--accent); }
+.topbar-nav .topbar-email {
+  color: var(--text);
+  font-weight: 500;
+}
+@media (max-width: 600px) {
+  .topbar { padding: 14px var(--pad-x); }
+  .topbar-nav a:not(.topbar-email) { display: none; }
+}
+
+/* ─── METRIC MINI-BAR ── */
+.metric-chart {
+  display: block;
+  margin-top: 14px;
+  width: 100%;
+  max-width: 160px;
+  height: 3px;
+  background: var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.metric-chart::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: var(--bar-to, 50%);
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s cubic-bezier(0.2, 0.7, 0.1, 1) .2s;
+}
+.metric.in-view .metric-chart::after { transform: scaleX(1); }
+.metric-context {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+  font-family: monospace;
+  letter-spacing: 0.02em;
+}
+
+/* ─── COUNT-UP ── */
+.metric-num { transition: opacity .3s; font-variant-numeric: tabular-nums; }
+
+/* ─── PROJECT ILLUSTRATIONS ── */
+.illus {
+  margin: 16px 0;
+  padding: 18px 22px;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: #111110;
+}
+.illus svg { display: block; width: 100%; height: auto; max-height: 130px; }
+.illus .node-bg { fill: #181715; stroke: #2e2e2a; stroke-width: 1; }
+.illus .node-label { fill: #b0ada6; font-family: var(--sans); font-size: 11px; font-weight: 500; }
+.illus .link { stroke: #3a3935; stroke-width: 1.2; fill: none; }
+.illus .axis { stroke: var(--axis); stroke-width: 1; fill: none; }
+.illus .pulse {
+  fill: var(--accent);
+  opacity: 0;
+}
+.illus.in-view .pulse {
+  animation: flowPulse 3s ease-in-out infinite;
+}
+@keyframes flowPulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+.illus .orbit-dot {
+  fill: var(--accent);
+}
+.illus.in-view .orbit-dot {
+  animation: orbitFloat 4s ease-in-out infinite;
+}
+@keyframes orbitFloat {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(3px, -2px); }
+  50% { transform: translate(-1px, 2px); }
+  75% { transform: translate(-3px, -1px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .illus.in-view .pulse, .illus.in-view .orbit-dot { animation: none; opacity: 1; }
+  .metric-chart::after { transition: none; transform: scaleX(1); }
+}
+
+/* ─── MAGNETIC CTA ── */
+.btn-primary, .cta-btn { position: relative; will-change: transform; }
+
+/* ─── TESTIMONIAL ── */
+.testimonial {
+  margin-top: var(--sp-m);
+  padding: var(--sp-m);
+  border-left: 2px solid var(--accent);
+  background: color-mix(in oklch, var(--accent) 3%, transparent);
+  max-width: 44em;
+  border-radius: 0 3px 3px 0;
+}
+.testimonial-quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: var(--step-0);
+  line-height: 1.55;
+  color: var(--text);
+  text-wrap: pretty;
+  margin-bottom: 14px;
+}
+.testimonial-quote::before { content: "“"; color: var(--accent); margin-right: 2px; }
+.testimonial-quote::after { content: "”"; color: var(--accent); margin-left: 1px; }
+.testimonial-attr {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* ─── THEME TOGGLE (single button, hitbox >> visible dot) ── */
+.theme-toggle {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top, 14px));
+  right: max(14px, env(safe-area-inset-right, 14px));
+  z-index: 51;
+  width: 34px; height: 34px;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: rgba(12, 12, 11, 0.65);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .15s, border-color .15s;
+}
+.theme-toggle:hover { transform: scale(1.06); border-color: var(--accent); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.theme-toggle .theme-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #f5f3ec;
+  box-shadow: inset 0 0 0 1px #d6d2c8;
+  transition: background .2s, box-shadow .2s;
+}
+html[data-theme="light"] .theme-toggle { background: rgba(245, 243, 236, 0.7); }
+html[data-theme="light"] .theme-toggle .theme-dot {
+  background: #0c0c0b;
+  box-shadow: inset 0 0 0 1px #2e2e2a;
+}
+
+@media print {
+  :root { --bg: #fff; --text: #111; --muted: #555; --rule: #ccc; --accent: #b8860b; }
+  html { background: #fff; color: #111; }
+  .hero { min-height: auto; page-break-after: always; }
+  .avail-dot { animation: none; }
+  .cta-btn, .btn-primary { background: #111; color: #fff; }
+  .topbar, .theme-toggle { display: none !important; }
+}
+</style>
+</head>
+<body style="font-family: -apple-system;" data-cc-id="cc-1">
+
+<!-- STICKY TOPBAR (appears after hero) -->
+<div class="topbar" id="topbar" role="navigation" aria-label="Page navigation">
+  <a href="#top" class="topbar-name">Daniil Makeev<span class="topbar-dot" aria-hidden="true"></span></a>
+  <div class="topbar-nav">
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="mailto:wyddy7@gmail.com" class="topbar-email">Email</a>
+  </div>
+</div>
+
+<!-- THEME TOGGLE (single button — visible dot shows the mode you'll switch TO) -->
+<button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color mode" title="Toggle color mode">
+  <span class="theme-dot" aria-hidden="true"></span>
+</button>
+
+<a id="top"></a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-main">
+    <h1 class="name"><span class="first">Daniil</span><span class="last">Makeev<span class="dot" aria-hidden="true"></span></span></h1>
+
+    <div class="hero-identity">
+      <span>AI Engineer at Hao</span>
+      <span>Production RAG &amp; GenAI Pipelines</span>
+    </div>
+
+    <p class="hero-line">
+      <strong>Production AI systems</strong> — RAG pipelines, content generation, and internal AI tooling.
+      Built end-to-end. Measured in production.
+    </p>
+
+    <div class="hero-cta">
+      <a class="btn-primary" href="mailto:wyddy7@gmail.com">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 7 10-7"></path></svg>
+        Email me
+      </a>
+      <a class="btn-secondary" href="https://www.linkedin.com/in/wyddy" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="3"></rect><line x1="8" y1="11" x2="8" y2="16"></line><line x1="8" y1="8" x2="8" y2="8.5"></line><path d="M12 16v-5M16 16v-3a2 2 0 0 0-4 0"></path></svg>
+        LinkedIn
+      </a>
+      <a class="btn-secondary" href="https://github.com/wyddy7" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+        GitHub
+      </a>
+      <a class="btn-secondary" href="https://t.me/wyddy7" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.5 2.5 11.5l7 2m12-9L14 19.5l-4.5-6m0 0 8.5-9"></path></svg>
+        Telegram
+      </a>
+    </div>
+    <div class="avail"><span class="avail-dot"></span>Open to full-time or contract · remote or relocation · EU/US timezones</div>
+  </div>
+
+  <div class="hero-metrics">
+    <div class="metric" data-metric style="--bar-to: 100%">
+      <span class="metric-num" data-to="6" data-suffix="×">6×</span>
+      <span class="metric-label">Faster video generation after pipeline rewrite</span>
+      <span class="metric-chart" aria-hidden="true"></span>
+      <span class="metric-context">60 min → 10 min per unit · Hao video pipeline</span>
+    </div>
+    <div class="metric" data-metric style="--bar-to: 60%">
+      <span class="metric-num" data-to="-60" data-suffix="%">−60%</span>
+      <span class="metric-label">Generation cost after LLM request deduplication</span>
+      <span class="metric-chart" aria-hidden="true"></span>
+      <span class="metric-context">$2 → $0.80 per generation</span>
+    </div>
+    <div class="metric" data-metric style="--bar-to: 60%">
+      <span class="metric-num" data-to="60" data-suffix="%" data-prefix="+">+60%</span>
+      <span class="metric-label">Retrieval relevance after reranking</span>
+      <span class="metric-chart" aria-hidden="true"></span>
+      <span class="metric-context">multi-tenant Contact RAG · reranked vs baseline</span>
+    </div>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- About -->
+  <section class="sec">
+    <h2>About</h2>
+    <p style="font-size: var(--step-0); color: #b0ada6; line-height: 1.7; text-wrap: pretty; max-width: 46em;">
+      Based in Moscow · open to remote or relocation across EU/US timezones.
+      Python backend since 2023 (ETL, data pipelines, internal services), moved into applied AI in January 2025.
+      Now over a year as AI engineer at Hao — shipping production RAG and content generation pipelines.
+      Graduating Bauman MSTU (CS) in 2026.
+    </p>
+  </section>
+
+  <!-- Experience -->
+  <section class="sec" id="experience">
+    <h2>Experience</h2>
+
+    <div class="company">
+      <div class="company-header">
+        <h3 class="company-name"><a href="https://hao.vc" target="_blank" rel="noopener">Hao<span class="ext">↗</span></a></h3>
+        <div class="company-role">AI Engineer · Jan 2025 – Present</div>
+        <p class="company-summary">AI-autonomous orchestrators. Led the video generation pipeline end-to-end and shipped the marketing site. Scope: dialogue generation, TTS integration, image compose, cost instrumentation, RAG work.</p>
+      </div>
+      <div class="projects">
+        <div class="project">
+          <div class="project-title">Video Generation Pipeline · Jun – Nov 2025</div>
+          <p class="work-desc">Led the rebuild of a linear single-path orchestrator into a two-stage CLI with JSON contract between stages. Stage 1 runs an eight-step dialogue pipeline with an optional human-review seam, against per-character YAML profiles. Stage 2 runs TTS and pluggable image generation in parallel, composes vertical video via FFmpeg with sprite overlays and ASS karaoke subtitles, uploads to S3. Built-in per-generation cost instrumentation, typed config, structured logging, rate-limited retries on external APIs.</p>
+          <div class="illus" data-illus aria-hidden="true">
+            <svg viewBox="0 0 400 132" preserveAspectRatio="xMidYMid meet">
+              <!-- stage labels -->
+              <text x="6"   y="10" class="node-label" style="font-size:8px;opacity:.55;letter-spacing:.14em">STAGE 1</text>
+              <text x="218" y="10" class="node-label" style="font-size:8px;opacity:.55;letter-spacing:.14em">STAGE 2</text>
+              <!-- divider -->
+              <path class="link" d="M206 18 L206 124" stroke-dasharray="2,3" opacity=".55"></path>
+
+              <!-- topic input -->
+              <circle cx="18" cy="62" r="5" class="orbit-dot"></circle>
+              <text x="4" y="85" class="node-label">topic</text>
+
+              <!-- LLM dialogue -->
+              <rect x="42" y="50" width="78" height="22" rx="3" class="node-bg"></rect>
+              <text x="81" y="65" text-anchor="middle" class="node-label">LLM dialogue</text>
+              <path class="link" d="M23 62 L42 62"></path>
+
+              <!-- JSON bus -->
+              <rect x="130" y="50" width="66" height="22" rx="3" class="node-bg" fill-opacity="0.35"></rect>
+              <text x="163" y="65" text-anchor="middle" class="node-label">JSON</text>
+              <path class="link" d="M120 62 L130 62"></path>
+
+              <!-- Optional human review (dashed = optional) -->
+              <rect x="132" y="104" width="62" height="14" rx="2" class="node-bg" stroke-dasharray="3,2"></rect>
+              <text x="163" y="114" text-anchor="middle" class="node-label" style="font-size:9px;opacity:.7">human · opt</text>
+              <path class="link" d="M163 72 L163 104" stroke-dasharray="2,2" opacity=".55"></path>
+
+              <!-- Stage 2: TTS + images -->
+              <rect x="218" y="24" width="78" height="22" rx="3" class="node-bg"></rect>
+              <text x="257" y="39" text-anchor="middle" class="node-label">TTS</text>
+              <rect x="218" y="80" width="78" height="22" rx="3" class="node-bg"></rect>
+              <text x="257" y="95" text-anchor="middle" class="node-label">images · pluggable</text>
+              <path class="link" d="M196 58 Q206 58 218 35"></path>
+              <path class="link" d="M196 66 Q206 66 218 91"></path>
+
+              <!-- FFmpeg -->
+              <rect x="306" y="50" width="72" height="22" rx="3" class="node-bg"></rect>
+              <text x="342" y="65" text-anchor="middle" class="node-label">FFmpeg</text>
+              <path class="link" d="M296 35 Q302 35 306 56"></path>
+              <path class="link" d="M296 91 Q302 91 306 66"></path>
+
+              <!-- S3 output -->
+              <path class="link" d="M378 62 L388 62"></path>
+              <circle cx="392" cy="62" r="5" class="pulse"></circle>
+              <text x="384" y="85" text-anchor="middle" class="node-label">S3</text>
+            </svg>
+          </div>
+          <p class="work-result"><strong>6× faster processing · −60% generation cost · batch mode enabled continuous output</strong></p>
+          <div class="work-stack">LLM dialogue · ElevenLabs TTS · pluggable image providers · FFmpeg (ASS karaoke) · sprite overlays · Backblaze S3</div>
+          <div class="work-links">
+            <a class="work-link" href="./case-video-pipeline.html">Read case study</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="company">
+      <div class="company-header">
+        <h3 class="company-name">Zenit-Elektro</h3>
+        <div class="company-role">Python Developer · Jun 2023 – Jan 2025</div>
+        <p class="company-summary">Metrology company · internal tooling. Owned Python services covering ETL and data quality across internal catalogs.</p>
+      </div>
+      <div class="projects">
+        <div class="project">
+          <div class="project-title">ETL &amp; Data Quality</div>
+          <p class="work-desc">Automated manual moderation across product catalogs and added validation across data imports from partner systems.</p>
+          <p class="work-result"><strong>3× faster site moderation · −60% import errors</strong></p>
+          <div class="work-stack">Python · FastAPI · AsyncIO · PostgreSQL · ETL</div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-quote">Daniil joined the team while still a student and within months was shipping ETL services we still run today. Rare to see that level of ownership and follow-through early on.</p>
+        <p class="testimonial-attr">— Yury · Team Lead, Zenit-Elektro</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Side Projects -->
+  <section class="sec">
+    <h2>Side Projects</h2>
+    <div class="work-list">
+      <div class="work-item">
+        <div class="work-title">NetWho · Multi-tenant Contact RAG</div>
+        <div class="work-meta">Shipped · Live on Telegram</div>
+        <p class="work-desc">AI assistant for personal and organizational networks. Multi-tenant — private and open communities connect their contacts with per-tenant RLS isolation. Semantic search over embeddings, news parsing via Jina AI, reranking loop grounds answers in source records.</p>
+        <div class="work-stack">RAG · pgvector · reranking · aiogram 3.x · Pydantic v2 · Supabase · deepagents</div>
+        <div class="work-links">
+          <a class="work-link" href="./case-netwho.html">Read case study</a>
+          <a class="work-link" href="https://t.me/netwho_bot" target="_blank">Try it on Telegram</a>
+          <a class="work-link" href="https://github.com/wyddy7/netwho" target="_blank">GitHub</a>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-title">Digest Bot</div>
+        <div class="work-meta">Shipped · Self-hosted · running daily</div>
+        <p class="work-desc">Personalized Telegram news digest. Scrapes configured channels, generates an AI summary tailored to the user's focus and profile. Two-agent architecture: stateless deterministic pipeline + stateful conversational agent with persistent LangGraph checkpointing over Supabase.</p>
+        <div class="work-stack">deepagents · LangGraph + Supabase checkpointer · OpenRouter · python-telegram-bot · docker-compose</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="sec" id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill-row">
+        <span class="skill-cat">Frameworks</span>
+        <div class="pills">
+          <span class="pill">FastAPI</span>
+          <span class="pill">PydanticAI</span>
+          <span class="pill">LangGraph</span>
+          <span class="pill">deepagents</span>
+          <span class="pill">aiogram 3.x</span>
+          <span class="pill">python-telegram-bot</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Libraries</span>
+        <div class="pills">
+          <span class="pill">Pydantic v2</span>
+          <span class="pill">pgvector</span>
+          <span class="pill">AsyncIO</span>
+          <span class="pill">httpx</span>
+          <span class="pill">structlog</span>
+          <span class="pill">tenacity</span>
+          <span class="pill">pydub</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Algorithms</span>
+        <div class="pills">
+          <span class="pill">RAG</span>
+          <span class="pill">Vector search</span>
+          <span class="pill">Reranking</span>
+          <span class="pill">Structured outputs</span>
+          <span class="pill">LLM deduplication</span>
+          <span class="pill">Grounded generation</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Platforms</span>
+        <div class="pills">
+          <span class="pill">PostgreSQL</span>
+          <span class="pill">Supabase</span>
+          <span class="pill">OpenRouter</span>
+          <span class="pill">OpenAI</span>
+          <span class="pill">ElevenLabs</span>
+          <span class="pill">Jina AI</span>
+          <span class="pill">Backblaze S3</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">DevOps</span>
+        <div class="pills">
+          <span class="pill">Docker</span>
+          <span class="pill">docker-compose</span>
+          <span class="pill">GitHub Actions</span>
+          <span class="pill">uv</span>
+          <span class="pill">Linux</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Programming languages</span>
+        <div class="pills">
+          <span class="pill">Python</span>
+          <span class="pill">SQL</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Spoken languages</span>
+        <div class="pills">
+          <span class="pill">English · C1</span>
+          <span class="pill">Russian · native</span>
+          <span class="pill">Chinese · B1</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="sec">
+    <h2>Contact</h2>
+    <div class="contact-row">
+      <div class="contact-links">
+        <a class="contact-link" href="https://www.linkedin.com/in/wyddy" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="3"></rect><line x1="8" y1="11" x2="8" y2="16"></line><line x1="8" y1="8" x2="8" y2="8.5"></line><path d="M12 16v-5M16 16v-3a2 2 0 0 0-4 0"></path></svg>
+          LinkedIn
+        </a>
+        <a class="contact-link" href="https://github.com/wyddy7" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+          GitHub
+        </a>
+        <a class="contact-link" href="https://t.me/wyddy7" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 4.5 2.5 11.5l7 2m12-9L14 19.5l-4.5-6m0 0 8.5-9"></path></svg>
+          Telegram
+        </a>
+        <a class="contact-link" href="mailto:wyddy7@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m2 7 10 7 10-7"></path></svg>
+          Email
+        </a>
+      </div>
+      <a class="cta-btn" href="mailto:wyddy7@gmail.com">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        Get in touch
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentColor": "oklch(83% 0.22 95)",
+  "showAvailability": true
+}/*EDITMODE-END*/;
+let tweaks = Object.assign({}, TWEAK_DEFAULTS);
+
+function applyTweaks(t) {
+  document.documentElement.style.setProperty('--accent', t.accentColor);
+  const a = document.querySelector('.avail');
+  if (a) a.style.display = t.showAvailability ? '' : 'none';
+}
+applyTweaks(tweaks);
+
+const panel = document.createElement('div');
+panel.style.cssText = 'display:none;position:fixed;bottom:max(24px,env(safe-area-inset-bottom,24px));right:max(24px,env(safe-area-inset-right,24px));z-index:9999;background:#1a1a18;border:1px solid #2e2e2a;border-radius:5px;padding:20px;width:232px;font-family:-apple-system,Helvetica Neue,Arial,sans-serif;font-size:13px;color:#f2f0eb;box-shadow:0 8px 32px rgba(0,0,0,.6)';
+panel.innerHTML = `
+  <div style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#6a6860;margin-bottom:16px;font-weight:700">Tweaks</div>
+  <div style="margin-bottom:14px">
+    <div style="color:#9a9790;font-size:11px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">Accent</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button onclick="setT('accentColor','oklch(83% 0.22 95)')" style="font-size:11px;padding:6px 10px;border-radius:3px;border:1px solid #3a3a36;background:#252523;color:#f2f0eb;cursor:pointer">Amber</button>
+      <button onclick="setT('accentColor','oklch(84% 0.22 130)')" style="font-size:11px;padding:6px 10px;border-radius:3px;border:1px solid #3a3a36;background:#252523;color:#f2f0eb;cursor:pointer">Lime</button>
+      <button onclick="setT('accentColor','oklch(80% 0.14 220)')" style="font-size:11px;padding:6px 10px;border-radius:3px;border:1px solid #3a3a36;background:#252523;color:#f2f0eb;cursor:pointer">Sky</button>
+      <button onclick="setT('accentColor','oklch(78% 0.18 20)')" style="font-size:11px;padding:6px 10px;border-radius:3px;border:1px solid #3a3a36;background:#252523;color:#f2f0eb;cursor:pointer">Rose</button>
+    </div>
+  </div>
+  <label style="display:flex;align-items:center;justify-content:space-between">
+    <span style="color:#9a9790;font-size:11px;text-transform:uppercase;letter-spacing:.06em">Availability</span>
+    <input type="checkbox" checked onchange="setT('showAvailability',this.checked)" style="width:16px;height:16px;cursor:pointer;accent-color:#f2f0eb">
+  </label>`;
+document.body.appendChild(panel);
+
+function setT(k,v){tweaks[k]=v;applyTweaks(tweaks);window.parent.postMessage({type:'__edit_mode_set_keys',edits:tweaks},'*');}
+window.addEventListener('message',e=>{
+  if(e.data?.type==='__activate_edit_mode') panel.style.display='block';
+  if(e.data?.type==='__deactivate_edit_mode') panel.style.display='none';
+});
+window.parent.postMessage({type:'__edit_mode_available'},'*');
+
+/* ─── ENHANCEMENTS ─────────────────────────────────────────── */
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* 1. Persistent theme (dark / light) — single-button toggle */
+const THEME_KEY = 'dm-landing-mode';
+let currentMode = localStorage.getItem(THEME_KEY) || 'dark';
+function applyMode(mode) {
+  if (mode === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  else document.documentElement.removeAttribute('data-theme');
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', mode === 'light' ? '#f5f3ec' : '#0c0c0b');
+  const fav = document.getElementById('favicon');
+  if (fav) fav.setAttribute('href', mode === 'light' ? './favicon-light.svg' : './favicon.svg');
+}
+applyMode(currentMode);
+const themeToggle = document.getElementById('themeToggle');
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    currentMode = currentMode === 'light' ? 'dark' : 'light';
+    applyMode(currentMode);
+    localStorage.setItem(THEME_KEY, currentMode);
+  });
+}
+
+/* 2. Sticky topbar appears past hero */
+const topbar = document.getElementById('topbar');
+const hero = document.querySelector('.hero');
+if (topbar && hero && 'IntersectionObserver' in window) {
+  const heroObs = new IntersectionObserver(([entry]) => {
+    topbar.classList.toggle('visible', !entry.isIntersecting);
+  }, { rootMargin: '-80px 0px 0px 0px' });
+  heroObs.observe(hero);
+}
+
+/* 3. Reveal metrics + illus on viewport enter (for bar fill + SVG animation) */
+if ('IntersectionObserver' in window) {
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('[data-metric], [data-illus]').forEach(el => revealObs.observe(el));
+}
+
+/* 5. Count-up animation on metric numbers */
+function animateCount(el) {
+  const to = parseFloat(el.dataset.to);
+  if (Number.isNaN(to)) return;
+  const prefix = el.dataset.prefix || (to < 0 ? '−' : '');
+  const suffix = el.dataset.suffix || '';
+  const abs = Math.abs(to);
+  const duration = 1100;
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const val = abs * eased;
+    el.textContent = prefix + (abs >= 10 ? Math.round(val) : val.toFixed(abs < 1 ? 2 : 0)) + suffix;
+    if (t < 1) requestAnimationFrame(tick);
+    else el.textContent = prefix + (abs >= 10 ? Math.round(abs) : abs) + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+if ('IntersectionObserver' in window && !reduceMotion) {
+  const numObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCount(e.target);
+        numObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.metric-num[data-to]').forEach(el => {
+    el.textContent = (el.dataset.prefix || (parseFloat(el.dataset.to) < 0 ? '−' : '')) + '0' + (el.dataset.suffix || '');
+    numObs.observe(el);
+  });
+}
+
+/* 6. Magnetic primary CTA */
+if (!reduceMotion) {
+  document.querySelectorAll('.btn-primary, .cta-btn').forEach(btn => {
+    const strength = 14;
+    btn.addEventListener('pointermove', (e) => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - (r.left + r.width / 2);
+      const y = e.clientY - (r.top + r.height / 2);
+      btn.style.transform = `translate(${x / r.width * strength}px, ${y / r.height * strength}px)`;
+    });
+    btn.addEventListener('pointerleave', () => { btn.style.transform = ''; });
+  });
+}
+
+/* 7. Smooth-scroll for in-page anchors (topbar links) */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body></html>

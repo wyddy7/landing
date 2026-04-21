@@ -408,6 +408,7 @@ html[data-theme="light"] .diagram { background: var(--illus-bg); border-color: v
 .case-footer .secondary:hover { color: var(--accent); }
 
 @media (max-width: 640px) {
+  :root { --step-3: clamp(38px, 9vw, 58px); --step-2: clamp(28px, 7vw, 42px); --step-1: clamp(18px, 5vw, 26px); }
   .fact-bar { grid-template-columns: repeat(2, 1fr); gap: var(--sp-s); }
   .fact:nth-child(2) { border-right: none; }
   .stack-row { grid-template-columns: 1fr; gap: 8px; }

@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="Daniil Makeev — AI Engineer">
 <meta name="twitter:description" content="AI Engineer. Builds agent systems, RAG pipelines and content generation stacks.">
 <meta name="twitter:image" content="https://wyddy.tech/og-image.png">
-<link rel="icon" type="image/svg+xml" href="./favicon.svg" id="favicon">
+<link rel="icon" type="image/svg+xml" href="./favicon-light.svg">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,400i" rel="stylesheet">
 
@@ -1179,8 +1179,6 @@ function applyMode(mode) {
   else document.documentElement.removeAttribute('data-theme');
   const meta = document.querySelector('meta[name="theme-color"]');
   if (meta) meta.setAttribute('content', mode === 'light' ? '#f5f3ec' : '#0c0c0b');
-  const fav = document.getElementById('favicon');
-  if (fav) fav.setAttribute('href', mode === 'light' ? './favicon-light.svg' : './favicon.svg');
 }
 applyMode(currentMode);
 const themeToggle = document.getElementById('themeToggle');

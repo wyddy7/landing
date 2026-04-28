@@ -529,6 +529,45 @@ body { min-height: 100vh; min-height: 100dvh; }
   .hero { max-width: 1400px; margin: 0 auto; }
 }
 
+@media (max-height: 1050px) and (min-width: 641px) {
+  :root {
+    --step-3: clamp(68px, 5rem + 3vw, 112px);
+    --step-2: clamp(36px, 2.3rem + 1.6vw, 54px);
+    --step-1: clamp(24px, 1.45rem + 1.4vw, 32px);
+  }
+  .hero {
+    padding-top: clamp(28px, 4vh, 48px);
+    padding-bottom: clamp(22px, 3vh, 36px);
+  }
+  .hero-main {
+    flex: 0 1 auto;
+    justify-content: flex-start;
+    padding-top: clamp(18px, 4vh, 48px);
+  }
+  .name,
+  .hero-identity,
+  .hero-line {
+    margin-bottom: clamp(18px, 3vh, 32px);
+  }
+  .hero-line {
+    line-height: 1.35;
+    max-width: 24em;
+  }
+  .btn-primary,
+  .btn-secondary {
+    min-height: 46px;
+  }
+  .btn-primary {
+    padding: 12px 24px;
+  }
+  .avail {
+    margin-top: clamp(12px, 2vh, 20px);
+  }
+  .hero-metrics {
+    margin-top: clamp(18px, 3vh, 32px);
+  }
+}
+
 /* ─── HERO NAME (typographic drama) ── */
 .name .first, .name .last { display: block; }
 .name .last { padding-left: 0.4em; }
@@ -640,6 +679,19 @@ body { min-height: 100vh; min-height: 100dvh; }
   color: var(--muted);
   font-family: monospace;
   letter-spacing: 0.02em;
+}
+.metric-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.metric-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: 0 0 auto;
 }
 
 /* ─── COUNT-UP ── */
@@ -832,8 +884,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
     <div class="metric" data-metric style="--bar-to: 72%">
       <span class="metric-num">Live</span>
       <span class="metric-label">Multi-tenant Contact RAG <a class="metric-link" href="https://t.me/netwho_bot" target="_blank" rel="noopener">shipped</a></span>
-      <span class="metric-chart" aria-hidden="true"></span>
-      <span class="metric-context">Supabase RLS · pgvector · reranking loop</span>
+      <span class="metric-context metric-status">Supabase RLS · pgvector · reranking loop</span>
     </div>
   </div>
 </section>

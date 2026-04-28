@@ -536,6 +536,8 @@ body { min-height: 100vh; min-height: 100dvh; }
     --step-1: clamp(24px, 1.45rem + 1.4vw, 32px);
   }
   .hero {
+    justify-content: flex-start;
+    gap: clamp(42px, 7vh, 74px);
     padding-top: clamp(28px, 4vh, 48px);
     padding-bottom: clamp(22px, 3vh, 36px);
   }
@@ -564,7 +566,7 @@ body { min-height: 100vh; min-height: 100dvh; }
     margin-top: clamp(12px, 2vh, 20px);
   }
   .hero-metrics {
-    margin-top: clamp(18px, 3vh, 32px);
+    margin-top: 0;
   }
 }
 

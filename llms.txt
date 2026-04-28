@@ -23,7 +23,7 @@
 
 - Telegram-native AI assistant over a personal professional network.
 - RAG with pgvector, Jina AI news enrichment, reranking loop.
-- Results: **+60%** retrieval relevance, **+34%** LTV via personalization.
+- Live demo with multi-tenant contact RAG, Supabase RLS, pgvector, and reranking.
 - Public demo: https://t.me/netwho_bot
 - Stack: deepagents, LangGraph, pgvector, Supabase, aiogram, Docker.
 

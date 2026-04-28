@@ -9,18 +9,18 @@ Use this skill when you need to connect featured outcomes to the underlying engi
 
 ## Hao - Video generation pipeline
 
-- Outcomes: 3x faster throughput, 48% lower cost, 2x less manual work
-- Technologies: GenAI, PydanticAI, ElevenLabs, Prefect, FFmpeg, Docker
+- Outcomes: 6x faster processing, 60% lower generation cost, batch mode
+- Technologies: LLM dialogue, ElevenLabs TTS, FFmpeg, Backblaze S3, Docker
 - Main themes: orchestration, cost control, pipeline reliability
 
 ## NetWho - AI CRM assistant
 
-- Outcomes: semantic search and structured context in one internal tool
-- Technologies: RAG, pgvector, deepagents, LangChain, Supabase, Docker
-- Main themes: retrieval, context assembly, operator workflows
+- Outcomes: live Telegram assistant over personal and organizational networks
+- Technologies: RAG, pgvector, aiogram, Pydantic v2, Supabase, Docker
+- Main themes: retrieval, context assembly, tenant isolation
 
 ## NetWho - Retrieval layer
 
-- Outcomes: 60% relevance lift, 34% LTV lift, cross-user isolation
-- Technologies: reranking, personalization, RLS, multi-user isolation
-- Main themes: answer quality, personalization, safe multi-user use
+- Outcomes: grounded answers from source records with cross-tenant isolation
+- Technologies: embeddings, reranking, Supabase RLS, multi-tenant schema
+- Main themes: answer quality, source grounding, safe multi-user use

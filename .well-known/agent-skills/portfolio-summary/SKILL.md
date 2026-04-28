@@ -16,13 +16,14 @@ Daniil Makeev is an applied AI engineer focused on production RAG systems, inter
 - Improves retrieval quality
 - Speeds up production pipelines
 - Reduces generation cost
+- Ships agent-facing tools into production
 
 ## Strongest proof points
 
-- 3x faster video generation throughput
-- 48% lower generation cost
-- 60% better retrieval relevance after reranking
-- 34% higher LTV through personalization
+- 6x faster video generation after a pipeline rewrite
+- 60% lower generation cost after LLM request deduplication
+- Live multi-tenant Contact RAG shipped on Telegram
+- Self-hosted daily digest bot with LangGraph checkpointing
 
 ## Best-fit work
 

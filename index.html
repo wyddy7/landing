@@ -261,6 +261,12 @@ body { min-height: 100vh; min-height: 100dvh; }
   line-height: 1.4;
   text-wrap: pretty;
 }
+.metric-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
 
 /* ─── BODY ── */
 .body {
@@ -823,11 +829,11 @@ html[data-theme="light"] .theme-toggle .theme-dot {
       <span class="metric-chart" aria-hidden="true"></span>
       <span class="metric-context">$2 → $0.80 per generation</span>
     </div>
-    <div class="metric" data-metric style="--bar-to: 60%">
-      <span class="metric-num" data-to="60" data-suffix="%" data-prefix="+">+60%</span>
-      <span class="metric-label">Retrieval relevance after reranking</span>
+    <div class="metric" data-metric style="--bar-to: 72%">
+      <span class="metric-num">Live</span>
+      <span class="metric-label">Multi-tenant Contact RAG <a class="metric-link" href="https://t.me/netwho_bot" target="_blank" rel="noopener">shipped</a></span>
       <span class="metric-chart" aria-hidden="true"></span>
-      <span class="metric-context">multi-tenant Contact RAG · reranked vs baseline</span>
+      <span class="metric-context">Supabase RLS · pgvector · reranking loop</span>
     </div>
   </div>
 </section>

@@ -9,14 +9,14 @@
 <meta property="og:url" content="https://wyddy.tech/case-video-pipeline.html">
 <meta property="og:title" content="Case · Video Generation Pipeline — Daniil Makeev">
 <meta property="og:description" content="Two-stage CLI pipeline, JSON contract between stages, pluggable providers. 6× faster · −60% cost.">
-<meta property="og:image" content="https://wyddy.tech/og-image.png">
+<meta property="og:image" content="https://wyddy.tech/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Case · Video Generation Pipeline — Daniil Makeev">
 <meta name="twitter:description" content="Two-stage CLI pipeline, JSON contract between stages, pluggable providers. 6× faster · −60% cost.">
-<meta name="twitter:image" content="https://wyddy.tech/og-image.png">
-<link rel="icon" type="image/svg+xml" href="./favicon.svg" id="favicon">
+<meta name="twitter:image" content="https://wyddy.tech/assets/og-image.png">
+<link rel="icon" type="image/svg+xml" href="./assets/favicon-light.svg">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,400i" rel="stylesheet">
 
@@ -650,13 +650,13 @@ html[data-theme="light"] .theme-toggle .theme-dot {
         <button class="reels-arrow reels-prev" type="button" aria-label="Previous clip">‹</button>
         <div class="reels-stage">
           <video data-reel="0" class="reels-video is-active" muted loop playsinline preload="auto" poster="">
-            <source src="./reelsgen-1.mp4" type="video/mp4">
+            <source src="./assets/reelsgen-1.mp4" type="video/mp4">
           </video>
           <video data-reel="1" class="reels-video" muted loop playsinline preload="none">
-            <source src="./reelsgen-2.mp4" type="video/mp4">
+            <source src="./assets/reelsgen-2.mp4" type="video/mp4">
           </video>
           <video data-reel="2" class="reels-video" muted loop playsinline preload="none">
-            <source src="./reelsgen-3.mp4" type="video/mp4">
+            <source src="./assets/reelsgen-3.mp4" type="video/mp4">
           </video>
         </div>
         <button class="reels-arrow reels-next" type="button" aria-label="Next clip">›</button>
@@ -890,8 +890,6 @@ html[data-theme="light"] .theme-toggle .theme-dot {
     else document.documentElement.removeAttribute('data-theme');
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', m === 'light' ? '#f5f3ec' : '#0c0c0b');
-    const fav = document.getElementById('favicon');
-    if (fav) fav.setAttribute('href', m === 'light' ? './favicon-light.svg' : './favicon.svg');
   }
   apply(mode);
   const toggle = document.getElementById('themeToggle');

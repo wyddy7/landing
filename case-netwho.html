@@ -9,14 +9,14 @@
 <meta property="og:url" content="https://wyddy.tech/case-netwho.html">
 <meta property="og:title" content="Case · NetWho — Daniil Makeev">
 <meta property="og:description" content="Personal RAG assistant in Telegram. Pydantic v2 schemas, pgvector embeddings, news enrichment, grounded answers.">
-<meta property="og:image" content="https://wyddy.tech/og-image.png">
+<meta property="og:image" content="https://wyddy.tech/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Case · NetWho — Daniil Makeev">
 <meta name="twitter:description" content="Personal RAG assistant in Telegram. Pydantic v2 schemas, pgvector embeddings, news enrichment, grounded answers.">
-<meta name="twitter:image" content="https://wyddy.tech/og-image.png">
-<link rel="icon" type="image/svg+xml" href="./favicon.svg" id="favicon">
+<meta name="twitter:image" content="https://wyddy.tech/assets/og-image.png">
+<link rel="icon" type="image/svg+xml" href="./assets/favicon-light.svg">
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,400i" rel="stylesheet">
 
@@ -529,7 +529,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
 
     <figure class="case-demo" aria-label="NetWho answering a query in Telegram">
       <video autoplay loop muted playsinline preload="metadata" poster="">
-        <source src="./netwho-demo.mp4" type="video/mp4">
+        <source src="./assets/netwho-demo.mp4" type="video/mp4">
       </video>
       <figcaption>Live in Telegram — question in, grounded answer out.</figcaption>
     </figure>
@@ -696,8 +696,6 @@ html[data-theme="light"] .theme-toggle .theme-dot {
     else document.documentElement.removeAttribute('data-theme');
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', m === 'light' ? '#f5f3ec' : '#0c0c0b');
-    const fav = document.getElementById('favicon');
-    if (fav) fav.setAttribute('href', m === 'light' ? './favicon-light.svg' : './favicon.svg');
   }
   apply(mode);
   const toggle = document.getElementById('themeToggle');

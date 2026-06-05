@@ -416,6 +416,24 @@ body { min-height: 100vh; min-height: 100dvh; }
   transition: border-color .15s;
 }
 .work-link:hover { border-color: var(--accent); }
+.install-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  background: var(--accent);
+  color: #0c0c0b;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 11px 18px;
+  border-radius: 3px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity .15s, transform .1s;
+}
+.install-btn:hover { opacity: .86; transform: translateY(-1px); }
+html[data-theme="light"] .install-btn { background: #1a1917; color: #f5f3ec; }
 
 /* ─── SKILLS ── */
 .skills { display: flex; flex-direction: column; gap: 22px; }
@@ -1009,8 +1027,12 @@ html[data-theme="light"] .theme-toggle .theme-dot {
         <div class="work-meta">Shipped · v0.1.15 on Chrome Web Store · open-source · Apache-2.0</div>
         <p class="work-desc">A Chromium side-panel agent that runs tasks inside your real browser session — no headless cloud VM, no credential copy-paste. Built on a LangGraph.js Plan-and-Execute StateGraph with per-tool budgets, tab isolation, and a tool-family-aware duplicate guard that recovers from antibot click loops by switching to URL-based navigation or HITL hand-off.</p>
         <div class="work-stack">LangGraph.js · React 18 · MV3 service worker · puppeteer-core · OpenRouter · TypeScript · pnpm/turbo</div>
+        <a class="install-btn" href="https://chromewebstore.google.com/detail/browd-ai-browser-agent/kgjeibjpgopjomghegdpelbnjgmddobb" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+          Install from the Chrome Web Store
+        </a>
         <div class="work-links">
-          <a class="work-link" href="https://chromewebstore.google.com/detail/browd-ai-browser-agent/kgjeibjpgopjomghegdpelbnjgmddobb" target="_blank">Chrome Web Store</a>
+          <a class="work-link" href="./case-browd.html">Read about project</a>
           <a class="work-link" href="https://github.com/wyddy7/browd" target="_blank">GitHub</a>
           <a class="work-link" href="https://x.com/wyddy7/status/2059039710027129263?s=20" target="_blank">Launch thread</a>
         </div>
@@ -1031,6 +1053,10 @@ html[data-theme="light"] .theme-toggle .theme-dot {
         <div class="work-meta">Shipped · Self-hosted · running daily</div>
         <p class="work-desc">Personalized Telegram news digest. Scrapes configured channels, generates an AI summary tailored to the user's focus and profile. Two-agent architecture: stateless deterministic pipeline + stateful conversational agent with persistent LangGraph checkpointing over Supabase.</p>
         <div class="work-stack">deepagents · LangGraph + Supabase checkpointer · OpenRouter · python-telegram-bot · docker-compose</div>
+        <div class="work-links">
+          <a class="work-link" href="./case-digest.html">Read about project</a>
+          <a class="work-link" href="https://github.com/wyddy7/claude-digest" target="_blank">GitHub</a>
+        </div>
       </div>
     </div>
   </section>

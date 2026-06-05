@@ -1041,7 +1041,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
         <div class="work-title">NetWho · Multi-tenant Contact RAG</div>
         <div class="work-meta">Shipped · Live on Telegram</div>
         <p class="work-desc">AI assistant for personal and organizational networks. Multi-tenant — private and open communities connect their contacts with per-tenant RLS isolation. Semantic search over embeddings, news parsing via Jina AI, reranking loop grounds answers in source records.</p>
-        <div class="work-stack">RAG · pgvector · reranking · aiogram 3.x · Pydantic v2 · Supabase · deepagents</div>
+        <div class="work-stack">RAG · pgvector · reranking · aiogram 3.x · Pydantic v2 · Supabase</div>
         <div class="work-links">
           <a class="work-link" href="./case-netwho.html">Read about project</a>
           <a class="work-link" href="https://t.me/netwho_bot" target="_blank">Try it on Telegram</a>
@@ -1051,7 +1051,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
       <div class="work-item">
         <div class="work-title">Digest Bot</div>
         <div class="work-meta">Shipped · Self-hosted · running daily</div>
-        <p class="work-desc">Personalized Telegram news digest. Scrapes configured channels, generates an AI summary tailored to the user's focus and profile. Two-agent architecture: stateless deterministic pipeline + stateful conversational agent with persistent LangGraph checkpointing over Supabase.</p>
+        <p class="work-desc">Personalized Telegram news digest. Reads your channels — fetching the article behind link-only posts — and writes one summary tuned to your focus and profile. A deterministic pipeline produces the daily digest; a separate stateful chat agent (LangGraph, checkpointed to Supabase) answers follow-ups.</p>
         <div class="work-stack">deepagents · LangGraph + Supabase checkpointer · OpenRouter · python-telegram-bot · docker-compose</div>
         <div class="work-links">
           <a class="work-link" href="./case-digest.html">Read about project</a>

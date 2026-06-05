@@ -545,7 +545,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
   </div>
   <h1 class="case-title">Digest Bot — your channels, distilled to 60 seconds a day.</h1>
   <p class="case-lede">
-    Follow 10–15 Telegram channels without the 30-minute doomscroll. Digest reads them for you and boils a day down to a single read — the substance inline, not a list of links to chase — tuned to what you care about. Want more on something? Ask it.
+    Follow 10–15 Telegram channels without the 30-minute scroll. Digest reads them for you and boils the day into one morning read, tuned to what you care about: the substance inline, not a list of links to chase. Want more on something? Ask it.
   </p>
 </section>
 
@@ -573,7 +573,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
       I follow more channels than I can read. Most days I skim, miss what mattered, and still lose half an hour scrolling. I wanted the opposite: <strong>one read</strong> in the morning — the real substance of everything worth knowing — and done.
     </p>
     <p class="prose">
-      The naive version — paste the posts together, ask an LLM to summarize — produces a bland wall nobody reads: dominated by whichever channel posted most, padded with ads, and blind to the article sitting behind a link. Making a digest you actually open every day is the work, and almost none of it is the summary step.
+      The naive version — paste the posts together, ask an LLM to summarize — produces a bland wall nobody reads: dominated by whichever channel posted most, padded with ads, blind to the article sitting behind a link. Each of those is a separate piece of plumbing to fix, and that plumbing is most of what the project actually is.
     </p>
   </section>
 
@@ -645,12 +645,12 @@ html[data-theme="light"] .theme-toggle .theme-dot {
   <section class="case-sec">
     <h2><span class="sec-num">04</span>Under the hood</h2>
     <p class="prose">
-      The summary is the easy part. The decisions that make a digest worth opening happen before it:
+      Most of the decisions that make a digest worth opening happen before the summary call ever runs:
     </p>
     <div class="steps">
       <div class="step">
         <div class="step-head"><span class="step-title">"A summary nobody reads"</span><span class="step-stamp">— read-and-go</span></div>
-        <p class="step-body">A generic roundup gets skimmed once and abandoned. Pulling facts inline, adding a so-what, and cutting the tap-out turns it into something read daily — the single biggest lever on whether the product survives contact with a real morning.</p>
+        <p class="step-body">A generic roundup gets skimmed once and abandoned. Pulling facts inline, adding a so-what, and cutting the tap-out turns it into something read daily — the single biggest lever on whether it actually gets opened each morning.</p>
       </div>
       <div class="step">
         <div class="step-head"><span class="step-title">"One loud channel drowned the rest"</span><span class="step-stamp">— fairness</span></div>
@@ -674,13 +674,13 @@ html[data-theme="light"] .theme-toggle .theme-dot {
   <section class="case-sec">
     <h2><span class="sec-num">05</span>Outcome</h2>
     <p class="prose">
-      Live and self-hosted, delivering a digest every day. Built solo end-to-end; every change merges to master and rolls out from there. It's the thing I actually open in the morning instead of the channels.
+      Live and self-hosted, delivering a digest every day. Built solo end-to-end, and it's the thing I actually open in the morning instead of the channels.
     </p>
 
     <div class="takeaway">
       <div class="takeaway-title">Takeaway</div>
       <p class="takeaway-body">
-        The hard part of a digest isn't summarizing — it's everything that decides what deserves your attention before the summary runs: reading behind links, keeping one channel from drowning the rest, killing ads, and writing it so you read it once and move on. Get those right and the LLM call at the end is almost an afterthought.
+        A digest lives or dies on the unglamorous parts around the summary: a reader that opens the link instead of quoting the headline, a picker that won't let one loud channel bury the rest, an ad filter that runs before anything costs money, and an output you finish inside the message instead of tapping through. Get those right and it gets opened again tomorrow — for something daily, the only test that counts.
       </p>
     </div>
   </section>

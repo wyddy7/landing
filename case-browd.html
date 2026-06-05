@@ -550,7 +550,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
   </div>
   <h1 class="case-title">Browd — an AI agent that operates your browser for you.</h1>
   <p class="case-lede">
-    An open-source AI agent that runs multi-step tasks inside your own browser — research, extraction, navigation, form-filling — with your own API keys and no subscription.
+    An open-source AI agent that runs multi-step browser tasks — research, extraction, navigation, form-filling — in your own browser session, on your own keys. No hosted cloud, no subscription.
   </p>
   <div class="hero-actions">
     <a class="btn-primary" href="https://chromewebstore.google.com/detail/browd-ai-browser-agent/kgjeibjpgopjomghegdpelbnjgmddobb" target="_blank" rel="noopener">
@@ -584,10 +584,10 @@ html[data-theme="light"] .theme-toggle .theme-dot {
     </figure>
 
     <p class="prose">
-      You tell it a task in plain language — <em>"find the top-3 open-source models on this leaderboard"</em>, <em>"pull this arXiv abstract and summarize it"</em>, <em>"fill this form"</em> — and it carries it out across real pages: clicking, scrolling, navigating, reading. It runs as a Chrome side panel, in your own browser session, on your own API keys. Unlike hosted agents, nothing leaves your machine to a vendor's cloud, and there's no subscription.
+      You give it a task in plain language — say, <em>"find the top-3 open-source models on this leaderboard"</em> or <em>"pull this arXiv abstract and summarize it"</em> — and it works through real pages to get there: clicking, typing, scrolling, reading. It lives in a Chrome side panel and acts in your live session, so nothing is handed off to a vendor's cloud.
     </p>
     <p class="prose">
-      The hard part isn't calling an LLM — it's making one act <strong>reliably</strong> inside a live browser without going off the rails: knowing when it's stuck instead of looping forever, staying out of your other tabs, never trusting what a web page tells it to do. That reliability-and-trust layer is the bulk of the work — and the rest of this page is how it's built.
+      The engineering challenge is reliability — keeping the model from going off the rails in a live browser. It has to recognize when it's stuck instead of looping forever, stay clear of your other tabs, and refuse instructions a web page tries to feed it. That reliability-and-trust layer is <strong>most of what's below</strong>.
     </p>
   </section>
 
@@ -597,7 +597,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
       The agent runs as a <strong>LangGraph.js</strong> state machine in a plan-and-execute shape: a planner breaks the task into concrete steps, an agent node executes each one with browser tools — click, type, scroll, navigate, read, extract, plus web search and fetch — and a <strong>replanner</strong> adapts the plan when a step fails instead of grinding on a dead path. The whole loop lives inside the extension's <strong>MV3 service worker</strong>, on your machine.
     </p>
     <p class="prose">
-      Two things keep it safe by construction: the agent works in <strong>its own tab</strong> — your other tabs are handed to the model as metadata only, never a surface it can touch without asking — and every piece of third-party text (page content, search snippets, fetched articles) is <strong>wrapped before it reaches the model</strong>, so a page can't smuggle in instructions of its own.
+      Two design choices keep it safe. The agent works in <strong>its own tab</strong>; your other tabs are passed to the model as metadata only, never a surface it can act on without asking. And every piece of third-party text — page content, search snippets, fetched articles — is <strong>wrapped before it reaches the model</strong>, so a page can't smuggle in instructions of its own.
     </p>
 
     <div class="diagram" aria-hidden="true">
@@ -674,8 +674,8 @@ html[data-theme="light"] .theme-toggle .theme-dot {
         <p class="step-body">The agent could take over an open tab silently. Now it confines itself to its own tab group and asks for explicit permission before touching anything of yours.</p>
       </div>
       <div class="step">
-        <div class="step-head"><span class="step-title">I deleted a guard I'd written myself</span><span class="step-stamp">— corrected against the field</span></div>
-        <p class="step-body">My own "stuck detector" was killing agents that were actually finishing — a no-tool-call turn is how this class of agent signals it's done. I checked the behaviour against five production systems (browser-use, Anthropic computer-use, OpenAI Operator, Magentic-One, Stagehand), confirmed it, and removed my code. Knowing what to take out is the harder half.</p>
+        <div class="step-head"><span class="step-title">The fix was deleting my own code</span><span class="step-stamp">— corrected against the field</span></div>
+        <p class="step-body">My "stuck detector" was killing agents that were actually finishing — a no-tool-call turn is how this class of agent signals it's done. I checked the behaviour against five production systems (browser-use, Anthropic computer-use, OpenAI Operator, Magentic-One, Stagehand), confirmed mine was wrong, and removed it.</p>
       </div>
     </div>
   </section>
@@ -683,13 +683,13 @@ html[data-theme="light"] .theme-toggle .theme-dot {
   <section class="case-sec">
     <h2><span class="sec-num">05</span>Outcome</h2>
     <p class="prose">
-      Live on the <a href="https://chromewebstore.google.com/detail/browd-ai-browser-agent/kgjeibjpgopjomghegdpelbnjgmddobb" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:2px">Chrome Web Store</a> — one-click install, your own keys, no account. <strong>27.6k lines</strong> of TypeScript, <strong>224</strong> tests, an eval suite that gates releases. Thirteen runtime decisions that didn't generalize are written up as lessons, so the next ones are cheaper.
+      Live on the <a href="https://chromewebstore.google.com/detail/browd-ai-browser-agent/kgjeibjpgopjomghegdpelbnjgmddobb" target="_blank" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:2px">Chrome Web Store</a> — one-click install, no account needed. <strong>27.6k lines</strong> of TypeScript, <strong>224</strong> tests, and an eval suite that gates every release. Thirteen runtime decisions that didn't generalize are written up as lessons, so the next ones come cheaper.
     </p>
 
     <div class="takeaway">
       <div class="takeaway-title">Takeaway</div>
       <p class="takeaway-body">
-        The interesting work in browser agents isn't the model — it's everything that keeps the model honest in a live, hostile environment. Stuck-loops, runaway budgets, injected instructions, tabs grabbed without consent: an agent you'd actually trust in your own browser is built out of exactly those.
+        The interesting work in browser agents isn't the model — it's everything that keeps the model honest in a live, hostile environment. Stuck loops, runaway budgets, injected instructions, a tab grabbed without consent: solving those is what turns a demo into an agent you'd actually run in your own browser.
       </p>
     </div>
   </section>

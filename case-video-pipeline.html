@@ -639,10 +639,10 @@ html[data-theme="light"] .theme-toggle .theme-dot {
   <section class="case-sec">
     <h2><span class="sec-num">01</span>Context</h2>
     <p class="prose">
-      Hao builds AI-autonomous orchestrators. One of them needed a pipeline that turns a topic into a finished vertical video — scripted dialogue, voiced lines, generated images, composed with sprites and karaoke subtitles, uploaded to storage. Every generated unit costs real money — LLM calls, TTS, images, storage — so latency and cost are not polish, they're the business.
+      Hao builds AI-autonomous orchestrators. One of them needed a pipeline that turns a topic into a finished vertical video — scripted dialogue, voiced lines, generated images, composed with sprites and karaoke subtitles, uploaded to storage. Every generated unit costs real money across LLM calls, TTS, images, and storage, so latency and cost were the whole point of the rebuild.
     </p>
     <p class="prose">
-      When I joined the project in June 2025, the pipeline was linear — a single-path orchestrator, no batch mode, no cost instrumentation, operator-driven between stages. <strong>Each generation took minutes and cost roughly $2.</strong> That's the starting line.
+      When I joined the project in June 2025, the pipeline was linear — a single-path orchestrator with no batch mode or cost instrumentation, operator-driven between stages. <strong>Each generation took minutes and cost roughly $2.</strong> That's the starting line.
     </p>
 
     <figure class="reels-carousel" id="reelsCarousel" aria-label="Generated reels — three samples">
@@ -674,7 +674,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
   <section class="case-sec">
     <h2><span class="sec-num">02</span>Architecture</h2>
     <p class="prose">
-      I redesigned the pipeline as a <strong>two-stage CLI API</strong> that talks to itself via JSON on stdin/stdout. Stage one generates the dialogue through a provider-agnostic LLM call, reading per-character profiles with voices, sprites and catchphrases. Stage two consumes that JSON and runs TTS and image generation in parallel, composes the final video with FFmpeg, uploads to S3. Two commands, one pipe, full automation.
+      I redesigned the pipeline as a <strong>two-stage CLI API</strong> that talks to itself via JSON on stdin/stdout. Stage one generates the dialogue through a provider-agnostic LLM call, reading per-character profiles with voices, sprites and catchphrases. Stage two consumes that JSON and runs TTS and image generation in parallel, composes the final video with FFmpeg, and uploads to S3. The two commands join with a pipe, with no manual step in between.
     </p>
 
     <div class="diagram" aria-hidden="true">

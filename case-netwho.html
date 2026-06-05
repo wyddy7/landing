@@ -535,7 +535,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
     </figure>
 
     <p class="prose">
-      I know a lot of people. I forget what they're up to. A notebook doesn't search; a CRM is too much; a flat list of contacts is where data goes to die. What I wanted was a conversational front door — I type a question, it answers with the right people and the right context.
+      I know a lot of people and I lose track of what they're working on. A notebook doesn't search, and a CRM is overkill for a personal network. What I wanted was simpler: ask a question in plain language and get back the relevant person with the context attached.
     </p>
     <p class="prose">
       NetWho is that. It lives in Telegram, so I already have it open. Under the hood it's a retrieval-augmented assistant: every contact becomes an embedded record, every news event gets parsed and linked, and the reasoning loop ranks what matches the question.
@@ -549,7 +549,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
     </p>
 
     <div class="diagram" aria-hidden="true">
-      <svg viewBox="0 0 480 160" preserveAspectRatio="xMidYMid meet">
+      <svg viewBox="0 0 504 160" preserveAspectRatio="xMidYMid meet">
         <!-- user query -->
         <circle cx="20" cy="80" r="6" class="dot"></circle>
         <text x="6" y="110" class="node-label">query</text>
@@ -569,13 +569,14 @@ html[data-theme="light"] .theme-toggle .theme-dot {
         <path class="link" d="M244 75 Q256 75 268 40"></path>
         <path class="link" d="M244 85 Q256 85 268 120"></path>
         <!-- reranker -->
-        <rect x="380" y="68" width="72" height="24" rx="3" class="node-bg"></rect>
-        <text x="416" y="83" text-anchor="middle" class="node-label">rerank + answer</text>
-        <path class="link" d="M364 40 Q372 40 380 76"></path>
-        <path class="link" d="M364 120 Q372 120 380 84"></path>
+        <rect x="372" y="68" width="96" height="24" rx="3" class="node-bg"></rect>
+        <text x="420" y="83" text-anchor="middle" class="node-label">rerank + answer</text>
+        <path class="link" d="M364 40 Q370 40 372 76"></path>
+        <path class="link" d="M364 120 Q370 120 372 84"></path>
         <!-- output -->
-        <circle cx="462" cy="80" r="7" class="pulse"></circle>
-        <text x="462" y="110" text-anchor="middle" class="node-label">reply</text>
+        <path class="link" d="M468 80 L479 80"></path>
+        <circle cx="486" cy="80" r="7" class="pulse"></circle>
+        <text x="486" y="110" text-anchor="middle" class="node-label">reply</text>
       </svg>
     </div>
   </section>
@@ -601,7 +602,7 @@ html[data-theme="light"] .theme-toggle .theme-dot {
       </div>
       <div class="step">
         <div class="step-head"><span class="step-title">Grounded answers with sources</span><span class="step-stamp">— trust</span></div>
-        <p class="step-body">Every reply references the underlying records it drew from — so the bot's answer is auditable. No hallucinated contacts, no invented jobs.</p>
+        <p class="step-body">Every reply cites the records it drew from, so you can check where each answer came from. It won't invent a contact or make up someone's job.</p>
       </div>
     </div>
   </section>

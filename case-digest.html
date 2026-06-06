@@ -329,27 +329,72 @@ body { min-height: 100vh; min-height: 100dvh; }
 
 .digest-demo {
   margin: var(--sp-m) auto;
-  max-width: 700px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 14px;
 }
-.digest-frames {
+.digest-frame {
   display: flex;
-  gap: 14px;
-  justify-content: center;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
   width: 100%;
 }
-.digest-frames img {
-  width: 320px;
-  max-width: 100%;
+.digest-stage {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+.digest-stage img {
+  width: 100%;
   height: auto;
-  display: block;
+  display: none;
   border-radius: 10px;
   border: 1px solid var(--rule);
 }
+.digest-stage img.is-active { display: block; }
+.digest-arrow {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--rule);
+  background: color-mix(in oklch, var(--rule) 18%, transparent);
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color .15s, border-color .15s, background .15s, transform .1s;
+  font-family: var(--sans);
+  padding: 0 0 3px 0;
+}
+.digest-arrow:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in oklch, var(--accent) 12%, transparent);
+}
+.digest-arrow:active { transform: scale(.95); }
+.digest-dots {
+  display: flex;
+  gap: 10px;
+  padding: 2px 0 0;
+}
+.digest-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--rule);
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.digest-dot:hover { transform: scale(1.2); }
+.digest-dot.is-active { background: var(--accent); transform: scale(1.15); }
 .digest-demo figcaption {
   font-size: 12px;
   color: var(--muted);
@@ -566,10 +611,18 @@ html[data-theme="light"] .theme-toggle .t-knob { transform: translate(0, -50%); 
   <section class="case-sec">
     <h2><span class="sec-num">01</span>Context</h2>
 
-    <figure class="digest-demo" aria-label="One daily digest in Telegram, start to finish">
-      <div class="digest-frames">
-        <img src="./assets/digest-demo-1.jpg" alt="Top of a daily digest — source-attributed bullets with inline insights." loading="lazy" decoding="async" width="680" height="1267">
-        <img src="./assets/digest-demo-2.jpg" alt="Tail one-liners, a 'Personally for you' section, and a receipt of posts checked." loading="lazy" decoding="async" width="680" height="1260">
+    <figure class="digest-demo" id="digestDemo" aria-label="One daily digest in Telegram, start to finish">
+      <div class="digest-frame">
+        <button class="digest-arrow digest-prev" type="button" aria-label="Previous screen">‹</button>
+        <div class="digest-stage">
+          <img class="is-active" data-shot="0" src="./assets/digest-demo-1.jpg" alt="Top of a daily digest — source-attributed bullets with inline insights." loading="lazy" decoding="async" width="680" height="1267">
+          <img data-shot="1" src="./assets/digest-demo-2.jpg" alt="Tail one-liners, a 'Personally for you' section, and a receipt of posts checked." loading="lazy" decoding="async" width="680" height="1260">
+        </div>
+        <button class="digest-arrow digest-next" type="button" aria-label="Next screen">›</button>
+      </div>
+      <div class="digest-dots" role="tablist">
+        <button class="digest-dot is-active" type="button" data-shot="0" aria-label="Screen 1"></button>
+        <button class="digest-dot"           type="button" data-shot="1" aria-label="Screen 2"></button>
       </div>
       <figcaption>One real digest, start to finish — source-attributed bullets with inline insights, a “Personally for you” section, and a receipt of what it checked. A few messages; one read.</figcaption>
     </figure>
@@ -787,6 +840,28 @@ html[data-theme="light"] .theme-toggle .t-knob { transform: translate(0, -50%); 
       localStorage.setItem(THEME_KEY, mode);
     });
   }
+})();
+
+// ─── digest screenshot carousel ─────────────────────────────────
+(function () {
+  const root = document.getElementById('digestDemo');
+  if (!root) return;
+  const shots = Array.from(root.querySelectorAll('.digest-stage img'));
+  const dots  = Array.from(root.querySelectorAll('.digest-dot'));
+  const prev  = root.querySelector('.digest-prev');
+  const next  = root.querySelector('.digest-next');
+  let idx = 0;
+
+  function show(i) {
+    idx = (i + shots.length) % shots.length;
+    shots.forEach((s, k) => s.classList.toggle('is-active', k === idx));
+    dots.forEach((d, k) => d.classList.toggle('is-active', k === idx));
+  }
+
+  prev.addEventListener('click', () => show(idx - 1));
+  next.addEventListener('click', () => show(idx + 1));
+  dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+  show(0);
 })();
 </script>
 

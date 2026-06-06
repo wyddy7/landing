@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" style="--accent: oklch(83% 0.22 95);"><head>
+<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0c0c0b">
@@ -17,8 +17,6 @@
 <meta name="twitter:description" content="Reads your Telegram channels and hands back one read-and-go digest a day. Deterministic reader pipeline, fair selection, cost-aware multi-model.">
 <meta name="twitter:image" content="https://wyddy.tech/assets/og-image.png">
 <link rel="icon" type="image/svg+xml" href="./assets/favicon-light.svg">
-<link rel="preconnect" href="https://fonts.bunny.net">
-<link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,400i" rel="stylesheet">
 
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,8 +27,9 @@
   --muted: #6a6860;
   --rule: #1e1e1c;
   --accent: oklch(83% 0.22 95);
-  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  --sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --serif: var(--sans);
+  --faint: #8a8780;
 
   --step--1: clamp(16px, 0.78rem + 0.72vw, 19px);
   --step-0:  clamp(20px, 1.2rem + 1.08vw, 26px);
@@ -54,26 +53,28 @@
 }
 
 html[data-theme="light"] {
-  --bg: #f5f3ec;
-  --text: #1a1917;
-  --muted: #78746b;
-  --rule: #dcd7cb;
-  --accent: oklch(58% 0.17 75);
-  --illus-bg: #eee9db;
-  --pill-bg: #ebe6d6;
-  --pill-text: #3a3834;
-  --axis: #78746b;
+  --bg: #faf4ed;
+  --text: #26211c;
+  --muted: #7c756c;
+  --rule: #efe5da;
+  --accent: #2c2620;
+  --faint: #5c5650;
+  --illus-bg: #f2e9e1;
+  --pill-bg: #f1e8d9;
+  --pill-text: #45423b;
+  --axis: #7c756c;
 }
 html[data-theme="light"] { color-scheme: light; }
 html[data-theme="light"] body { background: var(--bg); color: var(--text); }
 html[data-theme="light"] .prose,
-html[data-theme="light"] .step-body { color: #4a4740; }
-html[data-theme="light"] .takeaway { background: color-mix(in oklch, var(--accent) 7%, transparent); }
-html[data-theme="light"] .takeaway-body { color: #1a1917; }
-html[data-theme="light"] .case-footer .cta { background: #1a1917; color: #f5f3ec; }
-html[data-theme="light"] .diagram .node-bg { fill: var(--illus-bg); stroke: var(--rule); }
-html[data-theme="light"] .diagram .node-label { fill: #3a3834; }
-html[data-theme="light"] .diagram .link { stroke: #a8a498; }
+html[data-theme="light"] .step-body { color: #5c5650; }
+html[data-theme="light"] .takeaway { background: rgba(60,40,20,0.05); }
+html[data-theme="light"] .takeaway-body { color: #26211c; }
+html[data-theme="light"] .btn-primary { background: #26211c; color: #faf4ed; }
+html[data-theme="light"] .case-footer .cta { background: #26211c; color: #faf4ed; }
+html[data-theme="light"] .diagram .node-bg { fill: #fffdf8; stroke: var(--rule); }
+html[data-theme="light"] .diagram .node-label { fill: #45423b; }
+html[data-theme="light"] .diagram .link { stroke: #cbbfa8; }
 
 html {
   background: var(--bg);
@@ -126,31 +127,29 @@ body { min-height: 100vh; min-height: 100dvh; }
 }
 .case-kicker .kicker-company {
   color: var(--text);
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 17px;
-  letter-spacing: 0;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
   text-transform: none;
 }
 .case-title {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: var(--step-3);
-  line-height: 0.98;
-  letter-spacing: -0.025em;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(38px, 4vw + 1rem, 66px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
   color: var(--text);
   margin-bottom: var(--sp-m);
-  max-width: 12em;
+  max-width: 15em;
 }
 .case-lede {
-  font-family: var(--serif);
-  font-size: var(--step-1);
-  font-weight: 300;
-  color: #b0ada6;
-  line-height: 1.45;
-  max-width: 26em;
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  font-weight: 400;
+  color: var(--faint);
+  line-height: 1.5;
+  max-width: 30em;
   text-wrap: pretty;
   border-left: 2px solid var(--accent);
   padding-left: var(--sp-s);
@@ -206,19 +205,18 @@ body { min-height: 100vh; min-height: 100dvh; }
   margin-bottom: var(--sp-m);
 }
 .case-sec > h2 .sec-num {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 17px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 12px;
   color: var(--accent);
   margin-right: 10px;
-  letter-spacing: 0;
+  letter-spacing: 0.12em;
 }
 
 .prose {
   font-family: var(--sans);
   font-size: var(--step-0);
-  color: #b0ada6;
+  color: var(--faint);
   line-height: 1.7;
   text-wrap: pretty;
   max-width: 42em;
@@ -324,8 +322,7 @@ body { min-height: 100vh; min-height: 100dvh; }
 .case-demo figcaption {
   font-size: 12px;
   color: var(--muted);
-  font-style: italic;
-  font-family: var(--serif);
+  font-family: var(--sans);
   text-align: center;
   line-height: 1.4;
 }
@@ -356,8 +353,7 @@ body { min-height: 100vh; min-height: 100dvh; }
 .digest-demo figcaption {
   font-size: 12px;
   color: var(--muted);
-  font-style: italic;
-  font-family: var(--serif);
+  font-family: var(--sans);
   text-align: center;
   line-height: 1.5;
   max-width: 34em;
@@ -396,9 +392,9 @@ html[data-theme="light"] .diagram { background: var(--illus-bg); border-color: v
   margin-bottom: 12px;
 }
 .takeaway-body {
-  font-family: var(--serif);
-  font-style: italic;
+  font-family: var(--sans);
   font-size: var(--step-0);
+  font-weight: 400;
   line-height: 1.55;
   color: var(--text);
   text-wrap: pretty;
@@ -410,12 +406,13 @@ html[data-theme="light"] .diagram { background: var(--illus-bg); border-color: v
   border-top: 1px solid var(--rule);
 }
 .case-footer .prompt {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: var(--step-1);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: var(--step-0);
+  letter-spacing: -0.01em;
   color: var(--text);
   margin-bottom: var(--sp-m);
-  line-height: 1.3;
+  line-height: 1.35;
 }
 .case-footer .cta {
   display: inline-flex;
@@ -448,39 +445,45 @@ html[data-theme="light"] .diagram { background: var(--illus-bg); border-color: v
   .stack-row { grid-template-columns: 1fr; gap: 8px; }
 }
 
-/* ─── THEME TOGGLE (single button) ── */
+/* ─── THEME TOGGLE — sun/moon slider (matches index) ── */
 .theme-toggle {
   position: fixed;
-  top: max(14px, env(safe-area-inset-top, 14px));
-  right: max(14px, env(safe-area-inset-right, 14px));
+  top: max(18px, env(safe-area-inset-top, 18px));
+  right: max(20px, env(safe-area-inset-right, 20px));
   z-index: 51;
-  width: 34px; height: 34px;
-  padding: 0;
-  border: 1px solid var(--rule);
-  border-radius: 50%;
-  background: rgba(12, 12, 11, 0.65);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  cursor: pointer;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  transition: transform .15s, border-color .15s;
+  gap: 9px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--muted);
 }
-.theme-toggle:hover { transform: scale(1.06); border-color: var(--accent); }
-.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.theme-toggle .theme-dot {
+.theme-toggle svg { width: 15px; height: 15px; transition: color .2s, opacity .2s; }
+.theme-toggle .t-sun  { color: var(--text); }
+.theme-toggle .t-moon { color: var(--muted); }
+html[data-theme="light"] .theme-toggle .t-sun  { color: var(--muted); }
+html[data-theme="light"] .theme-toggle .t-moon { color: var(--text); }
+.theme-toggle .t-track {
+  position: relative;
+  width: 40px; height: 22px;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--text) 14%, transparent);
+  border: 1px solid var(--rule);
+  transition: background .2s;
+}
+.theme-toggle .t-knob {
+  position: absolute;
+  top: 50%; left: 3px;
   width: 16px; height: 16px;
   border-radius: 50%;
-  background: #f5f3ec;
-  box-shadow: inset 0 0 0 1px #d6d2c8;
-  transition: background .2s, box-shadow .2s;
+  background: var(--text);
+  transform: translate(16px, -50%);
+  transition: transform .22s cubic-bezier(.4,.1,.2,1);
 }
-html[data-theme="light"] .theme-toggle { background: rgba(245, 243, 236, 0.7); }
-html[data-theme="light"] .theme-toggle .theme-dot {
-  background: #0c0c0b;
-  box-shadow: inset 0 0 0 1px #2e2e2a;
-}
+html[data-theme="light"] .theme-toggle .t-knob { transform: translate(0, -50%); }
+.theme-toggle:hover .t-track { border-color: var(--accent); }
 
 /* ─── RELATED CASE CARD ── */
 .related-case {
@@ -511,12 +514,12 @@ html[data-theme="light"] .theme-toggle .theme-dot {
   margin-bottom: 8px;
 }
 .related-case-title {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: var(--step-1);
-  line-height: 1.1;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: var(--step-0);
+  line-height: 1.2;
   color: var(--text);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 .related-case-arrow {
   font-size: var(--step-1);
@@ -528,8 +531,10 @@ html[data-theme="light"] .theme-toggle .theme-dot {
 <body>
 
 <!-- THEME TOGGLE -->
-<button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color mode" title="Toggle color mode">
-  <span class="theme-dot" aria-hidden="true"></span>
+<button class="theme-toggle" id="themeToggle" type="button" role="switch" aria-label="Toggle color mode" title="Toggle color mode">
+  <svg class="t-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+  <span class="t-track" aria-hidden="true"><span class="t-knob"></span></span>
+  <svg class="t-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
 </button>
 
 <a class="back-link" href="./index.html">

@@ -354,6 +354,27 @@ html[data-theme="light"] .tag {
 }
 .mock-flat img { width: 100%; display: block; border-radius: 8px 8px 0 0; }
 
+/* browd card — autoplay promo video. Non-interactive: no controls, no scrub,
+   pointer-events off so the user can't select/seek it (clicks fall through to
+   the case link). The poster paints instantly so media is ALWAYS visible while
+   the mp4 streams in, and again if autoplay is ever blocked. */
+.entry-thumb--video { aspect-ratio: auto; align-items: center; padding: 22px 18px; }
+.mock-video {
+  width: min(92%, 580px);
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--bezel);
+  box-shadow: var(--plate-shadow);
+  background: #000;
+}
+.mock-video video {
+  width: 100%; height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+}
+
 /* recreated UI surfaces (NetWho chat, Digest card) — rendered in markup so the
    content stays legible at any size; they sit directly on the shared plate so
    all three projects read as one system (Browd = captured, these = recreated) */
@@ -710,7 +731,13 @@ html[data-theme="light"] .theme-toggle .t-knob { transform: translate(0, -50%); 
       <div class="entries">
 
         <article class="entry entry--project">
-          <a class="entry-thumb" href="./case-browd.html"><span class="mock-flat"><img src="./assets/thumb-browd.jpg" alt="Browd running a task inside the browser" loading="lazy"></span></a>
+          <a class="entry-thumb entry-thumb--video" href="./case-browd.html" aria-label="Browd running a task inside the browser">
+            <span class="mock-video">
+              <video src="./assets/browd-demo.mp4" poster="./assets/browd-card-poster.jpg"
+                     autoplay loop muted playsinline preload="auto"
+                     disablepictureinpicture tabindex="-1" aria-hidden="true"></video>
+            </span>
+          </a>
           <div class="entry-body">
             <div class="entry-title"><a href="./case-browd.html">Browd — browser-resident AI agent <span class="arrow" aria-hidden="true">↗</span></a></div>
             <p class="entry-desc">A Chrome side-panel agent that runs multi-step tasks inside your real browser session — no headless cloud, no credential copy-paste. LangGraph.js plan-and-execute with per-tool state budgets, tab isolation, prompt-injection guards on every third-party text source.</p>

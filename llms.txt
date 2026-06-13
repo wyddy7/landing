@@ -40,6 +40,17 @@
 - Email: wyddy7@gmail.com
 - Telegram: https://t.me/wyddy7
 
+## Markdown versions
+
+Every page has a markdown twin at its URL + `.md`, served as `Content-Type: text/markdown`.
+Each HTML page also advertises its twin via `<link rel="alternate" type="text/markdown">`.
+
+- Home: https://wyddy.tech/index.html.md
+- Case · Browd (browser agent): https://wyddy.tech/case-browd.html.md
+- Case · NetWho (contact RAG): https://wyddy.tech/case-netwho.html.md
+- Case · Digest Bot (news digest): https://wyddy.tech/case-digest.html.md
+- Case · Video pipeline (Hao): https://wyddy.tech/case-video-pipeline.html.md
+
 ## Agent Resources
 
 - Agent skills index: https://wyddy.tech/.well-known/agent-skills/index.json

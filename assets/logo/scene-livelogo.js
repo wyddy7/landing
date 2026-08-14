@@ -263,7 +263,7 @@ export async function mountLiveLogo(el, opts = {}) {
   // antialias must be ON: the vector-geometry edge is rasterised on the default
   // framebuffer, and MSAA is what makes it a clean vector edge
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, opts.dprCap || 2));
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   el.appendChild(renderer.domElement);

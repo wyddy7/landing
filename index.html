@@ -644,15 +644,12 @@ html.intro-on .mark-intro { opacity: 1; pointer-events: auto; }
 html.intro-on body { overflow: hidden; }
 .mark-intro-stage { position: absolute; inset: 0; }
 .mark-intro-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.mark-slot {
-  position: relative; width: 124px; height: 124px; margin: 34px 0 0 -5px;
-  transition: height .9s cubic-bezier(.2,.75,.15,1), margin-top .9s cubic-bezier(.2,.75,.15,1);
-}
-/* the slot opens as the mark comes down, so the nav glides into its final place
-   instead of being shoved there before anything has happened */
-.mark-slot.is-closed { height: 0; margin-top: 0; }
+/* The slot is reserved in the MARKUP, not created by script: the space belongs to the
+   mark from first paint, so nothing on the page ever shifts — on a repeat visit there
+   is no jump at all, which beats animating a jump away. */
+.mark-slot { position: relative; width: 124px; height: 124px; margin: 34px 0 0 -5px; }
 .mark-slot canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-@media (max-width: 1023px) { .mark-slot, .mark-intro { display: none; } }
+@media (max-width: 1023px) { .mark-slot { width: 88px; height: 88px; margin-top: 26px; } }
 
 @media (prefers-reduced-motion: reduce) {
   .mark-intro { display: none; }
@@ -666,8 +663,7 @@ html.intro-on body { overflow: hidden; }
      The timeout is a dead-man switch: if the module never arrives, the cover lifts. */
   (function () {
     try {
-      if (innerWidth >= 1024 &&
-          !matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches &&
           !sessionStorage.getItem('mark-intro')) {
         document.documentElement.classList.add('intro-on');
         window.__introFuse = setTimeout(function () {
@@ -696,6 +692,7 @@ html.intro-on body { overflow: hidden; }
       <p class="role">AI Engineer</p>
       <p class="tagline">I build and ship AI agents and RAG systems end to end.</p>
       <div class="avail"><span class="avail-dot"></span>Open to full-time or contract · remote / relocation</div>
+      <div class="mark-slot" aria-hidden="true"></div>
 
       <nav class="nav" aria-label="Section navigation">
         <ul>
@@ -906,7 +903,6 @@ html.intro-on body { overflow: hidden; }
 /* The mark's WebGL bundle is loaded only after `load`, so it can never be the LCP
    element and never blocks anything the page is actually read for. */
 addEventListener('load', function () {
-  if (innerWidth < 1024) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var s = document.createElement('script');
   s.type = 'module';

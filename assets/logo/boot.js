@@ -22,41 +22,32 @@ const COMMON = {
   logo: './assets/favicon-light.svg', msdfUrl: BASE + 'logo-msdf.png',
 };
 
-function makeSlot(closed) {
-  const anchor = document.querySelector('.avail');
-  if (!anchor) return null;
-  const slot = document.createElement('div');
-  slot.className = closed ? 'mark-slot is-closed' : 'mark-slot';
-  anchor.insertAdjacentElement('afterend', slot);
-  return slot;
-}
+// Phones are not excused from the sequence, they are given a smaller budget for it.
+const SMALL = innerWidth < 1024;
+const BUDGET = SMALL
+  ? { resident: 96, introSize: 160, res: 384, dprCap: 1.5 }
+  : { resident: 128, introSize: 224, res: 512, dprCap: 2 };
 
-// Measure where the slot WILL be once it is open, without opening it yet — the flight
-// has to aim at the final position, not at a target that moves while the nav slides.
-function finalRect(slot) {
-  const was = slot.className;
-  slot.style.transition = 'none';
-  slot.className = 'mark-slot';
-  const r = slot.getBoundingClientRect();
-  slot.className = was;
-  slot.getBoundingClientRect();          // force the collapsed layout back
-  slot.style.transition = '';
-  return r;
-}
+const getSlot = () => document.querySelector('.mark-slot');
 
 async function residentOnly() {
-  const slot = makeSlot();
+  const slot = getSlot();
   if (!slot) return;
-  await mountLiveLogo(slot, {
-    ...COMMON, size: 128, tilt: 0.14, birthDur: 1.2,
+  const api = await mountLiveLogo(slot, {
+    ...COMMON, res: BUDGET.res, dprCap: BUDGET.dprCap,
+    size: BUDGET.resident, tilt: 0.14, birthDur: 1.2,
     cycle: { logo: 3.2, dissolve: 1.7, chaos: 2.6, reform: 2.0 },
     params: { ...P },
   });
+  // A reload is not a rebirth. Run the simulation forward before the first visible
+  // frame so the mark arrives already formed and mid-cycle, instead of drawing itself
+  // from a single dot every time the page is refreshed.
+  api.stepManual(340, 1 / 30);
 }
 
 async function intro() {
   const cover = document.querySelector('.mark-intro');
-  const slot = makeSlot(true);
+  const slot = getSlot();
   if (!cover || !slot) { document.documentElement.classList.remove('intro-on'); return residentOnly(); }
 
   const stage = document.createElement('div');
@@ -64,7 +55,8 @@ async function intro() {
   cover.appendChild(stage);
 
   const api = await mountLiveLogo(stage, {
-    ...COMMON, size: 224, tilt: 0.04, birthDur: 1.4, solid: 0, params: { ...INTRO_P },
+    ...COMMON, res: BUDGET.res, dprCap: BUDGET.dprCap,
+    size: BUDGET.introSize, tilt: 0.04, birthDur: 1.4, solid: 0, params: { ...INTRO_P },
   });
   api.setInk(inkOf());
 
@@ -81,9 +73,8 @@ async function intro() {
   const T = { birth: 1.4, harden: 1.0, hold: 0.5, flight: 1.25, settle: 0.45, melt: 1.2 };
   let e = 0, last = performance.now(), landed = false, done = false;
 
-  let aim = null;
   function target() {
-    const r = aim || (aim = finalRect(slot));
+    const r = slot.getBoundingClientRect();   // the slot is reserved in markup: it never moves
     const W = innerWidth, H = innerHeight;
     const halfH = Math.tan((api.camera.fov / 2) * Math.PI / 180) * api.camera.position.z;
     return {
@@ -116,8 +107,6 @@ async function intro() {
       api.setCoverage(-1.0, -0.98);
       // open the slot now: the nav glides down while the mark is still descending,
       // so by the time it lands the space is already its own
-      if (!aim) aim = finalRect(slot);
-      slot.classList.remove('is-closed');
     } else if (e >= T.birth + T.harden + T.hold) {
       const ft = e - (T.birth + T.harden + T.hold);
       if ((k = ft / T.flight) < 1) {
@@ -162,8 +151,7 @@ if (!canIntro) {
   document.querySelector('.mark-intro')?.remove();
 }
 
-const wanted = innerWidth >= 1024 && !matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (wanted) {
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   (canIntro ? intro() : residentOnly())
     .catch((err) => {
       console.warn('[mark] disabled:', err);

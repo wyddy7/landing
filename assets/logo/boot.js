@@ -46,15 +46,6 @@ async function intro() {
   const slot = makeSlot();
   if (!cover || !slot) { document.documentElement.classList.remove('intro-on'); return residentOnly(); }
 
-  // The module is in charge now, so the 6s fuse must not lift the cover mid-sequence —
-  // but it must NOT simply be disarmed either: if anything here dies, the page would
-  // stay hidden forever. Re-arm it long, and clear it only on a successful landing.
-  clearTimeout(window.__introFuse);
-  window.__introFuse = setTimeout(() => {
-    document.documentElement.classList.remove('intro-on');
-    document.querySelector('.mark-intro')?.remove();
-  }, 14000);
-
   const stage = document.createElement('div');
   stage.className = 'mark-intro-stage';
   cover.appendChild(stage);
@@ -63,6 +54,16 @@ async function intro() {
     ...COMMON, size: 224, tilt: 0.04, birthDur: 1.4, solid: 0, params: { ...INTRO_P },
   });
   api.setInk(inkOf());
+
+  // Re-arm the fuse only NOW: the 6s one was measured from first paint and would burn
+  // through the bundle download on a slow connection, lifting the cover mid-sequence.
+  // From here the sequence is ~4.6s, so 10s is generous — and it is still a fuse: if
+  // anything below dies, the page is never left hidden.
+  clearTimeout(window.__introFuse);
+  window.__introFuse = setTimeout(() => {
+    document.documentElement.classList.remove('intro-on');
+    document.querySelector('.mark-intro')?.remove();
+  }, 10000);
 
   const T = { birth: 1.4, harden: 1.0, hold: 0.5, flight: 1.25, settle: 0.45, melt: 1.2 };
   let e = 0, last = performance.now(), landed = false, done = false;

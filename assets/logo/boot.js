@@ -22,13 +22,26 @@ const COMMON = {
   logo: './assets/favicon-light.svg', msdfUrl: BASE + 'logo-msdf.png',
 };
 
-function makeSlot() {
+function makeSlot(closed) {
   const anchor = document.querySelector('.avail');
   if (!anchor) return null;
   const slot = document.createElement('div');
-  slot.className = 'mark-slot';
+  slot.className = closed ? 'mark-slot is-closed' : 'mark-slot';
   anchor.insertAdjacentElement('afterend', slot);
   return slot;
+}
+
+// Measure where the slot WILL be once it is open, without opening it yet — the flight
+// has to aim at the final position, not at a target that moves while the nav slides.
+function finalRect(slot) {
+  const was = slot.className;
+  slot.style.transition = 'none';
+  slot.className = 'mark-slot';
+  const r = slot.getBoundingClientRect();
+  slot.className = was;
+  slot.getBoundingClientRect();          // force the collapsed layout back
+  slot.style.transition = '';
+  return r;
 }
 
 async function residentOnly() {
@@ -43,7 +56,7 @@ async function residentOnly() {
 
 async function intro() {
   const cover = document.querySelector('.mark-intro');
-  const slot = makeSlot();
+  const slot = makeSlot(true);
   if (!cover || !slot) { document.documentElement.classList.remove('intro-on'); return residentOnly(); }
 
   const stage = document.createElement('div');
@@ -68,8 +81,9 @@ async function intro() {
   const T = { birth: 1.4, harden: 1.0, hold: 0.5, flight: 1.25, settle: 0.45, melt: 1.2 };
   let e = 0, last = performance.now(), landed = false, done = false;
 
+  let aim = null;
   function target() {
-    const r = slot.getBoundingClientRect();
+    const r = aim || (aim = finalRect(slot));
     const W = innerWidth, H = innerHeight;
     const halfH = Math.tan((api.camera.fov / 2) * Math.PI / 180) * api.camera.position.z;
     return {
@@ -100,6 +114,10 @@ async function intro() {
     } else if (e >= T.birth + T.harden && e < T.birth + T.harden + T.hold) {
       api.setSolid(1);
       api.setCoverage(-1.0, -0.98);
+      // open the slot now: the nav glides down while the mark is still descending,
+      // so by the time it lands the space is already its own
+      if (!aim) aim = finalRect(slot);
+      slot.classList.remove('is-closed');
     } else if (e >= T.birth + T.harden + T.hold) {
       const ft = e - (T.birth + T.harden + T.hold);
       if ((k = ft / T.flight) < 1) {

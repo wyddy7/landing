@@ -18,6 +18,9 @@ const INTRO_P = { ...P, trail: 0.68, density: 2.6, pointSize: 1.8, glow: 1.15 };
 const EASE = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 const inkOf = () => (document.documentElement.dataset.theme === 'light' ? 0x26211c : 0xf2f0eb);
 const COMMON = {
+  // one framing number for every surface: the mark takes 82% of min(width, height),
+  // so the margin around it is guaranteed on a phone, a laptop and inside the slot alike
+  cover: 0.82,
   res: 512, threshold: 80, fit: 0.88, blobSize: 16, edge: 'msdf',
   logo: './assets/favicon-light.svg', msdfUrl: BASE + 'logo-msdf.png',
 };
@@ -80,7 +83,9 @@ async function intro() {
     return {
       x: (((r.left + r.width / 2) / W) * 2 - 1) * halfH * (W / H),
       y: -((((r.top + r.height / 2) / H) * 2 - 1)) * halfH,
-      scale: r.height / H,
+      // both canvases frame by min(w, h) with the same cover, so the flight's end scale
+      // is just the ratio of those minima — the handover cannot change size
+      scale: Math.min(r.width, r.height) / Math.min(W, H),
     };
   }
 

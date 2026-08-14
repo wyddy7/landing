@@ -573,7 +573,10 @@ export async function mountLiveLogo(el, opts = {}) {
 
   // grain must scale with the canvas: the same constant that reads as dust at 560px
   // reads as a smudge at 52px. Keep coverage constant instead of keeping size constant.
-  let grainScale = 1;
+  let grainScale = 1, markScale = 1, fitScale = 1;
+  const eff = () => fitScale * markScale;            // framing × flight = what actually ships
+  function applyScale() { points.scale.setScalar(eff()); }
+
   function resize() {
     const w = el.clientWidth, h = el.clientHeight;
     if (!w || !h) return;
@@ -581,6 +584,14 @@ export async function mountLiveLogo(el, opts = {}) {
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     mat.uniforms.uDpr.value = renderer.getPixelRatio();
+
+    // ONE framing multiplier, derived instead of tuned: the perspective camera frames by
+    // HEIGHT, so on a portrait viewport a roughly square mark runs off the sides. Solve it
+    // once — the mark always occupies `cover` of min(width, height), which also guarantees
+    // the margin around it on any screen.
+    const halfHv = Math.tan((camera.fov / 2) * Math.PI / 180) * camera.position.z;
+    fitScale = (opts.cover ?? 0.8) * Math.min(w, h) * halfHv / (fit * h);
+    applyScale();
     grainScale = opts.grainAuto === false ? 1 : Math.min(w, h) / Math.sqrt(N) / 3.5;
     const dpr = renderer.getPixelRatio();
     trA.setSize(Math.max(1, Math.floor(w * dpr)), Math.max(1, Math.floor(h * dpr)));
@@ -594,7 +605,7 @@ export async function mountLiveLogo(el, opts = {}) {
   resize();
   addEventListener('resize', resize);
 
-  let t = 0, born = 0, raf = 0, visible = true, tilt = 0, markScale = 1, cyclePhase = 'logo';
+  let t = 0, born = 0, raf = 0, visible = true, tilt = 0, cyclePhase = 'logo';
   let solidLevel = opts.solid ?? 0;
   let edgeMode = opts.edge || 'geo';        // 'geo' = real geometry, 'sdf' = distance field
   const BIRTH = opts.birthDur || 1.6;
@@ -630,7 +641,7 @@ export async function mountLiveLogo(el, opts = {}) {
     simU.uChurn.value = P.churn * born;
     // floor at ~1.35 css px: below that a grain is sub-pixel, additive alpha stops
     // accumulating and the mark goes ghostly instead of getting finer
-    mat.uniforms.uSize.value = Math.min(5.0, Math.max(1.35, P.pointSize * grainScale * markScale));
+    mat.uniforms.uSize.value = Math.min(5.0, Math.max(1.35, P.pointSize * grainScale * eff()));
     mat.uniforms.uGlow.value = P.glow;
 
     simU.uPrev.value = rtA.texture;
@@ -667,7 +678,7 @@ export async function mountLiveLogo(el, opts = {}) {
     if (solidLevel > 0.001) {
       blobMat.uniforms.uPos.value = mat.uniforms.uPos.value;
       blobMat.uniforms.uDpr.value = renderer.getPixelRatio() * 0.5;
-      blobMat.uniforms.uSize.value = (opts.blobSize || 14) * markScale;
+      blobMat.uniforms.uSize.value = (opts.blobSize || 14) * eff();
       blobPoints.rotation.copy(points.rotation);
       blobPoints.scale.copy(points.scale);
       blobPoints.position.copy(points.position);
@@ -702,11 +713,11 @@ export async function mountLiveLogo(el, opts = {}) {
       } else {
         solidMat.uniforms.uSolid.value = solidLevel;
         solidMat.uniforms.uMode.value = edgeMode === 'msdf' ? 1 : 0;
-        solidMat.uniforms.uMark.value.set(points.position.x, points.position.y, markScale);
+        solidMat.uniforms.uMark.value.set(points.position.x, points.position.y, eff());
         // how many screen pixels the mark's own 1024-unit box currently spans —
         // msdfgen's AA needs this, and it must never fall below ~2 px of range
         const hH = Math.tan((camera.fov / 2) * Math.PI / 180) * camera.position.z;
-        solidMat.uniforms.uBoxPx.value = ((2 * fit * markScale) / (2 * hH)) * el.clientHeight;
+        solidMat.uniforms.uBoxPx.value = ((2 * fit * eff()) / (2 * hH)) * el.clientHeight;
         fsQuad.material = solidMat;
         renderer.render(fsScene, qCam);
       }
@@ -738,7 +749,7 @@ export async function mountLiveLogo(el, opts = {}) {
     // disturb the mark's internal life
     setTransform(scale, x, y) {
       markScale = scale;
-      points.scale.setScalar(scale);
+      applyScale();
       points.position.set(x, y, 0);
     },
     setSolid(v) { solidLevel = v; },

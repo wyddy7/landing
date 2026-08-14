@@ -127,14 +127,6 @@ async function intro() {
     }
   }
 
-  // manual driver for verification (?markdebug=1) — rAF is frozen in a hidden tab
-  if (location.search.includes('markdebug')) {
-    window.__mark = (dt = 1 / 60, n = 1) => {
-      for (let i = 0; i < n; i++) { e += dt; api.stepManual(1, dt); advance(); }
-      return { e: +e.toFixed(2), landed, solid: +api.solid.toFixed(2) };
-    };
-  }
-
   const skip = () => { if (!landed) e = T.birth + T.harden + T.hold + T.flight; };
   addEventListener('pointerdown', skip, { once: true });
   addEventListener('keydown', skip, { once: true });
@@ -145,8 +137,7 @@ async function intro() {
 
 // A hidden tab freezes requestAnimationFrame: the sequence would never advance and the
 // cover would sit over the page until the visitor came back. Don't gate the page on it.
-const canIntro = document.documentElement.classList.contains('intro-on') &&
-                 (!document.hidden || location.search.includes('markdebug'));
+const canIntro = document.documentElement.classList.contains('intro-on') && !document.hidden;
 if (!canIntro) {
   clearTimeout(window.__introFuse);
   document.documentElement.classList.remove('intro-on');

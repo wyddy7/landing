@@ -634,13 +634,46 @@ html[data-theme="light"] .theme-toggle .t-moon { color: var(--text); }
 html[data-theme="light"] .theme-toggle .t-knob { transform: translate(0, -50%); }
 .theme-toggle:hover .t-track { border-color: var(--accent); }
 
+/* ── LIVING MARK ── the logo as a particle field: born full screen on the first
+   visit, hardens into the crisp mark, then lives in the sidebar. Desktop only. */
+.mark-intro {
+  position: fixed; inset: 0; z-index: 9999; background: var(--bg);
+  opacity: 0; pointer-events: none;
+}
+html.intro-on .mark-intro { opacity: 1; pointer-events: auto; }
+html.intro-on body { overflow: hidden; }
+.mark-intro-stage { position: absolute; inset: 0; }
+.mark-intro-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mark-slot { position: relative; width: 124px; height: 124px; margin: 34px 0 0 -5px; }
+.mark-slot canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+@media (max-width: 1023px) { .mark-slot, .mark-intro { display: none; } }
+
 @media (prefers-reduced-motion: reduce) {
+  .mark-intro { display: none; }
   html { scroll-behavior: auto; }
   .avail-dot { animation: none; }
 }
 </style>
+<script>
+  /* Decide BEFORE first paint whether the boot sequence runs, so the page never
+     flashes in and then gets covered. Pure CSS cover; the WebGL module loads later.
+     The timeout is a dead-man switch: if the module never arrives, the cover lifts. */
+  (function () {
+    try {
+      if (innerWidth >= 1024 &&
+          !matchMedia('(prefers-reduced-motion: reduce)').matches &&
+          !sessionStorage.getItem('mark-intro')) {
+        document.documentElement.classList.add('intro-on');
+        window.__introFuse = setTimeout(function () {
+          document.documentElement.classList.remove('intro-on');
+        }, 6000);
+      }
+    } catch (e) {}
+  })();
+</script>
 </head>
 <body>
+<div class="mark-intro" aria-hidden="true"></div>
 
 <button class="theme-toggle" id="themeToggle" type="button" role="switch" aria-label="Toggle color mode" title="Toggle color mode">
   <svg class="t-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
@@ -863,6 +896,17 @@ html[data-theme="light"] .theme-toggle .t-knob { transform: translate(0, -50%); 
     document.querySelectorAll('.section').forEach(s => obs.observe(s));
   }
 })();
+
+/* The mark's WebGL bundle is loaded only after `load`, so it can never be the LCP
+   element and never blocks anything the page is actually read for. */
+addEventListener('load', function () {
+  if (innerWidth < 1024) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var s = document.createElement('script');
+  s.type = 'module';
+  s.src = './assets/logo/boot.js';
+  document.body.appendChild(s);
+});
 </script>
 
 </body></html>

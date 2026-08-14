@@ -17,8 +17,8 @@ For the past year-plus I've been an AI engineer at [Hao](https://hao.vc),
 shipping production RAG and content-generation pipelines, where I led a video
 pipeline to **6× faster output at 60% lower cost**. On the side I build and ship
 my own tools — an open-source [browser agent](https://wyddy.tech/case-browd.html),
-a multi-tenant contact RAG, a personalized news digest. Graduating Bauman MSTU
-(CS) in 2026.
+a multi-tenant contact RAG, a personalized news digest. Graduated from Bauman
+MSTU (CS) in 2026.
 
 ## Experience
 

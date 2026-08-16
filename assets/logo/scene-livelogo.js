@@ -343,6 +343,7 @@ export async function mountLiveLogo(el, opts = {}) {
       uDpr: { value: renderer.getPixelRatio() },
       uInk: { value: 0 },
       uAmber: { value: new THREE.Color(0xffc247) },
+      uCream: { value: new THREE.Color(0xf2f0eb) },
       uInkColor: { value: new THREE.Color(0x2c2620) },
       uSize: { value: P.pointSize },
       uGlow: { value: P.glow },
@@ -368,25 +369,31 @@ export async function mountLiveLogo(el, opts = {}) {
       }`,
     fragmentShader: /* glsl */`
       precision highp float;
-      uniform float uInk, uGlow, uHeat, uDensity; uniform vec3 uAmber, uInkColor;
+      uniform float uInk, uGlow, uHeat, uDensity; uniform vec3 uAmber, uInkColor, uCream;
       varying float vRnd, vZ, vLife, vDisp, vKeep;
       void main(){
         vec2 q = gl_PointCoord - 0.5;
         float r = length(q);
         float a = smoothstep(0.5, 0.06, r);
         float fade = smoothstep(0.0, 0.18, vLife) * smoothstep(1.0, 0.85, vLife);
-        vec3 warm = mix(uAmber * 0.62, uAmber * 1.15, vRnd);
-        warm *= 1.0 + vZ * 1.1;                       // grains nearer the viewer burn hotter
-        // displaced grains cool toward the rim colour, settled ones stay hot: density gradient
-        vec3 cool = uAmber * vec3(0.55, 0.42, 0.85);
-        warm = mix(warm, cool, vDisp * uHeat);
+        // DARK: cream is the mass. On a #0c0c0b page cream carries ~1.5x the luminance
+        // of amber, so the mark reads at a glance; amber stays as the warm undertone
+        // of the settled cores. Displacement shifts HUE, it never drops value —
+        // dropping value is what made the dissolve phase disappear on dark.
+        vec3 core = mix(uAmber, uCream, 0.70);
+        vec3 mass = mix(uAmber, uCream, 0.95);
+        vec3 warm = mix(core, mass, clamp(vDisp * uHeat, 0.0, 1.0));
+        warm *= 0.85 + vRnd * 0.30;
+        warm *= 1.0 + vZ * 0.55;
         vec3 col = mix(warm * uGlow, uInkColor, uInk);
-        // low per-grain alpha: value is built by OVERLAP, not by drawing solid dots.
-        // This is the difference between graphite (tonal range, deep cores) and a sticker.
-        float alpha = a * fade * mix(0.10, 0.14, uInk) * uDensity * vKeep;
-        gl_FragColor = vec4(col, alpha);
+        // dispersal compensation: a spread-out swarm accumulates less overlap, so the
+        // dissolved state used to thin out to nothing. Give the wandering grains more ink.
+        // Dark only (uInk=0): light theme is already right, do not touch it.
+        float alpha = a * fade * mix(0.040, 0.14, uInk) * uDensity * vKeep * mix(1.0 + vDisp * 0.55, 1.0, uInk);
+        gl_FragColor = vec4(col * alpha, alpha);
       }`,
     transparent: true, depthWrite: false, depthTest: false,
+    premultipliedAlpha: true,
     blending: THREE.AdditiveBlending,
   });
   const points = new THREE.Points(geo, mat);
@@ -411,7 +418,8 @@ export async function mountLiveLogo(el, opts = {}) {
     vertexShader: FSV,
     fragmentShader: `uniform sampler2D uTex; varying vec2 vUv;
       void main(){ gl_FragColor = texture2D(uTex, vUv); }`,
-    depthTest: false, depthWrite: false, transparent: true, blending: THREE.AdditiveBlending,
+    depthTest: false, depthWrite: false, transparent: true, premultipliedAlpha: true,
+    blending: THREE.AdditiveBlending,
   });
   const fsScene = new THREE.Scene();
   const fsQuad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), fadeMat);
@@ -563,6 +571,7 @@ export async function mountLiveLogo(el, opts = {}) {
   function syncTheme() {
     const light = document.documentElement.dataset.theme === 'light';
     mat.uniforms.uInk.value = light ? 1 : 0;
+    solidMat.uniforms.uInkColor.value.set(light ? 0x26211c : 0xf2f0eb);
     mat.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending;
     blitMat.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending;
     mat.needsUpdate = true;

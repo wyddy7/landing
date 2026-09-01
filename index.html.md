@@ -9,7 +9,7 @@
 
 ## About
 
-I'm an AI engineer based in Moscow, open to remote or relocation across EU/US
+I'm an AI engineer based in Yerevan, Armenia, open to remote or relocation across EU/US
 timezones. I started in Python backend in 2023 — ETL, data pipelines, internal
 services — and moved into applied AI in January 2025.
 

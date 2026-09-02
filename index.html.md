@@ -99,5 +99,5 @@ of engineer your team is missing:
 - Telegram (primary): https://t.me/wyddy7
 - Email: wyddy.work@gmail.com
 - GitHub: https://github.com/wyddy7
-- LinkedIn: https://www.linkedin.com/in/wyddy
+- LinkedIn: https://www.linkedin.com/in/daniil-makeev/
 - X: https://x.com/wyddy7

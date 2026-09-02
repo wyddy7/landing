@@ -97,7 +97,7 @@ The projects here I built, shipped, and keep running myself. If that's the kind
 of engineer your team is missing:
 
 - Telegram (primary): https://t.me/wyddy7
-- Email: wyddy7@gmail.com
+- Email: wyddy.work@gmail.com
 - GitHub: https://github.com/wyddy7
 - LinkedIn: https://www.linkedin.com/in/wyddy
 - X: https://x.com/wyddy7

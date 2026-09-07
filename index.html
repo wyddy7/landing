@@ -2,6 +2,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0c0c0b">
+<script>
+/* Restore the saved palette before the first paint, including the fallback. */
+try {
+  if (localStorage.getItem('dm-landing-mode') === 'light') {
+    document.documentElement.dataset.theme = 'light';
+    document.querySelector('meta[name="theme-color"]').content = '#faf4ed';
+  }
+} catch (_) { /* Storage can be blocked; the default theme still works. */ }
+</script>
 <title>Daniil Makeev — AI Engineer</title>
 <meta name="description" content="AI Engineer. Builds production AI agents, RAG pipelines and content-generation systems — end to end.">
 <link rel="canonical" href="https://wyddy.tech/">
@@ -634,48 +643,56 @@ html[data-theme="light"] .theme-toggle .t-moon { color: var(--text); }
 html[data-theme="light"] .theme-toggle .t-knob { transform: translate(0, -50%); }
 .theme-toggle:hover .t-track { border-color: var(--accent); }
 
-/* ── LIVING MARK ── the logo as a particle field: born full screen on the first
-   visit, hardens into the crisp mark, then lives in the sidebar. Desktop only. */
-.mark-intro {
-  position: fixed; inset: 0; z-index: 9999; background: var(--bg);
-  opacity: 0; pointer-events: none;
-}
-html.intro-on .mark-intro { opacity: 1; pointer-events: auto; }
-html.intro-on body { overflow: hidden; }
-.mark-intro-stage { position: absolute; inset: 0; }
-.mark-intro-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-/* The slot is reserved in the MARKUP, not created by script: the space belongs to the
-   mark from first paint, so nothing on the page ever shifts — on a repeat visit there
-   is no jump at all, which beats animating a jump away. */
-.mark-slot { position: relative; width: 124px; height: 124px; margin: 34px 0 0 -5px; }
-.mark-slot canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-@media (max-width: 1023px) { .mark-slot { width: 88px; height: 88px; margin-top: 26px; } }
+/* Interactive optical logo. Its reserved slot prevents a loading-time jump. */
+.mark-slot { position: relative; width: min(100%, 300px); height: 300px; height: clamp(150px, calc(100svh - 650px), 300px); margin: 24px 0 0 -5px; }
+.mark-placeholder { position: absolute; inset: 7.5%; width: 85%; height: 85%; display: block; color: var(--text); pointer-events: none; }
+.mark-slot.is-ready .mark-placeholder { visibility: hidden; }
+.glass-logo { opacity: 0; position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: transparent; user-select: none; -webkit-user-select: none; touch-action: pan-y; cursor: default; outline: none; }
+.mark-slot.is-ready .glass-logo { opacity: 1; }
+.glass-logo.is-over-logo { cursor: grab; }
+.glass-logo.is-dragging { cursor: grabbing; }
+.glass-logo:focus-visible:not(.is-pointer-focused) { outline: 1px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+@media (max-width: 1023px) { .mark-slot { width: min(100%, 300px); height: 280px; margin-top: 22px; } }
+
+/* The entrance uses the same canvas; the page is revealed as it reaches home. */
+html.glass-intro-pending .layout,
+html.glass-intro-pending .theme-toggle { visibility: hidden; }
+html.glass-intro-active .layout,
+html.glass-intro-active .theme-toggle { opacity: var(--glass-content-opacity, 0); }
+html.glass-intro-active .mark-placeholder { visibility: hidden; }
+.glass-logo.is-intro { position: fixed; z-index: 50; pointer-events: none; opacity: 1; transform-origin: 0 0; outline: none; will-change: transform; }
 
 @media (prefers-reduced-motion: reduce) {
-  .mark-intro { display: none; }
   html { scroll-behavior: auto; }
   .avail-dot { animation: none; }
 }
 </style>
 <script>
-  /* Decide BEFORE first paint whether the boot sequence runs, so the page never
-     flashes in and then gets covered. Pure CSS cover; the WebGL module loads later.
-     The timeout is a dead-man switch: if the module never arrives, the cover lifts. */
-  (function () {
-    try {
-      if (!matchMedia('(prefers-reduced-motion: reduce)').matches &&
-          !sessionStorage.getItem('mark-intro')) {
-        document.documentElement.classList.add('intro-on');
-        window.__introFuse = setTimeout(function () {
-          document.documentElement.classList.remove('intro-on');
-        }, 6000);
-      }
-    } catch (e) {}
-  })();
+/* Decide before paint. Every failure/input path releases this short-lived gate. */
+(function () {
+  var root = document.documentElement;
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  var force = new URLSearchParams(location.search).get('intro') === '1';
+  var seen = false;
+  try { seen = sessionStorage.getItem('glass-logo-intro-v1') === '1'; } catch (_) {}
+  var constrained = navigator.connection && navigator.connection.saveData || navigator.hardwareConcurrency <= 2 || navigator.deviceMemory <= 2;
+  if (reduced.matches || constrained || (seen && !force) || location.hash) return;
+  window.__glassIntroRequested = true;
+  root.classList.add('glass-intro-pending');
+  var inputs = ['pointerdown', 'wheel', 'touchstart', 'keydown'];
+  function release() {
+    window.__glassIntroRequested = false;
+    root.classList.remove('glass-intro-pending');
+    clearTimeout(window.__glassIntroFuse);
+    inputs.forEach(function (type) { removeEventListener(type, release, true); });
+  }
+  inputs.forEach(function (type) { addEventListener(type, release, { capture: true, passive: true }); });
+  window.__glassIntroRelease = release;
+  window.__glassIntroFuse = setTimeout(release, 3500);
+})();
 </script>
 </head>
 <body>
-<div class="mark-intro" aria-hidden="true"></div>
 
 <button class="theme-toggle" id="themeToggle" type="button" role="switch" aria-label="Toggle color mode" title="Toggle color mode">
   <svg class="t-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
@@ -692,7 +709,10 @@ html.intro-on body { overflow: hidden; }
       <p class="role">AI Engineer</p>
       <p class="tagline">I build and ship AI agents and RAG systems end to end.</p>
       <div class="avail"><span class="avail-dot"></span>Open to full-time or contract · remote / relocation</div>
-      <div class="mark-slot" aria-hidden="true"></div>
+      <div class="mark-slot">
+        <!-- The original mark is present before CSS assets, JavaScript or a GPU. -->
+        <svg class="mark-placeholder" viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="true" focusable="false"><path d="M285.494 22.7611C-28.0848 308.139 -74.819 1122.92 597.791 1014.64C1179.4 921.01 931.114 -21.6078 734.703 110.991C694.316 138.256 759.4 200.303 781.372 241.392C801.09 278.265 836.829 397.324 809.642 572.652C780.415 761.135 636.523 910.65 599.729 901.347C475.32 852.666 503.703 613.867 502.571 563.216C497.981 357.725 605.093 101.343 575.523 95.5879C527.039 86.1512 314.197 355.067 298.191 73.3788C297.14 54.8845 302.885 6.93411 285.494 22.7611Z"/></svg>
+      </div>
 
       <nav class="nav" aria-label="Section navigation">
         <ul>
@@ -872,21 +892,22 @@ html.intro-on body { overflow: hidden; }
 (function () {
   /* theme */
   const KEY = 'dm-landing-mode';
-  let mode = localStorage.getItem(KEY) || 'dark';
+  let mode = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
   function apply(m){
     if (m === 'light') document.documentElement.setAttribute('data-theme','light');
     else document.documentElement.removeAttribute('data-theme');
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', m==='light' ? '#f5f3ec' : '#0c0c0b');
+    if (meta) meta.setAttribute('content', m==='light' ? '#faf4ed' : '#0c0c0b');
   }
-  apply(mode);
   const t = document.getElementById('themeToggle');
-  if (t) t.addEventListener('click', () => { mode = mode==='light'?'dark':'light'; apply(mode); localStorage.setItem(KEY, mode); });
+  apply(mode);
+  if (t) t.setAttribute('aria-checked', String(mode === 'dark'));
+  if (t) t.addEventListener('click', () => { mode = mode==='light'?'dark':'light'; apply(mode); t.setAttribute('aria-checked', String(mode === 'dark')); try { localStorage.setItem(KEY, mode); } catch (_) {} });
 
   /* nav active-on-scroll */
   const links = [...document.querySelectorAll('.nav a')];
   const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
-  if ('IntersectionObserver' in window) {
+  if (typeof IntersectionObserver === 'function') {
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -900,13 +921,12 @@ html.intro-on body { overflow: hidden; }
   }
 })();
 
-/* The mark's WebGL bundle is loaded only after `load`, so it can never be the LCP
-   element and never blocks anything the page is actually read for. */
+/* Load the optical logo after the page; the SVG fallback is already visible. */
 addEventListener('load', function () {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var s = document.createElement('script');
   s.type = 'module';
-  s.src = './assets/logo/boot.js';
+  s.src = './assets/logo/boot.js?v=glass-support-2';
+  s.onerror = function () { if (window.__glassIntroRelease) window.__glassIntroRelease(); };
   document.body.appendChild(s);
 });
 </script>

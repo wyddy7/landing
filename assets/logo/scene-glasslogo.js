@@ -1,7 +1,7 @@
 import * as THREE from './three.module.js';
-import { logoDistanceTexture, opticalMaterial } from './optical-shader.js?v=glass-support-2';
-import { createFrameBudget, pixelRatioFor } from './render-budget.js?v=glass-support-2';
-import { createGlassEntrance } from './entrance.js?v=glass-support-2';
+import { logoDistanceTexture, opticalMaterial } from './optical-shader.js?v=glass-startup-1';
+import { createFrameBudget, pixelRatioFor } from './render-budget.js?v=glass-startup-1';
+import { createGlassEntrance } from './entrance.js?v=glass-startup-1';
 
 // Use the original SVG as the only shape source, including its negative space.
 function logoGeometry(slot) {
@@ -72,6 +72,7 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
     pointer: null, lastX: 0, lastY: 0, lastInteraction: -100,
   };
   let raf = 0, last = 0, time = 0, visible = true, destroyed = false, shaderError = false;
+  let introStageSize = null;
   let intro = null, introStarted = false, firstRender = false, introLanding = false;
   renderer.debug.onShaderError = (gl, program, vertex, fragment) => {
     shaderError = true;
@@ -180,10 +181,11 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
   }
 
   function startIntro() {
-    if (intro || destroyed || reduced.matches || shaderError || budget.quality !== 'full') { window.__glassIntroRelease?.(); return; }
+    if (intro || destroyed || reduced.matches || shaderError || budget.quality === 'static') { window.__glassIntroRelease?.(); return; }
     intro = createGlassEntrance({
       slot, canvas,
       onStart(stage) {
+        introStageSize = stage;
         visible = true;
         setSize(stage.width, stage.height, true);
         camera.aspect = stage.width / stage.height; camera.updateProjectionMatrix();
@@ -214,6 +216,7 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
         introLanding = false;
       },
       onFinish() {
+        introStageSize = null;
         resetState();
         intro = null;
         updateMaterialMatrix();
@@ -239,7 +242,7 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
     if (nextQuality === 'static') { dispose('slow-device'); return; }
     if (nextQuality === 'economy') {
       slot.dataset.glassQuality = nextQuality;
-      if (intro) intro.cancel('performance');
+      if (intro && introStageSize) setSize(introStageSize.width, introStageSize.height, true);
       else resize();
     }
     const dt = Math.min(elapsed, 0.05);

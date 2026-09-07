@@ -77,7 +77,7 @@ test('no-JS placeholder retains the original logo; distance image is padded RGBA
   assert.equal(png[25], 6); // RGBA, no palette conversion of numeric channels.
 });
 
-test('prepaint gate skips constrained devices and always releases on input or failed loading', async () => {
+test('prepaint gate replays on every opening, including economy devices, and fails open', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
   const gate = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((m) => m[1])
     .find((script) => script.includes('Decide before paint'));
@@ -85,7 +85,7 @@ test('prepaint gate skips constrained devices and always releases on input or fa
     const classes = new Set(), events = new Map();
     let fuse;
     const context = {
-      document: { documentElement: { classList: { add: (c) => classes.add(c), remove: (c) => classes.delete(c) } } },
+      document: { documentElement: { dataset: {}, classList: { add: (c) => classes.add(c), remove: (c) => classes.delete(c) } } },
       matchMedia: () => ({ matches: reduced }), location: { hash, search }, URLSearchParams,
       navigator, sessionStorage: { getItem: () => seen ? '1' : null },
       addEventListener: (name, fn) => events.set(name, fn), removeEventListener: (name) => events.delete(name),
@@ -95,11 +95,15 @@ test('prepaint gate skips constrained devices and always releases on input or fa
     runInNewContext(gate, context);
     return { classes, events, expire: () => fuse?.() };
   }
-  for (const options of [{ reduced: true }, { seen: true }, { hash: '#experience' },
-    { navigator: { hardwareConcurrency: 2 } }, { navigator: { deviceMemory: 2 } },
+  for (const options of [{ reduced: true }, { search: '?intro=0' }, { hash: '#experience' },
     { navigator: { connection: { saveData: true } } }]) {
     assert.equal(run(options).classes.size, 0);
   }
+  for (const options of [{ seen: true }, { navigator: { hardwareConcurrency: 2 } }, { navigator: { deviceMemory: 2 } }]) {
+    assert.ok(run(options).classes.has('glass-intro-pending'));
+  }
+  assert.match(html, /<script type="module" src="\.\/assets\/logo\/boot.js/);
+  assert.ok(!html.includes("addEventListener('load'"));
   const forced = run({ seen: true, search: '?intro=1' });
   assert.ok(forced.classes.has('glass-intro-pending'));
   forced.events.get('wheel')();

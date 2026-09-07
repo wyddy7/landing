@@ -118,6 +118,7 @@ export function createGlassEntrance({ slot, canvas, onStart, onPose, onLand, onF
     root.classList.remove('glass-intro-active');
     root.style.removeProperty('--glass-content-opacity');
     releaseGate();
+    root.dataset.glassIntro = reason === 'complete' ? 'complete' : 'skipped-' + reason;
     onFinish(reason);
     resolveDone({ reason });
     return done;
@@ -135,7 +136,7 @@ export function createGlassEntrance({ slot, canvas, onStart, onPose, onLand, onF
         width: `${stage.width}px`, height: `${stage.height}px` });
       onStart(stage); active = true; applyPose(0);
       inputs.forEach((type) => addEventListener(type, inputSkip, { capture: true, passive: true }));
-      try { sessionStorage.setItem('glass-logo-intro-v1', '1'); } catch (_) {}
+      root.dataset.glassIntro = 'playing';
       return done;
     },
     advance(dt) {

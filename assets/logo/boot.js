@@ -1,4 +1,4 @@
-import { initialQuality } from './render-budget.js?v=glass-aa-1';
+import { initialQuality } from './render-budget.js?v=glass-aa-2';
 
 const slot = document.querySelector('.mark-slot');
 function releaseIntroGate(reason = 'unavailable') {
@@ -37,7 +37,11 @@ async function boot() {
     if (!context || !context.getShaderPrecisionFormat(context.FRAGMENT_SHADER, context.HIGH_FLOAT)?.precision) {
       throw new Error('WebGL with high-precision fragment shading unavailable');
     }
-    const { mountGlassLogo } = await import('./scene-glasslogo.js?v=glass-aa-1');
+    const webgl2 = typeof WebGL2RenderingContext !== 'undefined' && context instanceof WebGL2RenderingContext;
+    if (!webgl2 && !context.getExtension('OES_standard_derivatives')) {
+      throw new Error('Derivative antialiasing unavailable');
+    }
+    const { mountGlassLogo } = await import('./scene-glasslogo.js?v=glass-aa-2');
     if (controller.signal.aborted) throw new Error('Logo startup timed out');
     const api = await mountGlassLogo(slot, { quality, canvas, context, signal: controller.signal });
     if (controller.signal.aborted) { api.dispose(); return; }

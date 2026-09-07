@@ -82,12 +82,14 @@ export function opticalMaterial(distance, jelly, grab) {
         return normalize(vec3(field(p + e.xyy) - field(p - e.xyy),
           field(p + e.yxy) - field(p - e.yxy), field(p + e.yyx) - field(p - e.yyx)));
       }
-      float primaryHit(vec3 origin, vec3 direction) {
+      float primaryHit(vec3 origin, vec3 direction, out float clearance) {
+        clearance = 1e3;
         float b = dot(origin, direction), h = b * b - dot(origin, origin) + 1.65 * 1.65;
         if (h < 0.) return -1.;
         float t = max(0., -b - sqrt(h)), far = -b + sqrt(h);
         for (int j = 0; j < 90; j++) {
           float d = field(origin + direction * t);
+          clearance = min(clearance, d / max(t, 0.001));
           if (d < EPS) return t;
           t += max(d * 0.82, EPS * 0.5);
           if (t > far) break;
@@ -152,32 +154,42 @@ export function opticalMaterial(distance, jelly, grab) {
         return color;
       }
       vec3 aces(vec3 c) { return clamp((c*(2.51*c+0.03))/(c*(2.43*c+0.59)+0.14),0.,1.); }
-      vec4 sampleGlass(vec2 uv) {
+      vec4 sampleGlass(vec2 uv, out float edge) {
+        edge = 0.;
         vec2 screen = uv * 2. - 1.; screen.x *= uAspect;
         vec3 worldOrigin = vec3(0.,0.,3.95);
         vec3 worldRay = normalize(vec3(screen * 0.28675,-1.));
         vec3 origin = uInverse * worldOrigin;
         vec3 direction = normalize(uInverse * worldRay);
-        float t = primaryHit(origin, direction);
-        if (t < 0.) return vec4(0.);
+        float clearance;
+        float t = primaryHit(origin, direction, clearance);
+        if (t < 0.) {
+          // Catch thin tips between pixel centers, where fwidth alone sees no edge.
+          float cone = 0.86 * length(uInverse[1]) / uResolution.y;
+          edge = 1. - step(cone, clearance);
+          return vec4(0.);
+        }
         vec3 p = origin + direction * t;
         vec3 normal = surfaceNormal(p);
+        edge = 1. - smoothstep(0.1, 0.3, abs(dot(normal, direction)));
         vec3 color = traceGlass(p,direction,normal);
         color = pow(aces(color * 1.12),vec3(1. / 2.2));
         return vec4(color,1.);
       }
       void main() {
-        vec4 center = sampleGlass(vUv);
+        float edge;
+        vec4 center = sampleGlass(vUv, edge);
         // MSAA on a fullscreen quad cannot see this ray-marched silhouette.
         // Spend extra rays only where coverage or reflected light changes sharply.
         vec4 variation = fwidth(center);
-        if (max(max(variation.r, variation.g), max(variation.b, variation.a)) < 0.08) {
+        if (edge < 0.01 && max(max(variation.r, variation.g), max(variation.b, variation.a)) < 0.08) {
           gl_FragColor = center;
           return;
         }
         vec4 sum = vec4(0.);
         for (int y = 0; y < 2; y++) for (int x = 0; x < 2; x++) {
-          sum += sampleGlass(vUv + (vec2(float(x),float(y)) - .5) * .5 / uResolution);
+          float unusedEdge;
+          sum += sampleGlass(vUv + (vec2(float(x),float(y)) - .5) * .5 / uResolution, unusedEdge);
         }
         // Average coverage separately from straight-alpha RGB to avoid dark fringes.
         gl_FragColor = vec4(sum.rgb / max(sum.a, 1.), sum.a * .25);

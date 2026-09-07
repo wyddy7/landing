@@ -1,8 +1,8 @@
-import { initialQuality } from './render-budget.js?v=glass-support-2';
+import { initialQuality } from './render-budget.js?v=glass-startup-1';
 
 const slot = document.querySelector('.mark-slot');
-function releaseIntroGate() {
-  window.__glassIntroRelease?.();
+function releaseIntroGate(reason = 'unavailable') {
+  window.__glassIntroRelease?.(reason);
   window.__glassIntroRequested = false;
   document.documentElement.classList.remove('glass-intro-pending', 'glass-intro-active');
   document.documentElement.style.removeProperty('--glass-content-opacity');
@@ -22,8 +22,7 @@ async function boot() {
     reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
   });
   slot.dataset.glassQuality = quality;
-  if (quality !== 'full') releaseIntroGate();
-  if (quality === 'static') { slot.dataset.glassState = 'static'; return; }
+  if (quality === 'static') { releaseIntroGate('save-data'); slot.dataset.glassState = 'static'; return; }
   slot.dataset.glassState = 'loading';
   const controller = new AbortController();
   const timeout = setTimeout(() => {
@@ -39,13 +38,13 @@ async function boot() {
     if (!context || !context.getShaderPrecisionFormat(context.FRAGMENT_SHADER, context.HIGH_FLOAT)?.precision) {
       throw new Error('WebGL with high-precision fragment shading unavailable');
     }
-    const { mountGlassLogo } = await import('./scene-glasslogo.js?v=glass-support-2');
+    const { mountGlassLogo } = await import('./scene-glasslogo.js?v=glass-startup-1');
     if (controller.signal.aborted) throw new Error('Logo startup timed out');
     const api = await mountGlassLogo(slot, { quality, canvas, context, signal: controller.signal });
     if (controller.signal.aborted) { api.dispose(); return; }
     // Input, an anchor jump or the loading fuse may have cancelled the gate.
-    if (quality === 'full' && introAllowed()) api.startIntro();
-    else releaseIntroGate();
+    if (introAllowed()) api.startIntro();
+    else releaseIntroGate(document.hidden ? 'hidden' : window.scrollX || window.scrollY ? 'scroll-position' : 'not-requested');
   } catch (error) {
     context?.getExtension('WEBGL_lose_context')?.loseContext();
     slot.dataset.glassState = 'static'; slot.dataset.glassQuality = 'static';

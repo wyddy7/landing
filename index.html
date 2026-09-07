@@ -672,15 +672,20 @@ html.glass-intro-active .mark-placeholder { visibility: hidden; }
 (function () {
   var root = document.documentElement;
   var reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  var force = new URLSearchParams(location.search).get('intro') === '1';
-  var seen = false;
-  try { seen = sessionStorage.getItem('glass-logo-intro-v1') === '1'; } catch (_) {}
-  var constrained = navigator.connection && navigator.connection.saveData || navigator.hardwareConcurrency <= 2 || navigator.deviceMemory <= 2;
-  if (reduced.matches || constrained || (seen && !force) || location.hash) return;
+  var disabled = new URLSearchParams(location.search).get('intro') === '0';
+  var saveData = navigator.connection && navigator.connection.saveData;
+  if (reduced.matches || saveData || disabled || location.hash) {
+    root.dataset.glassIntro = 'skipped-' + (reduced.matches ? 'reduced-motion' : saveData ? 'save-data' : disabled ? 'disabled' : 'anchor');
+    return;
+  }
+  // Each document opening gets its entrance. A previous visit in this tab must
+  // not silently suppress the reveal on reload; BFCache keeps its existing page.
+  root.dataset.glassIntro = 'pending';
   window.__glassIntroRequested = true;
   root.classList.add('glass-intro-pending');
   var inputs = ['pointerdown', 'wheel', 'touchstart', 'keydown'];
-  function release() {
+  function release(reason) {
+    if (root.dataset.glassIntro === 'pending') root.dataset.glassIntro = 'skipped-' + (typeof reason === 'string' ? reason : 'input');
     window.__glassIntroRequested = false;
     root.classList.remove('glass-intro-pending');
     clearTimeout(window.__glassIntroFuse);
@@ -688,7 +693,7 @@ html.glass-intro-active .mark-placeholder { visibility: hidden; }
   }
   inputs.forEach(function (type) { addEventListener(type, release, { capture: true, passive: true }); });
   window.__glassIntroRelease = release;
-  window.__glassIntroFuse = setTimeout(release, 3500);
+  window.__glassIntroFuse = setTimeout(function () { release('loading-timeout'); }, 3500);
 })();
 </script>
 </head>
@@ -921,14 +926,8 @@ html.glass-intro-active .mark-placeholder { visibility: hidden; }
   }
 })();
 
-/* Load the optical logo after the page; the SVG fallback is already visible. */
-addEventListener('load', function () {
-  var s = document.createElement('script');
-  s.type = 'module';
-  s.src = './assets/logo/boot.js?v=glass-support-2';
-  s.onerror = function () { if (window.__glassIntroRelease) window.__glassIntroRelease(); };
-  document.body.appendChild(s);
-});
 </script>
 
+<!-- Start after HTML parsing; unrelated images/video must not consume the intro fuse. -->
+<script type="module" src="./assets/logo/boot.js?v=glass-startup-1" onerror="if(window.__glassIntroRelease)window.__glassIntroRelease('module-error')"></script>
 </body></html>

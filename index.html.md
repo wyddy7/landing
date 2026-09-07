@@ -101,3 +101,4 @@ of engineer your team is missing:
 - GitHub: https://github.com/wyddy7
 - LinkedIn: https://www.linkedin.com/in/daniil-makeev/
 - X: https://x.com/wyddy7
+- CV (PDF, English): https://wyddy.tech/makeev-daniil-cv-en.pdf

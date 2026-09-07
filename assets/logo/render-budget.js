@@ -1,8 +1,10 @@
 // Hardware hints are optional. Frame cadence is the final authority; neither
 // a browser name nor a missing WebGPU API excludes an otherwise capable GPU.
-export function initialQuality({ saveData = false, cores, memory, reduced = false } = {}) {
+export function initialQuality({ saveData = false, reduced = false } = {}) {
   if (saveData) return 'static';
-  return reduced || cores <= 2 || memory <= 2 ? 'economy' : 'full';
+  // Privacy protections may cap or spoof core/memory hints on capable hardware.
+  // Let measured frame cadence select economy instead of degrading on first paint.
+  return reduced ? 'economy' : 'full';
 }
 
 export function pixelRatioFor(quality, width, height, dpr = 1, intro = false) {

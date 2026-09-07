@@ -5,11 +5,11 @@ import { runInNewContext } from 'node:vm';
 import { initialQuality, pixelRatioFor, createFrameBudget } from '../assets/logo/render-budget.js';
 import { sampleGlassMotion } from '../assets/logo/entrance.js';
 
-test('optional device hints degrade gracefully, save-data avoids the renderer', () => {
+test('privacy-reduced hardware hints preserve quality; explicit save-data avoids the renderer', () => {
   assert.equal(initialQuality(), 'full');
   assert.equal(initialQuality({ cores: 8 }), 'full');
-  assert.equal(initialQuality({ cores: 2 }), 'economy');
-  assert.equal(initialQuality({ memory: 2 }), 'economy');
+  assert.equal(initialQuality({ cores: 2 }), 'full');
+  assert.equal(initialQuality({ memory: 2 }), 'full');
   assert.equal(initialQuality({ reduced: true }), 'economy');
   assert.equal(initialQuality({ saveData: true, cores: 16 }), 'static');
 });

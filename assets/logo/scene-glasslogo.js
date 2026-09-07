@@ -1,7 +1,7 @@
 import * as THREE from './three.module.js';
-import { logoDistanceTexture, opticalMaterial } from './optical-shader.js?v=glass-startup-1';
-import { createFrameBudget, pixelRatioFor } from './render-budget.js?v=glass-startup-1';
-import { createGlassEntrance } from './entrance.js?v=glass-startup-1';
+import { logoDistanceTexture, opticalMaterial } from './optical-shader.js?v=glass-aa-2';
+import { createFrameBudget, pixelRatioFor } from './render-budget.js?v=glass-aa-2';
+import { createGlassEntrance } from './entrance.js?v=glass-aa-2';
 
 // Use the original SVG as the only shape source, including its negative space.
 function logoGeometry(slot) {
@@ -44,6 +44,7 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
   function setSize(width, height, isIntro = false) {
     renderer.setPixelRatio(pixelRatioFor(budget.quality, width, height, devicePixelRatio, isIntro));
     renderer.setSize(width, height, false);
+    renderer.getDrawingBufferSize(material.uniforms.uResolution.value);
     budget.reset();
   }
   renderer.outputColorSpace = THREE.SRGBColorSpace;

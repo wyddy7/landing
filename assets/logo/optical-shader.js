@@ -29,9 +29,10 @@ export function opticalMaterial(distance, jelly, grab) {
     uniforms: {
       uDistance: { value: distance }, uJelly: jelly, uGrab: grab,
       uRotation: { value: new THREE.Matrix3() }, uInverse: { value: new THREE.Matrix3() },
-      uAspect: { value: 1 }, uLight: { value: 0 },
+      uResolution: { value: new THREE.Vector2(1, 1) }, uAspect: { value: 1 }, uLight: { value: 0 },
     },
     depthTest: false, depthWrite: false,
+    extensions: { derivatives: true },
     vertexShader: /* glsl */`
       varying vec2 vUv;
       void main() { vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }
@@ -39,10 +40,10 @@ export function opticalMaterial(distance, jelly, grab) {
     fragmentShader: /* glsl */`
       precision highp float;
       varying vec2 vUv;
-      uniform sampler2D uDistance;
+      uniform highp sampler2D uDistance;
       uniform mat3 uRotation, uInverse;
       uniform vec3 uJelly;
-      uniform vec2 uGrab;
+      uniform vec2 uGrab, uResolution;
       uniform float uAspect, uLight;
       const float EPS = 0.00065;
       const float IOR = 1.49;
@@ -75,7 +76,9 @@ export function opticalMaterial(distance, jelly, grab) {
       vec3 surfaceNormal(vec3 p) {
         // Broader than one mask texel to suppress contour stair-stepping in
         // specular reflections, while the intersection itself remains precise.
-        vec2 e = vec2(0.012, 0.);
+        // Filter the normal over the pixel footprint at low resolutions.
+        // This suppresses unstable subpixel highlights without blurring the silhouette.
+        vec2 e = vec2(max(0.012, 4.5 / uResolution.y), 0.);
         return normalize(vec3(field(p + e.xyy) - field(p - e.xyy),
           field(p + e.yxy) - field(p - e.yxy), field(p + e.yyx) - field(p - e.yyx)));
       }
@@ -149,19 +152,35 @@ export function opticalMaterial(distance, jelly, grab) {
         return color;
       }
       vec3 aces(vec3 c) { return clamp((c*(2.51*c+0.03))/(c*(2.43*c+0.59)+0.14),0.,1.); }
-      void main() {
-        vec2 screen = vUv * 2. - 1.; screen.x *= uAspect;
+      vec4 sampleGlass(vec2 uv) {
+        vec2 screen = uv * 2. - 1.; screen.x *= uAspect;
         vec3 worldOrigin = vec3(0.,0.,3.95);
         vec3 worldRay = normalize(vec3(screen * 0.28675,-1.));
         vec3 origin = uInverse * worldOrigin;
         vec3 direction = normalize(uInverse * worldRay);
         float t = primaryHit(origin, direction);
-        if (t < 0.) { gl_FragColor = vec4(0.); return; }
+        if (t < 0.) return vec4(0.);
         vec3 p = origin + direction * t;
         vec3 normal = surfaceNormal(p);
         vec3 color = traceGlass(p,direction,normal);
         color = pow(aces(color * 1.12),vec3(1. / 2.2));
-        gl_FragColor = vec4(color,1.);
+        return vec4(color,1.);
+      }
+      void main() {
+        vec4 center = sampleGlass(vUv);
+        // MSAA on a fullscreen quad cannot see this ray-marched silhouette.
+        // Spend extra rays only where coverage or reflected light changes sharply.
+        vec4 variation = fwidth(center);
+        if (max(max(variation.r, variation.g), max(variation.b, variation.a)) < 0.08) {
+          gl_FragColor = center;
+          return;
+        }
+        vec4 sum = vec4(0.);
+        for (int y = 0; y < 2; y++) for (int x = 0; x < 2; x++) {
+          sum += sampleGlass(vUv + (vec2(float(x),float(y)) - .5) * .5 / uResolution);
+        }
+        // Average coverage separately from straight-alpha RGB to avoid dark fringes.
+        gl_FragColor = vec4(sum.rgb / max(sum.a, 1.), sum.a * .25);
       }
     `,
     transparent: true, toneMapped: false,

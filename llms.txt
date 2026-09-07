@@ -39,6 +39,7 @@
 - GitHub: https://github.com/wyddy7
 - Email: wyddy.work@gmail.com
 - Telegram: https://t.me/wyddy7
+- CV (PDF, English, single source — same file that goes out with applications): https://wyddy.tech/cv.pdf
 
 ## Markdown versions
 

@@ -659,6 +659,8 @@ html[data-theme="light"] .theme-toggle .t-knob { transform: translate(0, -50%); 
 .glass-logo.is-over-logo { cursor: grab; }
 .glass-logo.is-dragging { cursor: grabbing; }
 .glass-logo:focus-visible:not(.is-pointer-focused) { outline: 1px solid var(--accent); outline-offset: 4px; border-radius: 8px; }
+.glass-baked { pointer-events: none; }
+.glass-baked-poster, .glass-baked-video { object-fit: contain; }
 @media (max-width: 1023px) { .mark-slot { width: min(100%, 300px); height: 280px; margin-top: 22px; } }
 
 /* The entrance uses the same canvas; the page is revealed as it reaches home. */
@@ -937,5 +939,5 @@ html.glass-intro-active .mark-placeholder { visibility: hidden; }
 </script>
 
 <!-- Start after HTML parsing; unrelated images/video must not consume the intro fuse. -->
-<script type="module" src="./assets/logo/boot.js?v=glass-aa-2" onerror="if(window.__glassIntroRelease)window.__glassIntroRelease('module-error')"></script>
+<script type="module" src="./assets/logo/boot.js?v=glass-baked-1" onerror="if(window.__glassIntroRelease)window.__glassIntroRelease('module-error')"></script>
 </body></html>

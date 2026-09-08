@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
-import { initialQuality, pixelRatioFor, createFrameBudget } from '../assets/logo/render-budget.js';
+import { initialQuality, pixelRatioFor, createFrameBudget, selectLogoMode } from '../assets/logo/render-budget.js';
 import { sampleGlassMotion } from '../assets/logo/entrance.js';
 
 test('privacy-reduced hardware hints preserve quality; explicit save-data avoids the renderer', () => {
@@ -12,6 +12,15 @@ test('privacy-reduced hardware hints preserve quality; explicit save-data avoids
   assert.equal(initialQuality({ memory: 2 }), 'full');
   assert.equal(initialQuality({ reduced: true }), 'economy');
   assert.equal(initialQuality({ saveData: true, cores: 16 }), 'static');
+});
+
+test('touch-first and accessibility paths select the baked logo before Three is requested', () => {
+  assert.equal(selectLogoMode(), 'live');
+  assert.equal(selectLogoMode({ coarsePointer: true }), 'baked');
+  assert.equal(selectLogoMode({ coarsePointer: false, override: 'baked' }), 'baked');
+  assert.equal(selectLogoMode({ coarsePointer: true, override: 'live' }), 'live');
+  assert.equal(selectLogoMode({ coarsePointer: false, saveData: true, override: 'live' }), 'baked-static');
+  assert.equal(selectLogoMode({ coarsePointer: false, reduced: true, override: 'live' }), 'baked-static');
 });
 
 test('drawing buffer stays bounded even on high-DPR and very large screens', () => {

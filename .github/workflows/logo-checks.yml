@@ -16,6 +16,6 @@ jobs:
       - run: node --test tests/logo-support.test.mjs
       - name: Check runtime syntax
         run: |
-          for file in assets/logo/boot.js assets/logo/scene-glasslogo.js assets/logo/optical-shader.js assets/logo/entrance.js assets/logo/render-budget.js; do
+          for file in assets/logo/boot.js assets/logo/scene-glasslogo.js assets/logo/scene-bakedlogo.js assets/logo/optical-shader.js assets/logo/entrance.js assets/logo/render-budget.js; do
             node --check "$file"
           done

@@ -7,6 +7,17 @@ export function initialQuality({ saveData = false, reduced = false } = {}) {
   return reduced ? 'economy' : 'full';
 }
 
+// A phone does not have a reliable public "GPU class". Touch-first screens get
+// the authored recording from the first paint; desktops keep the interactive
+// object until measured cadence proves that it cannot sustain it. Save Data and
+// reduced motion always win over a developer-only mode override.
+export function selectLogoMode({ coarsePointer = false, saveData = false, reduced = false, override = '' } = {}) {
+  if (saveData || reduced) return 'baked-static';
+  if (override === 'baked') return 'baked';
+  if (override === 'live') return 'live';
+  return coarsePointer ? 'baked' : 'live';
+}
+
 export function pixelRatioFor(quality, width, height, dpr = 1, intro = false) {
   const cap = quality === 'economy' ? 1 : intro ? 1.5 : 2;
   const pixels = quality === 'economy' ? 100000 : 560000;

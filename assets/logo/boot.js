@@ -1,6 +1,10 @@
-import { initialQuality } from './render-budget.js?v=glass-aa-2';
+import { selectLogoMode } from './render-budget.js?v=glass-baked-1';
 
 const slot = document.querySelector('.mark-slot');
+let activeApi = null;
+let activeController = null;
+let fallbackPromise = null;
+
 function releaseIntroGate(reason = 'unavailable') {
   window.__glassIntroRelease?.(reason);
   window.__glassIntroRequested = false;
@@ -8,27 +12,73 @@ function releaseIntroGate(reason = 'unavailable') {
   document.documentElement.style.removeProperty('--glass-content-opacity');
   clearTimeout(window.__glassIntroFuse);
 }
+
 function introAllowed() {
   return window.__glassIntroRequested === true &&
     !matchMedia('(prefers-reduced-motion: reduce)').matches &&
     !document.hidden && !window.scrollX && !window.scrollY && !location.hash;
 }
 
-async function boot() {
-  if (!slot) { releaseIntroGate(); return; }
-  const quality = initialQuality({
-    saveData: navigator.connection?.saveData,
+function requestedMode() {
+  const override = new URLSearchParams(location.search).get('logo');
+  return selectLogoMode({
+    coarsePointer: matchMedia('(pointer: coarse)').matches,
+    saveData: navigator.connection?.saveData === true,
     reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
+    override: override === 'baked' || override === 'live' ? override : '',
   });
-  slot.dataset.glassQuality = quality;
-  if (quality === 'static') { releaseIntroGate('save-data'); slot.dataset.glassState = 'static'; return; }
-  slot.dataset.glassState = 'loading';
+}
+
+function clearLiveContext(context) {
+  context?.getExtension('WEBGL_lose_context')?.loseContext();
+}
+
+async function mountBaked({ posterOnly = false, reason = 'baked' } = {}) {
+  if (fallbackPromise) return fallbackPromise;
+  fallbackPromise = (async () => {
+    activeController?.abort();
+    activeController = new AbortController();
+    const controller = activeController;
+    activeApi?.dispose?.('replaced');
+    activeApi = null;
+    slot.dataset.glassMode = 'baked';
+    slot.dataset.glassQuality = posterOnly ? 'static' : 'baked';
+    slot.dataset.glassState = 'loading';
+    try {
+      const { mountBakedLogo } = await import('./scene-bakedlogo.js?v=glass-baked-1');
+      const api = await mountBakedLogo(slot, { introAllowed, signal: controller.signal, posterOnly });
+      if (controller.signal.aborted) { api.dispose('replaced'); return null; }
+      activeApi = api;
+      // Let the baked runtime make the final gate decision. If input or the
+      // prepaint fuse fired between preparation and this continuation, its
+      // startIntro() path hides the first video frame and lands on the poster.
+      if (!posterOnly) api.startIntro();
+      else releaseIntroGate(reason);
+      return api;
+    } catch (error) {
+      if (!controller.signal.aborted) {
+        slot.dataset.glassMode = 'svg';
+        slot.dataset.glassQuality = 'static';
+        slot.dataset.glassState = 'static';
+        releaseIntroGate(reason);
+        console.warn('Baked glass logo unavailable; keeping the inline SVG.', error);
+      }
+      return null;
+    }
+  })();
+  return fallbackPromise;
+}
+
+async function mountLive() {
   const controller = new AbortController();
-  const timeout = setTimeout(() => {
-    controller.abort(); releaseIntroGate(); slot.dataset.glassState = 'static';
-    context?.getExtension('WEBGL_lose_context')?.loseContext();
-  }, 6000);
+  activeController = controller;
   let context;
+  const timeout = setTimeout(() => {
+    if (controller.signal.aborted) return;
+    controller.abort();
+    clearLiveContext(context);
+    mountBaked({ posterOnly: true, reason: 'startup-timeout' });
+  }, 6000);
   try {
     // Reuse the capability probe as the renderer's context; no spare GPU context.
     const canvas = document.createElement('canvas');
@@ -41,18 +91,46 @@ async function boot() {
     if (!webgl2 && !context.getExtension('OES_standard_derivatives')) {
       throw new Error('Derivative antialiasing unavailable');
     }
-    const { mountGlassLogo } = await import('./scene-glasslogo.js?v=glass-aa-2');
-    if (controller.signal.aborted) throw new Error('Logo startup timed out');
-    const api = await mountGlassLogo(slot, { quality, canvas, context, signal: controller.signal });
-    if (controller.signal.aborted) { api.dispose(); return; }
-    // Input, an anchor jump or the loading fuse may have cancelled the gate.
+    const { mountGlassLogo } = await import('./scene-glasslogo.js?v=glass-baked-1');
+    if (controller.signal.aborted) return;
+    const api = await mountGlassLogo(slot, {
+      quality: 'full', canvas, context, signal: controller.signal,
+      onFallback(reason) {
+        clearLiveContext(context);
+        mountBaked({ posterOnly: true, reason });
+      },
+    });
+    if (controller.signal.aborted) { api.dispose('startup-timeout'); return; }
+    activeApi = api;
+    slot.dataset.glassMode = 'live';
     if (introAllowed()) api.startIntro();
     else releaseIntroGate(document.hidden ? 'hidden' : window.scrollX || window.scrollY ? 'scroll-position' : 'not-requested');
   } catch (error) {
-    context?.getExtension('WEBGL_lose_context')?.loseContext();
-    slot.dataset.glassState = 'static'; slot.dataset.glassQuality = 'static';
-    releaseIntroGate();
-    console.warn('Glass logo unavailable; keeping the inline SVG.', error);
-  } finally { clearTimeout(timeout); }
+    clearLiveContext(context);
+    if (!controller.signal.aborted) {
+      console.warn('Interactive glass logo unavailable; using the baked poster.', error);
+      await mountBaked({ posterOnly: true, reason: 'webgl-unavailable' });
+    }
+  } finally {
+    clearTimeout(timeout);
+  }
 }
+
+async function boot() {
+  if (!slot) { releaseIntroGate(); return; }
+  const mode = requestedMode();
+  if (mode === 'baked-static') {
+    await mountBaked({ posterOnly: true, reason: navigator.connection?.saveData ? 'save-data' : 'reduced-motion' });
+    return;
+  }
+  if (mode === 'baked') {
+    await mountBaked();
+    return;
+  }
+  slot.dataset.glassMode = 'live';
+  slot.dataset.glassQuality = 'full';
+  slot.dataset.glassState = 'loading';
+  await mountLive();
+}
+
 boot();

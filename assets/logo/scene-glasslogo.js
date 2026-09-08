@@ -1,7 +1,7 @@
 import * as THREE from './three.module.js';
-import { logoDistanceTexture, opticalMaterial } from './optical-shader.js?v=glass-aa-2';
-import { createFrameBudget, pixelRatioFor } from './render-budget.js?v=glass-aa-2';
-import { createGlassEntrance } from './entrance.js?v=glass-aa-2';
+import { logoDistanceTexture, opticalMaterial } from './optical-shader.js?v=glass-baked-1';
+import { createFrameBudget, pixelRatioFor } from './render-budget.js?v=glass-baked-1';
+import { createGlassEntrance } from './entrance.js?v=glass-baked-1';
 
 // Use the original SVG as the only shape source, including its negative space.
 function logoGeometry(slot) {
@@ -32,7 +32,7 @@ function logoGeometry(slot) {
   return raw;
 }
 
-export async function mountGlassLogo(slot, { introRequested = false, quality = 'full', canvas: targetCanvas, context, signal } = {}) {
+export async function mountGlassLogo(slot, { introRequested = false, quality = 'full', canvas: targetCanvas, context, signal, onFallback } = {}) {
   const distance = await logoDistanceTexture(signal);
   let geometry, renderer;
   try {
@@ -74,7 +74,7 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
   };
   let raf = 0, last = 0, time = 0, visible = true, destroyed = false, shaderError = false;
   let introStageSize = null;
-  let intro = null, introStarted = false, firstRender = false, introLanding = false;
+  let intro = null, introStarted = false, firstRender = false, introLanding = false, fallbackPending = false;
   renderer.debug.onShaderError = (gl, program, vertex, fragment) => {
     shaderError = true;
     console.error('Glass logo shader:', gl.getProgramInfoLog(program), gl.getShaderInfoLog(vertex), gl.getShaderInfoLog(fragment));
@@ -224,6 +224,10 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
         time = 0; last = 0;
         const rect = slot.getBoundingClientRect();
         visible = rect.bottom > -80 && rect.top < innerHeight + 80;
+        if (fallbackPending) {
+          queueMicrotask(() => dispose('slow-device'));
+          return;
+        }
         wake();
       },
     });
@@ -236,15 +240,21 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
     if (destroyed || document.hidden || !visible) { last = 0; return; }
     // Intro and direct manipulation run at display cadence; quiet idle gets 30 fps.
     const active = intro || state.pointer !== null || time - state.lastInteraction < 6;
-    const frameInterval = budget.quality === 'economy' || !active ? 30 : 0;
+    // Once fallback is pending, preserve the accepted score at display cadence
+    // through its landing beat. The transfer changes neither its buffer nor its
+    // temporal sampling halfway through the gesture.
+    const frameInterval = !fallbackPending && (budget.quality === 'economy' || !active) ? 30 : 0;
     if (last && now - last < frameInterval) { wake(); return; }
     const elapsed = last ? (now - last) / 1000 : 1 / 60;
     const nextQuality = last ? budget.sample(now - last, frameInterval ? 1000 / 30 : 1000 / 60) : null;
-    if (nextQuality === 'static') { dispose('slow-device'); return; }
-    if (nextQuality === 'economy') {
-      slot.dataset.glassQuality = nextQuality;
-      if (intro && introStageSize) setSize(introStageSize.width, introStageSize.height, true);
-      else resize();
+    // Do not swap drawing-buffer resolution while the choreographed entrance
+    // is on screen. One sustained slow measurement transfers to the baked
+    // resting frame; the accepted entrance either finishes whole or is never
+    // started on this runtime.
+    if (nextQuality && !fallbackPending) {
+      fallbackPending = true;
+      slot.dataset.glassQuality = 'baked-pending';
+      if (!intro) { dispose('slow-device'); return; }
     }
     const dt = Math.min(elapsed, 0.05);
     last = now; time += dt;
@@ -267,7 +277,7 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
       if (window.__glassIntroRequested && !reduced.matches && !window.scrollY) startIntro();
       else { introRequested = false; window.__glassIntroRelease?.(); }
     }
-    if (intro || !reduced.matches && (budget.quality === 'full' || active)) wake();
+    if (intro || !fallbackPending && !reduced.matches && (budget.quality === 'full' || active)) wake();
     else { last = 0; budget.reset(); }
   }
   function wake() { if (!raf && !destroyed && !document.hidden && visible) raf = requestAnimationFrame(render); }
@@ -282,7 +292,10 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
   function resumed() { last = 0; budget.reset(); wake(); }
   document.addEventListener('visibilitychange', resumed);
   window.addEventListener('pageshow', resumed);
-  function reducedChanged() { if (reduced.matches && intro) intro.cancel('reduced-motion'); resumed(); }
+  function reducedChanged() {
+    if (reduced.matches) { dispose('reduced-motion'); return; }
+    resumed();
+  }
   function windowResized() { if (intro) intro.cancel('resize'); else resize(); }
   if (reduced.addEventListener) reduced.addEventListener('change', reducedChanged);
   else reduced.addListener(reducedChanged);
@@ -314,6 +327,7 @@ export async function mountGlassLogo(slot, { introRequested = false, quality = '
     slot.classList.remove('is-ready');
     slot.dataset.glassState = 'static'; slot.dataset.glassQuality = 'static'; slot.dataset.glassReason = reason;
     window.__glassIntroRelease?.();
+    if (reason !== 'disposed') queueMicrotask(() => onFallback?.(reason));
   }
   theme(); resize();
   return {
